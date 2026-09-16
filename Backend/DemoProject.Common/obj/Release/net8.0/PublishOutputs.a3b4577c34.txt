@@ -1,3 +1,0 @@
-E:\Work\AccSoft\publish\backend\DemoProject.Common.dll
-E:\Work\AccSoft\publish\backend\DemoProject.Common.deps.json
-E:\Work\AccSoft\publish\backend\DemoProject.Common.pdb
