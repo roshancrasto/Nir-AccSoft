@@ -1,0 +1,27 @@
+# .NET / C#
+[Bb]in/
+[Oo]bj/
+*.dll
+*.exe
+*.pdb
+*.user
+*.suo
+*.cache
+*.vs/
+[Dd]ebug/
+[Rr]elease/
+
+# Angular / Node.js
+node_modules/
+dist/
+.angular/
+npm-debug.log
+yarn-error.log
+
+# General Temp files
+*.tmp
+*.temp
+*.log
+.DS_Store
+__pycache__/
+.vscode/

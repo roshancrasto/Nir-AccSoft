@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Work\\AccSoft\\Backend\\DemoProject.Common\\DemoProject.Common.csproj": {}
+    "E:\\Work\\Projects\\Nir-AccSoft\\Backend\\DemoProject.Common\\DemoProject.Common.csproj": {}
   },
   "projects": {
-    "E:\\Work\\AccSoft\\Backend\\DemoProject.Common\\DemoProject.Common.csproj": {
+    "E:\\Work\\Projects\\Nir-AccSoft\\Backend\\DemoProject.Common\\DemoProject.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Work\\AccSoft\\Backend\\DemoProject.Common\\DemoProject.Common.csproj",
+        "projectUniqueName": "E:\\Work\\Projects\\Nir-AccSoft\\Backend\\DemoProject.Common\\DemoProject.Common.csproj",
         "projectName": "DemoProject.Common",
-        "projectPath": "E:\\Work\\AccSoft\\Backend\\DemoProject.Common\\DemoProject.Common.csproj",
+        "projectPath": "E:\\Work\\Projects\\Nir-AccSoft\\Backend\\DemoProject.Common\\DemoProject.Common.csproj",
         "packagesPath": "C:\\Users\\Roshan\\.nuget\\packages\\",
-        "outputPath": "E:\\Work\\AccSoft\\Backend\\DemoProject.Common\\obj\\",
+        "outputPath": "E:\\Work\\Projects\\Nir-AccSoft\\Backend\\DemoProject.Common\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

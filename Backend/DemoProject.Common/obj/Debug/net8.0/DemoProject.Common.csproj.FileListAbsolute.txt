@@ -9,3 +9,15 @@ E:\Work\AccSoft\Backend\DemoProject.Common\obj\Debug\net8.0\DemoProject.Common.d
 E:\Work\AccSoft\Backend\DemoProject.Common\obj\Debug\net8.0\refint\DemoProject.Common.dll
 E:\Work\AccSoft\Backend\DemoProject.Common\obj\Debug\net8.0\DemoProject.Common.pdb
 E:\Work\AccSoft\Backend\DemoProject.Common\obj\Debug\net8.0\ref\DemoProject.Common.dll
+E:\Work\Projects\Nir-AccSoft\Backend\DemoProject.Common\bin\Debug\net8.0\DemoProject.Common.deps.json
+E:\Work\Projects\Nir-AccSoft\Backend\DemoProject.Common\bin\Debug\net8.0\DemoProject.Common.dll
+E:\Work\Projects\Nir-AccSoft\Backend\DemoProject.Common\bin\Debug\net8.0\DemoProject.Common.pdb
+E:\Work\Projects\Nir-AccSoft\Backend\DemoProject.Common\obj\Debug\net8.0\DemoProject.Common.GeneratedMSBuildEditorConfig.editorconfig
+E:\Work\Projects\Nir-AccSoft\Backend\DemoProject.Common\obj\Debug\net8.0\DemoProject.Common.AssemblyInfoInputs.cache
+E:\Work\Projects\Nir-AccSoft\Backend\DemoProject.Common\obj\Debug\net8.0\DemoProject.Common.AssemblyInfo.cs
+E:\Work\Projects\Nir-AccSoft\Backend\DemoProject.Common\obj\Debug\net8.0\DemoProject.Common.csproj.CoreCompileInputs.cache
+E:\Work\Projects\Nir-AccSoft\Backend\DemoProject.Common\obj\Debug\net8.0\DemoProject.Common.sourcelink.json
+E:\Work\Projects\Nir-AccSoft\Backend\DemoProject.Common\obj\Debug\net8.0\DemoProject.Common.dll
+E:\Work\Projects\Nir-AccSoft\Backend\DemoProject.Common\obj\Debug\net8.0\refint\DemoProject.Common.dll
+E:\Work\Projects\Nir-AccSoft\Backend\DemoProject.Common\obj\Debug\net8.0\DemoProject.Common.pdb
+E:\Work\Projects\Nir-AccSoft\Backend\DemoProject.Common\obj\Debug\net8.0\ref\DemoProject.Common.dll
