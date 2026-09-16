@@ -1,0 +1,109 @@
+<div class="print-container" id="printArea">
+  <div class="receipt-header">
+    <div class="org-logo">
+      <mat-icon class="org-icon">account_balance</mat-icon>
+    </div>
+    <div class="org-info">
+      <h1>DemoProject</h1>
+      <p>NGO Registration No: XXXX-XXXX-XXXX</p>
+      <p>Address Line 1, City, State - PIN Code</p>
+    </div>
+    <div class="receipt-badge">
+      <span class="badge">RECEIPT</span>
+    </div>
+  </div>
+
+  <div class="receipt-meta">
+    <div class="meta-row">
+      <div class="meta-item">
+        <label>Receipt No:</label>
+        <span class="value">{{receipt?.receiptNumber || 'REC-0001'}}</span>
+      </div>
+      <div class="meta-item">
+        <label>Date:</label>
+        <span class="value">{{receipt?.receiptDate | date:'dd/MM/yyyy'}}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="receipt-body">
+    <div class="info-grid">
+      <div class="info-item">
+        <label>Received From:</label>
+        <span class="value underline">{{receipt?.donorName || 'N/A'}}</span>
+      </div>
+      <div class="info-item">
+        <label>Event/Purpose:</label>
+        <span class="value underline">{{receipt?.eventName || 'General Donation'}}</span>
+      </div>
+      <div class="info-item">
+        <label>Payment Mode:</label>
+        <span class="value underline">{{receipt?.paymentMode || 'Cash'}}</span>
+      </div>
+      <div class="info-item" *ngIf="receipt?.referenceNumber">
+        <label>Reference No:</label>
+        <span class="value underline">{{receipt?.referenceNumber}}</span>
+      </div>
+    </div>
+
+    <div class="amount-section">
+      <table class="amount-table">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th class="text-right">Amount (₹)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="receipt?.cashAmount">
+            <td>Cash Received</td>
+            <td class="text-right">{{receipt?.cashAmount | number:'1.2-2'}}</td>
+          </tr>
+          <tr *ngIf="receipt?.bankAmount">
+            <td>Bank Transfer / Cheque</td>
+            <td class="text-right">{{receipt?.bankAmount | number:'1.2-2'}}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr class="total-row">
+            <td><strong>Total Amount</strong></td>
+            <td class="text-right"><strong>₹ {{(receipt?.cashAmount || 0) + (receipt?.bankAmount || 0) | number:'1.2-2'}}</strong></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <div class="amount-words">
+      <label>Amount in Words:</label>
+      <span class="value">Rupees ________________________________ Only</span>
+    </div>
+
+    <div class="pan-notice" *ngIf="receipt?.panAvailable">
+      <mat-icon>verified</mat-icon>
+      <span>PAN available on file. Tax exemption receipt under Section 80G issued.</span>
+    </div>
+  </div>
+
+  <div class="receipt-footer">
+    <div class="signature-block">
+      <div class="signature">
+        <div class="sig-line"></div>
+        <span>Received By</span>
+      </div>
+      <div class="signature">
+        <div class="sig-line"></div>
+        <span>Authorized Signatory</span>
+      </div>
+    </div>
+    <p class="disclaimer">This is a computer-generated receipt. Thank you for your generous contribution.</p>
+  </div>
+</div>
+
+<div class="print-actions no-print">
+  <button mat-raised-button color="primary" (click)="printReceipt()">
+    <mat-icon>print</mat-icon> Print Receipt
+  </button>
+  <button mat-stroked-button (click)="goBack()">
+    <mat-icon>arrow_back</mat-icon> Go Back
+  </button>
+</div>

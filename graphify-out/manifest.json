@@ -1,0 +1,710 @@
+{
+  "E:\\Work\\AccSoft\\scratch_read_docx.py": {
+    "mtime": 1778220919.0302744,
+    "hash": "908d326a7df64038ed97af049d9e15c3"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.API\\Program.cs": {
+    "mtime": 1778228875.5337577,
+    "hash": "c98c35e28edd141a1bbba29f2ee16a7e"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.API\\WeatherForecast.cs": {
+    "mtime": 1778228875.5337577,
+    "hash": "024d0e0e5ad141d0a7c3f23671330d16"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.API\\Controllers\\AuthController.cs": {
+    "mtime": 1778228875.5060887,
+    "hash": "b37d219f57840c310b41ab88a9b1e260"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.API\\Controllers\\CategoryController.cs": {
+    "mtime": 1778228875.508269,
+    "hash": "4e031bc429b68c512e02a98d963cdf42"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.API\\Controllers\\MasterControllers.cs": {
+    "mtime": 1778228875.5110216,
+    "hash": "e63e5af55d4669e2b8188a5bf86d86f9"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.API\\Controllers\\MoreTransactionControllers.cs": {
+    "mtime": 1778228875.51504,
+    "hash": "46b88de0de8007bf768b196648dba936"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.API\\Controllers\\ReportController.cs": {
+    "mtime": 1778228875.5170467,
+    "hash": "ab0e151cc3c6e8dca3dec39696c59b34"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.API\\Controllers\\TransactionControllers.cs": {
+    "mtime": 1778228875.5190537,
+    "hash": "11dc71d46f5203c2e79ccc408c1c45bf"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.API\\Controllers\\WeatherForecastController.cs": {
+    "mtime": 1778228875.522526,
+    "hash": "e116fa5a8b367a842c0f08d1c642d749"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.API\\obj\\Debug\\net8.0\\DemoProject.API.AssemblyInfo.cs": {
+    "mtime": 1778229302.8133667,
+    "hash": "2f988ed54a3222f3ab54eeae150ca4a9"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.API\\obj\\Debug\\net8.0\\DemoProject.API.GlobalUsings.g.cs": {
+    "mtime": 1778228918.9739373,
+    "hash": "27a3303725b3d7fb45be5fb2a2844928"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.API\\obj\\Debug\\net8.0\\DemoProject.API.MvcApplicationPartsAssemblyInfo.cs": {
+    "mtime": 1778229302.8951163,
+    "hash": "8305d75e4d1eab1c8fc9dd41b02a5658"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Business\\Class1.cs": {
+    "mtime": 1778228875.5889747,
+    "hash": "169b67739c61fca5e079c9ad6ee941bc"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Business\\DTOs\\AuthDtos.cs": {
+    "mtime": 1778228875.5400534,
+    "hash": "cdd77a81f2f88a122fa61253b3b1912e"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Business\\DTOs\\CategoryDtos.cs": {
+    "mtime": 1778228875.5423956,
+    "hash": "6f920e49fa0e698f5025c1a8978663be"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Business\\DTOs\\CategoryProfile.cs": {
+    "mtime": 1778228875.5444102,
+    "hash": "4f72125f4b68513309bac1cf02fee401"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Business\\DTOs\\MasterDtos.cs": {
+    "mtime": 1778228875.546936,
+    "hash": "17b7973985e3bda5b8521a0d691ed557"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Business\\DTOs\\MasterProfiles.cs": {
+    "mtime": 1778228875.546936,
+    "hash": "abff216201fc722fce1736d30d6e716e"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Business\\DTOs\\MoreTransactionDtos.cs": {
+    "mtime": 1778228875.550953,
+    "hash": "3d35f2ad42699bf13054b87e7b6f82d2"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Business\\DTOs\\MoreTransactionProfiles.cs": {
+    "mtime": 1778228875.550953,
+    "hash": "c31417e9b02ba5a98364728302593511"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Business\\DTOs\\TransactionDtos.cs": {
+    "mtime": 1778228875.5564125,
+    "hash": "15cb3544ccb1050334dd13c4aed192dd"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Business\\DTOs\\TransactionProfiles.cs": {
+    "mtime": 1778228875.558865,
+    "hash": "5ea691f577189cdcff94ae8ac59db054"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Business\\Interfaces\\IAuthService.cs": {
+    "mtime": 1778228875.5608354,
+    "hash": "43b2b69bb1adc24f26d1bd1525fea73c"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Business\\Interfaces\\ICategoryService.cs": {
+    "mtime": 1778228875.5608354,
+    "hash": "47032b61cd9589d410f83aeae744cfb0"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Business\\Interfaces\\IMasterServices.cs": {
+    "mtime": 1778228875.5628452,
+    "hash": "4d1ba69aeb122174f8ff536276f0a99f"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Business\\Interfaces\\IMoreTransactionServices.cs": {
+    "mtime": 1778228875.5648541,
+    "hash": "1f9f299ac24231c757a7ee66658adcd7"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Business\\Interfaces\\IReportService.cs": {
+    "mtime": 1778228875.5668612,
+    "hash": "6fdb8094f73352f532d5aed85a190928"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Business\\Interfaces\\ITransactionServices.cs": {
+    "mtime": 1778228875.5688705,
+    "hash": "95b6257cca8b1330cdb54eef270d17b4"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Business\\obj\\Debug\\net8.0\\DemoProject.Business.AssemblyInfo.cs": {
+    "mtime": 1778229302.0362537,
+    "hash": "6f048afa49bdb4876b525f9387c776b8"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Business\\obj\\Debug\\net8.0\\DemoProject.Business.GlobalUsings.g.cs": {
+    "mtime": 1778228918.5094335,
+    "hash": "0ca42cbc4f22da0578a209aaeb544bf8"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Business\\Services\\AuthService.cs": {
+    "mtime": 1778228875.571776,
+    "hash": "b7e4c619558f2cebd100b19f89cb9adb"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Business\\Services\\CategoryService.cs": {
+    "mtime": 1778228875.5743217,
+    "hash": "29753e833ce0f53beb65ba3a2996e209"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Business\\Services\\MasterServices.cs": {
+    "mtime": 1778228875.5778377,
+    "hash": "320a067af06e0dded3e75cd39be50e63"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Business\\Services\\MoreTransactionServices.cs": {
+    "mtime": 1778228875.5813127,
+    "hash": "c2d5c62d48eeb94f5de9f5a2256f24cc"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Business\\Services\\ReportService.cs": {
+    "mtime": 1778228875.5818224,
+    "hash": "9c5de335de6cb1c7a91006a085016aa6"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Business\\Services\\TransactionServices.cs": {
+    "mtime": 1778228875.5858548,
+    "hash": "0a79398c99b336b6579df7071984d3c5"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Common\\Class1.cs": {
+    "mtime": 1778228875.592233,
+    "hash": "81987f84e5afba37cc0b3f247a2fc6af"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Common\\obj\\Debug\\net8.0\\DemoProject.Common.AssemblyInfo.cs": {
+    "mtime": 1778229300.4358015,
+    "hash": "baba777e1968987ab55591f451233dd5"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Common\\obj\\Debug\\net8.0\\DemoProject.Common.GlobalUsings.g.cs": {
+    "mtime": 1778228918.4771433,
+    "hash": "0ca42cbc4f22da0578a209aaeb544bf8"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Data\\Class1.cs": {
+    "mtime": 1778228875.6123643,
+    "hash": "fbba37e145215bbcdc1b4a36c8d93f6d"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Data\\ConnectionFactory\\DbConnectionFactory.cs": {
+    "mtime": 1778228875.597403,
+    "hash": "c010cac91185ae37a93dfc225f2c626e"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Data\\ConnectionFactory\\IDbConnectionFactory.cs": {
+    "mtime": 1778228875.597403,
+    "hash": "5311bb617f3fa80fe73dc5ad3e65b566"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Data\\Entities\\Category.cs": {
+    "mtime": 1778228875.597403,
+    "hash": "840aca8b89a01d4444a01a7dbf6f592c"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Data\\Entities\\MasterEntities.cs": {
+    "mtime": 1778228875.6007688,
+    "hash": "b8cdaf7759804717ea90b1d12f4c0856"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Data\\Entities\\MoreTransactionEntities.cs": {
+    "mtime": 1778228875.604082,
+    "hash": "24b0696da32b6ee12047eb4bb779b342"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Data\\Entities\\ReportModels.cs": {
+    "mtime": 1778228875.6083508,
+    "hash": "153d9bba75ce394eeeaa711b216e5f08"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Data\\Entities\\TransactionEntities.cs": {
+    "mtime": 1778228875.610358,
+    "hash": "c7762685a67cb58ec5d25da30b5f0595"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Data\\Entities\\User.cs": {
+    "mtime": 1778228875.610358,
+    "hash": "f76ad4c80e9bdedee8591722ef91d961"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Data\\obj\\Debug\\net8.0\\DemoProject.Data.AssemblyInfo.cs": {
+    "mtime": 1778229300.933648,
+    "hash": "53744ae281827113f1b8f9c4aab5541d"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Data\\obj\\Debug\\net8.0\\DemoProject.Data.GlobalUsings.g.cs": {
+    "mtime": 1778228918.4941003,
+    "hash": "0ca42cbc4f22da0578a209aaeb544bf8"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Repository\\Class1.cs": {
+    "mtime": 1778228875.6525412,
+    "hash": "69287c712847f682aa280be026e31784"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Repository\\Implementations\\CategoryRepository.cs": {
+    "mtime": 1778228875.6163912,
+    "hash": "524f571e9902dd2c632dca15ae6ff208"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Repository\\Implementations\\MasterRepositories.cs": {
+    "mtime": 1778228875.6219804,
+    "hash": "45731b8ddf061d39b63f88d6e913955f"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Repository\\Implementations\\MoreTransactionRepositories.cs": {
+    "mtime": 1778228875.6276903,
+    "hash": "c932a40ff57c3c50c759242bef42b90e"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Repository\\Implementations\\ReportRepository.cs": {
+    "mtime": 1778228875.6276903,
+    "hash": "ff3c82936e750651385f63b8c94033d6"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Repository\\Implementations\\TransactionRepositories.cs": {
+    "mtime": 1778228875.6276903,
+    "hash": "9ecc41060e630f963e32f8a13b804e93"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Repository\\Implementations\\UserRepository.cs": {
+    "mtime": 1778228875.6397426,
+    "hash": "83b6ba2a479be395e97d6f6031fb0e25"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Repository\\Interfaces\\ICategoryRepository.cs": {
+    "mtime": 1778228875.641903,
+    "hash": "3aa6a789c25ca75aa1ba1f69eae5ae9d"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Repository\\Interfaces\\IMasterRepositories.cs": {
+    "mtime": 1778228875.6442137,
+    "hash": "6c292991d129a31bef66264cedcd1a8d"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Repository\\Interfaces\\IMoreTransactionRepositories.cs": {
+    "mtime": 1778228875.6452253,
+    "hash": "d45ab146f79911a881bc44b8cf5943bb"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Repository\\Interfaces\\IReportRepository.cs": {
+    "mtime": 1778228875.6452253,
+    "hash": "c67ebaf42698be7894d4714a4511f9d2"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Repository\\Interfaces\\ITransactionRepositories.cs": {
+    "mtime": 1778228875.6452253,
+    "hash": "83f899c7c9b84f06880ce81343a535d6"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Repository\\Interfaces\\IUserRepository.cs": {
+    "mtime": 1778228875.6452253,
+    "hash": "a57348c1df8f6f128929360b4c422acc"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Repository\\obj\\Debug\\net8.0\\DemoProject.Repository.AssemblyInfo.cs": {
+    "mtime": 1778229301.4629207,
+    "hash": "b74b14dfc35c27f8c808ff6ea3b054df"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Repository\\obj\\Debug\\net8.0\\DemoProject.Repository.GlobalUsings.g.cs": {
+    "mtime": 1778228918.5124931,
+    "hash": "0ca42cbc4f22da0578a209aaeb544bf8"
+  },
+  "E:\\Work\\AccSoft\\Database\\Migrations\\001_InitialSchema.sql": {
+    "mtime": 1778225932.7850173,
+    "hash": "284457c82d4582187ef71f9673fde783"
+  },
+  "E:\\Work\\AccSoft\\Database\\Migrations\\002_TransactionSchema.sql": {
+    "mtime": 1778223508.1191728,
+    "hash": "fc3910ccc13da47218a4186147199f94"
+  },
+  "E:\\Work\\AccSoft\\Database\\Migrations\\003_MoreTransactionSchema.sql": {
+    "mtime": 1778223676.152624,
+    "hash": "f44f5afa73cd34df0e39da4d081ada75"
+  },
+  "E:\\Work\\AccSoft\\Database\\SeedData\\001_SeedData.sql": {
+    "mtime": 1778225954.8522742,
+    "hash": "12480ec3efdb86ac063585f4dc263501"
+  },
+  "E:\\Work\\AccSoft\\Database\\StoredProcedures\\001_Categories_SPs.sql": {
+    "mtime": 1778222364.7507432,
+    "hash": "f0dd92115aa8eb97d536f4ff881a82b5"
+  },
+  "E:\\Work\\AccSoft\\Database\\StoredProcedures\\002_Auth_SPs.sql": {
+    "mtime": 1778222905.659385,
+    "hash": "d3a44c446ed69450d02bc8a1446e7031"
+  },
+  "E:\\Work\\AccSoft\\Database\\StoredProcedures\\003_Events_SPs.sql": {
+    "mtime": 1778223094.1392367,
+    "hash": "57fe6a6280db99479096d2e30d89a574"
+  },
+  "E:\\Work\\AccSoft\\Database\\StoredProcedures\\004_Donors_SPs.sql": {
+    "mtime": 1778223107.331567,
+    "hash": "1975107843fd076c02124d5187db62dd"
+  },
+  "E:\\Work\\AccSoft\\Database\\StoredProcedures\\005_Vendors_SPs.sql": {
+    "mtime": 1778223119.078726,
+    "hash": "0dae41dd50fb88b5b6cddc51661fc88c"
+  },
+  "E:\\Work\\AccSoft\\Database\\StoredProcedures\\006_Receipts_SPs.sql": {
+    "mtime": 1778223522.6777215,
+    "hash": "204ca08a008d3db3dbad0918c577f054"
+  },
+  "E:\\Work\\AccSoft\\Database\\StoredProcedures\\007_Payments_SPs.sql": {
+    "mtime": 1778223536.140139,
+    "hash": "8fce81dacbe0799c4039f95bfa1130ed"
+  },
+  "E:\\Work\\AccSoft\\Database\\StoredProcedures\\008_MoreTransaction_SPs.sql": {
+    "mtime": 1778223697.326739,
+    "hash": "c74afe7986bf36b5526e8ae5ddf4a08b"
+  },
+  "E:\\Work\\AccSoft\\Database\\StoredProcedures\\009_Reports_SPs.sql": {
+    "mtime": 1778224004.9735494,
+    "hash": "065ae8f41fa5b40deda8a1bd46ea279f"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\main.ts": {
+    "mtime": 1778222444.0495603,
+    "hash": "b5c1d106e573fea21ef1ad9e4360e77a"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\app.component.spec.ts": {
+    "mtime": 1778229364.2136698,
+    "hash": "2cf9af441425909094dafd8bd066eabf"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\app.component.ts": {
+    "mtime": 1778230773.0620372,
+    "hash": "c272271631916e26608c73627318c0a1"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\app.config.ts": {
+    "mtime": 1778226107.2369568,
+    "hash": "3e519d889be86fe6f69b056d359af1fb"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\app.routes.ts": {
+    "mtime": 1778224783.6032934,
+    "hash": "7f78e0b06ae974091591784f8ffc4c4f"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\core\\services\\api.service.spec.ts": {
+    "mtime": 1778226139.3090973,
+    "hash": "8e0f8b961368938b09a2b9f61d410e6e"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\core\\services\\api.service.ts": {
+    "mtime": 1778226139.3111172,
+    "hash": "5284af3b6791813336786c1ac21e6504"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\core\\services\\asset.service.spec.ts": {
+    "mtime": 1778226139.313126,
+    "hash": "e157fb0424e01af43017dca3fbbc80f1"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\core\\services\\asset.service.ts": {
+    "mtime": 1778226139.315138,
+    "hash": "c5906217812ae3555c51b3c44e8d197f"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\core\\services\\auth.service.spec.ts": {
+    "mtime": 1778226139.317146,
+    "hash": "3952e9c3f4e964e9287851a82a908c1c"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\core\\services\\auth.service.ts": {
+    "mtime": 1778226139.3198745,
+    "hash": "4de4fe3da65c3cdc9bf0164e4b520e50"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\core\\services\\bank-transfer.service.spec.ts": {
+    "mtime": 1778226139.3219,
+    "hash": "c50db6ed539f1014136152f05c024f3d"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\core\\services\\bank-transfer.service.ts": {
+    "mtime": 1778226139.3219,
+    "hash": "a6db0ef5c0f24d6c0123a27986ab3c43"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\core\\services\\category.service.spec.ts": {
+    "mtime": 1778226139.3239145,
+    "hash": "38ac63f310da0e8fae35e749801eaf74"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\core\\services\\category.service.ts": {
+    "mtime": 1778226139.3259287,
+    "hash": "d2bbadd50dbf86f6ebd7d5304aaa24d3"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\core\\services\\donor.service.spec.ts": {
+    "mtime": 1778226139.327939,
+    "hash": "b0c037439d009123d42217615883932f"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\core\\services\\donor.service.ts": {
+    "mtime": 1778226139.329947,
+    "hash": "b300eb2ef28a6354e2bbd85849d66b79"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\core\\services\\event.service.spec.ts": {
+    "mtime": 1778226139.3324587,
+    "hash": "0ccab2271f53faf4d4c4caaf7c2d8d28"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\core\\services\\event.service.ts": {
+    "mtime": 1778226139.334498,
+    "hash": "2a3447fee6735b44312af07a003d9464"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\core\\services\\payment.service.spec.ts": {
+    "mtime": 1778226139.3365152,
+    "hash": "032d24baac04a10db2bb47eb78031df9"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\core\\services\\payment.service.ts": {
+    "mtime": 1778226139.3385408,
+    "hash": "b9789abc7a815d8984e4dc6db5e199c6"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\core\\services\\receipt.service.spec.ts": {
+    "mtime": 1778226139.3406818,
+    "hash": "15fe60289a217e74ccb3f15d96a39d73"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\core\\services\\receipt.service.ts": {
+    "mtime": 1778226139.3406818,
+    "hash": "1046f2591a3975e163fb15557ee15293"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\core\\services\\reimbursement.service.spec.ts": {
+    "mtime": 1778226139.3433895,
+    "hash": "036e455164cec6dc6a62c5c445d463b6"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\core\\services\\reimbursement.service.ts": {
+    "mtime": 1778226139.3475058,
+    "hash": "351828aceab021ab3aabe1b29035b84d"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\core\\services\\report.service.spec.ts": {
+    "mtime": 1778226139.349523,
+    "hash": "d1c1b1ae59bee2fcd22d82042094c8f1"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\core\\services\\report.service.ts": {
+    "mtime": 1778226139.351882,
+    "hash": "052ea315290b2d273cb217111ce25694"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\core\\services\\vendor.service.spec.ts": {
+    "mtime": 1778226139.351882,
+    "hash": "673e0ef81724b0513e17678f180a2933"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\core\\services\\vendor.service.ts": {
+    "mtime": 1778226139.3538983,
+    "hash": "771fc5d3df70372ea81dd9111e1798fd"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\auth\\login\\login.component.spec.ts": {
+    "mtime": 1778223297.226421,
+    "hash": "36526be78881af91125232cc87ff4fc7"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\auth\\login\\login.component.ts": {
+    "mtime": 1778223297.2277915,
+    "hash": "fc7241ffdbe334533b99835f19830ed4"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\dashboard\\dashboard.component.spec.ts": {
+    "mtime": 1778223301.7404144,
+    "hash": "4ed86e6e9ed3d9affee9df47006858bf"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\dashboard\\dashboard.component.ts": {
+    "mtime": 1778224421.4037695,
+    "hash": "ca9cbd6cbd6b9c042e97c5b4e1fd1105"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\masters\\categories\\categories.component.spec.ts": {
+    "mtime": 1778223306.2862134,
+    "hash": "fa07d322b58a00c7f103143030f2233a"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\masters\\categories\\categories.component.ts": {
+    "mtime": 1778223388.1922717,
+    "hash": "6b92c0d5892e62a06c307eaa6a18a3b9"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\masters\\donors\\donors.component.spec.ts": {
+    "mtime": 1778223315.0655506,
+    "hash": "1d3e6081e754ac966594d710b077ee09"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\masters\\donors\\donors.component.ts": {
+    "mtime": 1778223315.0655506,
+    "hash": "6c2f253b5aeb0dfe131ca0f5b5771bb5"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\masters\\events\\events.component.spec.ts": {
+    "mtime": 1778223310.5000556,
+    "hash": "d21b3ec7af5c44a50f3f85b15a448cc2"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\masters\\events\\events.component.ts": {
+    "mtime": 1778223310.5000556,
+    "hash": "d875d89eefd94bdad440ffd2a3de51ff"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\masters\\vendors\\vendors.component.spec.ts": {
+    "mtime": 1778223319.5391574,
+    "hash": "95949b8c18fad153d2b5c08e106e2d55"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\masters\\vendors\\vendors.component.ts": {
+    "mtime": 1778223319.5406704,
+    "hash": "56378bfd97b10d7ad62640f809cb804e"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\print\\print-receipt\\print-receipt.component.spec.ts": {
+    "mtime": 1778224470.5814772,
+    "hash": "b3877580f37048e6f341a93c9dffdac0"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\print\\print-receipt\\print-receipt.component.ts": {
+    "mtime": 1778224620.6156092,
+    "hash": "0c15dfe4e5375fda690fb0b3263806a7"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\print\\print-voucher\\print-voucher.component.spec.ts": {
+    "mtime": 1778224475.3699627,
+    "hash": "7d55f7f2aff3e11824ba76e5b7e3a23d"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\print\\print-voucher\\print-voucher.component.ts": {
+    "mtime": 1778224674.0115547,
+    "hash": "217f4afce42d64a5b6db36312adb278f"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\reports\\category-expense\\category-expense.component.spec.ts": {
+    "mtime": 1778224261.5014422,
+    "hash": "9e74092e43f77a0794fa3e17d20b61ca"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\reports\\category-expense\\category-expense.component.ts": {
+    "mtime": 1778224261.5024407,
+    "hash": "29810dab761cd765841416d02e5a9be9"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\reports\\donor-receipts\\donor-receipts.component.spec.ts": {
+    "mtime": 1778224270.2308483,
+    "hash": "bfccd88bfabaaf01830481d76b13432e"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\reports\\donor-receipts\\donor-receipts.component.ts": {
+    "mtime": 1778224270.2318478,
+    "hash": "ffea5a79badf3023a0c04f7a3b872c6f"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\reports\\event-pnl\\event-pnl.component.spec.ts": {
+    "mtime": 1778224266.222561,
+    "hash": "be7f95512c1cdb7bb6346aa5a1852f23"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\reports\\event-pnl\\event-pnl.component.ts": {
+    "mtime": 1778224266.2235625,
+    "hash": "0cada1db8806df1d92024307a2246c17"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\reports\\income-expenditure\\income-expenditure.component.spec.ts": {
+    "mtime": 1778224274.3205597,
+    "hash": "77465e2533d8a79af3519c8198dd074c"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\reports\\income-expenditure\\income-expenditure.component.ts": {
+    "mtime": 1778224274.3215702,
+    "hash": "81df50e91f4a9af86142c068f3372967"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\reports\\payment-register\\payment-register.component.spec.ts": {
+    "mtime": 1778224257.6437368,
+    "hash": "3f435dafe4bece649b97f02a8632ebdb"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\reports\\payment-register\\payment-register.component.ts": {
+    "mtime": 1778224257.6437368,
+    "hash": "3a2a195df6180a6d718c856c9defde3f"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\reports\\receipt-register\\receipt-register.component.spec.ts": {
+    "mtime": 1778224253.9744906,
+    "hash": "de5a949a1fdf559be64665556d0f1b7c"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\reports\\receipt-register\\receipt-register.component.ts": {
+    "mtime": 1778224721.1805365,
+    "hash": "ab689d100879c8918ec6b51768e76c66"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\transactions\\assets\\assets.component.spec.ts": {
+    "mtime": 1778223914.000659,
+    "hash": "333d906ba04d7b5eee520547e5051341"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\transactions\\assets\\assets.component.ts": {
+    "mtime": 1778223914.000659,
+    "hash": "7daf8b3e1e4b18e4e8c48ba2a307c2be"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\transactions\\bank-transfers\\bank-transfers.component.spec.ts": {
+    "mtime": 1778223917.786985,
+    "hash": "8d1df2b9c9c2e95e41a758a2f79983d5"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\transactions\\bank-transfers\\bank-transfers.component.ts": {
+    "mtime": 1778223917.786985,
+    "hash": "899470c3ad613e8bab4f5761caaafc0d"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\transactions\\payments\\payments.component.spec.ts": {
+    "mtime": 1778223905.2621899,
+    "hash": "4305cb1af6bfbddfbbbf25161332fa5b"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\transactions\\payments\\payments.component.ts": {
+    "mtime": 1778223905.2621899,
+    "hash": "e0648deeb33c0b211b051343d61ef640"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\transactions\\receipts\\receipts.component.spec.ts": {
+    "mtime": 1778223901.2966232,
+    "hash": "3649918cdd37f700ae1de7ac5bfae603"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\transactions\\receipts\\receipts.component.ts": {
+    "mtime": 1778223901.2966232,
+    "hash": "a4dab8772a427c9e334b67073141bb81"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\transactions\\reimbursements\\reimbursements.component.spec.ts": {
+    "mtime": 1778223909.9019625,
+    "hash": "a6d18e85e0434c5981f7f9c0d97424cc"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\transactions\\reimbursements\\reimbursements.component.ts": {
+    "mtime": 1778223909.9019625,
+    "hash": "a6afcb4b4a0ca7f65a943dedae0b9654"
+  },
+  "E:\\Work\\AccSoft\\docx_output.txt": {
+    "mtime": 1778220933.0337946,
+    "hash": "0abbd175c7cedbce56ce5acfa505abb6"
+  },
+  "E:\\Work\\AccSoft\\docx_output_utf8.txt": {
+    "mtime": 1778220960.1450088,
+    "hash": "ec144b20efd7970f0c3014391e3b5e6d"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.API\\obj\\Debug\\net8.0\\DemoProject.API.csproj.FileListAbsolute.txt": {
+    "mtime": 1778229407.62716,
+    "hash": "c9dabc6611cd834218cfc0ba0aeb7042"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.API\\obj\\Debug\\net8.0\\staticwebassets.references.upToDateCheck.txt": {
+    "mtime": 1778228972.1952424,
+    "hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.API\\obj\\Debug\\net8.0\\staticwebassets.removed.txt": {
+    "mtime": 1778228937.4521835,
+    "hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Business\\obj\\Debug\\net8.0\\DemoProject.Business.csproj.FileListAbsolute.txt": {
+    "mtime": 1778229302.3603427,
+    "hash": "927e6a01743f2b9eab745e70cb580d14"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Common\\obj\\Debug\\net8.0\\DemoProject.Common.csproj.FileListAbsolute.txt": {
+    "mtime": 1778229300.5936987,
+    "hash": "0491511cbb316d8f53185b08a90ceb87"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Data\\obj\\Debug\\net8.0\\DemoProject.Data.csproj.FileListAbsolute.txt": {
+    "mtime": 1778229301.124613,
+    "hash": "73dfb8bcf62896ca55b1d8cb337359ef"
+  },
+  "E:\\Work\\AccSoft\\Backend\\DemoProject.Repository\\obj\\Debug\\net8.0\\DemoProject.Repository.csproj.FileListAbsolute.txt": {
+    "mtime": 1778229301.6876748,
+    "hash": "dcc0f5ef8cdd61258954f5162d3123b1"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\README.md": {
+    "mtime": 1778226203.3366253,
+    "hash": "a8bd27f498008e02342a8437a971cc77"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\index.html": {
+    "mtime": 1778225889.0251832,
+    "hash": "0cf7d418a4add377f313b44ac2079b64"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\app.component.html": {
+    "mtime": 1778230786.460703,
+    "hash": "246af8ece5246a0bd098f75b2eeafc8a"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\auth\\login\\login.component.html": {
+    "mtime": 1778223297.226421,
+    "hash": "bb99261c5891f72e3f69a5050f50edb9"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\dashboard\\dashboard.component.html": {
+    "mtime": 1778225910.9083514,
+    "hash": "e20f1505f6c945cff3cc6261f1ef11a0"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\masters\\categories\\categories.component.html": {
+    "mtime": 1778223403.0171547,
+    "hash": "3e1f33d7ec9dc278a42593b72e091e16"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\masters\\donors\\donors.component.html": {
+    "mtime": 1778223315.064569,
+    "hash": "a3381fd9e162c85d765167f4aef8ac3c"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\masters\\events\\events.component.html": {
+    "mtime": 1778223310.4990597,
+    "hash": "fde3fa4fdf036d15d1cd007bc4781eb5"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\masters\\vendors\\vendors.component.html": {
+    "mtime": 1778223319.5391574,
+    "hash": "9825903e8eb538db3d4f9656d189be6b"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\print\\print-receipt\\print-receipt.component.html": {
+    "mtime": 1778225917.2595546,
+    "hash": "0b4ccd492fa31177947a505ca0acfa54"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\print\\print-voucher\\print-voucher.component.html": {
+    "mtime": 1778225923.7960103,
+    "hash": "1bf01145dc0d9d8f03e85392be94eaa2"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\reports\\category-expense\\category-expense.component.html": {
+    "mtime": 1778224261.5004323,
+    "hash": "7d9efe583e40929a72d14ef6f6c3ca48"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\reports\\donor-receipts\\donor-receipts.component.html": {
+    "mtime": 1778224270.2308483,
+    "hash": "29ac7efce82a9d4fc34416219d50e4d6"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\reports\\event-pnl\\event-pnl.component.html": {
+    "mtime": 1778224266.222561,
+    "hash": "240f31229cd661e886b9962b54e44fea"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\reports\\income-expenditure\\income-expenditure.component.html": {
+    "mtime": 1778224274.319564,
+    "hash": "33d66b0480181c0a0f2c54723a6b9fc9"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\reports\\payment-register\\payment-register.component.html": {
+    "mtime": 1778224257.6423402,
+    "hash": "6716e8b952aa28b9a39bc6912fd63267"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\reports\\receipt-register\\receipt-register.component.html": {
+    "mtime": 1778224741.4674685,
+    "hash": "6967b3a37c9ca01654dab99780b36c86"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\transactions\\assets\\assets.component.html": {
+    "mtime": 1778223913.9996579,
+    "hash": "862f5a3c2e25acc299fd2a71b066fb53"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\transactions\\bank-transfers\\bank-transfers.component.html": {
+    "mtime": 1778223917.785984,
+    "hash": "9a70ba8c02756ce47ed3f563c33ed862"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\transactions\\payments\\payments.component.html": {
+    "mtime": 1778223905.2601943,
+    "hash": "6319ed7c6a960e47880448361c8a9573"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\transactions\\receipts\\receipts.component.html": {
+    "mtime": 1778223901.2956097,
+    "hash": "dda96e59de64e9e0f465972140805f77"
+  },
+  "E:\\Work\\AccSoft\\Frontend\\src\\app\\features\\transactions\\reimbursements\\reimbursements.component.html": {
+    "mtime": 1778223909.9009612,
+    "hash": "702322a4870b34b84952bd7eb0f2ec0e"
+  }
+}

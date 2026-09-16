@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>
+  <mat-icon class="dialog-icon">{{ data.mode === 'add' ? 'add_circle' : 'edit' }}</mat-icon>
+  {{ data.mode === 'add' ? 'Add New Event Category' : 'Edit Event Category' }}
+</h2>
+<mat-dialog-content>
+  <form #catForm="ngForm" class="cat-form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Category Name</mat-label>
+      <input matInput [(ngModel)]="eventCatName" name="eventCatName" required placeholder="Enter category name" #nameField="ngModel">
+      <mat-error *ngIf="nameField.hasError('required')">Category name is required</mat-error>
+    </mat-form-field>
+
+    <div class="toggle-row" *ngIf="data.mode === 'edit'">
+      <mat-slide-toggle [(ngModel)]="isActive" name="isActive" color="primary">
+        {{ isActive ? 'Active' : 'Inactive' }}
+      </mat-slide-toggle>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close style="color: #64748b;">Cancel</button>
+  <button class="btn-gradient" [disabled]="!eventCatName.trim()" (click)="onSave()">
+    <mat-icon style="font-size: 18px; width: 18px; height: 18px;">save</mat-icon>
+    {{ data.mode === 'add' ? 'Save' : 'Update' }}
+  </button>
+</mat-dialog-actions>

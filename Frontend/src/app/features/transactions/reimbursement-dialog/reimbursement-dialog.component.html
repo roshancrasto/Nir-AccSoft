@@ -1,0 +1,111 @@
+<h2 mat-dialog-title>{{ data.mode === 'add' ? 'Record Member Expense' : 'Edit Member Expense' }}</h2>
+
+<mat-dialog-content>
+  <form class="dialog-form">
+    
+    <div class="row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Event Group</mat-label>
+        <mat-select [(ngModel)]="eventGroupKey" name="eventGroupKey" (selectionChange)="onEventGroupChange($event.value)" required>
+          <mat-option *ngFor="let eg of eventGroups" [value]="eg.eventGroupId">{{ eg.eventGroupName }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Category</mat-label>
+        <mat-select [(ngModel)]="expenseCategoryKey" name="expenseCategoryKey" required>
+          <mat-option *ngFor="let c of categories" [value]="c.categoryId">{{ c.categoryName }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Expense Details (Optional)</mat-label>
+      <input matInput [(ngModel)]="expenseDetails" name="expenseDetails">
+    </mat-form-field>
+
+    <div class="row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Vendor (Optional)</mat-label>
+        <mat-select [(ngModel)]="vendorKey" name="vendorKey">
+          <mat-option [value]="0">-- None --</mat-option>
+          <mat-option *ngFor="let v of vendors" [value]="v.vendorId">{{ v.vendorName }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Amount (₹)</mat-label>
+        <input matInput type="number" [(ngModel)]="amount" name="amount" required min="1">
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Payment Mode</mat-label>
+        <mat-select [(ngModel)]="paymentMode" name="paymentMode">
+          <mat-option *ngFor="let mode of paymentModes" [value]="mode">{{ mode }}</mat-option>
+        </mat-select>
+        <mat-icon matPrefix>payments</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Paid By Member (Optional)</mat-label>
+      <mat-select [(ngModel)]="paidByMemberKey" name="paidByMemberKey">
+        <mat-option [value]="null">-- None --</mat-option>
+        <mat-option *ngFor="let m of members" [value]="m.memberKey">{{ m.memberName }}</mat-option>
+      </mat-select>
+      <mat-icon matPrefix>person</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Related Payment (Optional)</mat-label>
+      <input type="text"
+             placeholder="Search Expense"
+             matInput
+             [(ngModel)]="selectedRelatedPayment"
+             name="selectedRelatedPayment"
+             [matAutocomplete]="auto"
+             (input)="filterPayments($event)"
+             (focus)="filterPayments('')">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayPayment" (optionSelected)="onPaymentSelected($event)">
+        <mat-option *ngFor="let payment of filteredPayments" [value]="payment">
+          {{payment.categoryName || 'Unknown'}} | {{payment.expenseDetails || 'No details'}} | {{payment.amount | currency:'INR'}}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-icon matPrefix>link</mat-icon>
+    </mat-form-field>
+
+    <div class="row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Bill No (Optional)</mat-label>
+        <input matInput [(ngModel)]="billNo" name="billNo">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Bill Date (Optional)</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="billDate" name="billDate">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-checkbox [(ngModel)]="isVoucherOnly" name="isVoucherOnly" color="primary">Is Voucher Only</mat-checkbox>
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Remarks</mat-label>
+      <textarea matInput [(ngModel)]="remarks" name="remarks" rows="2"></textarea>
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close style="color: #64748b;">Cancel</button>
+  <button class="btn-gradient" (click)="onSave()" 
+          [disabled]="!eventGroupKey || !expenseCategoryKey || !amount">
+    <mat-icon style="font-size: 18px; width: 18px; height: 18px;">save</mat-icon> Save
+  </button>
+</mat-dialog-actions>

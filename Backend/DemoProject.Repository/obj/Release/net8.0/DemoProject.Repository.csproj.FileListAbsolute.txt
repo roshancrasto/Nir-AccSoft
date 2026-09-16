@@ -1,0 +1,17 @@
+E:\Work\AccSoft\Backend\DemoProject.Repository\bin\Release\net8.0\DemoProject.Repository.deps.json
+E:\Work\AccSoft\Backend\DemoProject.Repository\bin\Release\net8.0\DemoProject.Repository.dll
+E:\Work\AccSoft\Backend\DemoProject.Repository\bin\Release\net8.0\DemoProject.Repository.pdb
+E:\Work\AccSoft\Backend\DemoProject.Repository\bin\Release\net8.0\DemoProject.Common.dll
+E:\Work\AccSoft\Backend\DemoProject.Repository\bin\Release\net8.0\DemoProject.Data.dll
+E:\Work\AccSoft\Backend\DemoProject.Repository\bin\Release\net8.0\DemoProject.Data.pdb
+E:\Work\AccSoft\Backend\DemoProject.Repository\bin\Release\net8.0\DemoProject.Common.pdb
+E:\Work\AccSoft\Backend\DemoProject.Repository\obj\Release\net8.0\DemoProject.Repository.csproj.AssemblyReference.cache
+E:\Work\AccSoft\Backend\DemoProject.Repository\obj\Release\net8.0\DemoProject.Repository.GeneratedMSBuildEditorConfig.editorconfig
+E:\Work\AccSoft\Backend\DemoProject.Repository\obj\Release\net8.0\DemoProject.Repository.AssemblyInfoInputs.cache
+E:\Work\AccSoft\Backend\DemoProject.Repository\obj\Release\net8.0\DemoProject.Repository.AssemblyInfo.cs
+E:\Work\AccSoft\Backend\DemoProject.Repository\obj\Release\net8.0\DemoProject.Repository.csproj.CoreCompileInputs.cache
+E:\Work\AccSoft\Backend\DemoProject.Repository\obj\Release\net8.0\DemoProj.3EA6744F.Up2Date
+E:\Work\AccSoft\Backend\DemoProject.Repository\obj\Release\net8.0\DemoProject.Repository.dll
+E:\Work\AccSoft\Backend\DemoProject.Repository\obj\Release\net8.0\refint\DemoProject.Repository.dll
+E:\Work\AccSoft\Backend\DemoProject.Repository\obj\Release\net8.0\DemoProject.Repository.pdb
+E:\Work\AccSoft\Backend\DemoProject.Repository\obj\Release\net8.0\ref\DemoProject.Repository.dll

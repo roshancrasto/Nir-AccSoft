@@ -1,0 +1,79 @@
+<h2 mat-dialog-title>
+  {{ data.mode === 'add' ? 'New Box Collection' : data.mode === 'edit' ? 'Edit Box Collection' : 'Box Collection Details' }}
+</h2>
+<mat-dialog-content [formGroup]="form">
+  <div class="form-container">
+    <div class="form-row" *ngIf="data.mode !== 'add' && data.collection?.collectionNumber">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Collection Number</mat-label>
+        <input matInput [value]="data.collection?.collectionNumber" readonly>
+        <mat-icon matPrefix>confirmation_number</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Event Group</mat-label>
+        <mat-select formControlName="eventGroupKey" required>
+          <mat-option *ngFor="let group of eventGroups" [value]="group.eventGroupId">
+            {{ group.eventGroupName }}
+          </mat-option>
+        </mat-select>
+        <mat-icon matPrefix>event</mat-icon>
+        <mat-error *ngIf="form.get('eventGroupKey')?.hasError('required')">
+          Event Group is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Collection Date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="collectionDate" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-icon matPrefix>calendar_today</mat-icon>
+        <mat-error *ngIf="form.get('collectionDate')?.hasError('required')">
+          Collection Date is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Amount</mat-label>
+        <input matInput type="number" formControlName="amount" placeholder="0.00" required>
+        <mat-icon matPrefix>currency_rupee</mat-icon>
+        <mat-error *ngIf="form.get('amount')?.hasError('required')">
+          Amount is required
+        </mat-error>
+        <mat-error *ngIf="form.get('amount')?.hasError('min')">
+          Amount must be greater than zero
+        </mat-error>
+      </mat-form-field>
+
+      <div class="half-width checkbox-container">
+        <mat-checkbox formControlName="considerForAudit" color="primary">
+          Consider For Audit
+        </mat-checkbox>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Remarks</mat-label>
+        <textarea matInput formControlName="remarks" rows="3" placeholder="Enter collection remarks..."></textarea>
+        <mat-icon matPrefix>notes</mat-icon>
+      </mat-form-field>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close style="color: #64748b;">{{ data.mode === 'view' ? 'Close' : 'Cancel' }}</button>
+  <button class="btn-gradient" 
+          *ngIf="data.mode !== 'view'" 
+          [disabled]="form.invalid" 
+          (click)="onSave()">
+    <mat-icon style="font-size: 18px; width: 18px; height: 18px;">save</mat-icon>
+    {{ data.mode === 'add' ? 'Save' : 'Update' }}
+  </button>
+</mat-dialog-actions>

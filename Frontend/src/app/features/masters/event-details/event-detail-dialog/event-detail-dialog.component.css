@@ -1,0 +1,30 @@
+.event-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 12px 0;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.form-row {
+  display: flex;
+  gap: 16px;
+}
+
+.half-width {
+  flex: 1;
+}
+
+.toggle-row {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.dialog-icon {
+  vertical-align: middle;
+  margin-right: 8px;
+}

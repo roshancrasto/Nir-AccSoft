@@ -1,0 +1,353 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]: DemoProject - NGO Accounting System
+      - button [ref=e317]:
+        - img [ref=e6]: account_circle
+        - generic [ref=e7]: Admin
+      - button [ref=e10] [cursor=pointer]:
+        - img [ref=e11]: logout
+    - generic [ref=e15]:
+      - link [ref=e318] [cursor=pointer]:
+        - /url: /dashboard
+        - img [ref=e17]: dashboard
+        - generic [ref=e18]: Dashboard
+      - button [ref=e319]:
+        - img [ref=e22]: category
+        - img [ref=e23]: arrow_drop_down
+        - generic [ref=e24]: Masters
+      - button [ref=e320]:
+        - img [ref=e28]: receipt_long
+        - img [ref=e29]: arrow_drop_down
+        - generic [ref=e30]: Transactions
+      - button [ref=e321]:
+        - img [ref=e34]: business_center
+        - img [ref=e35]: arrow_drop_down
+        - generic [ref=e36]: Internal
+      - button [ref=e322]:
+        - img [ref=e40]: summarize
+        - img [ref=e41]: arrow_drop_down
+        - generic [ref=e42]: Reports
+    - main [ref=e45]:
+      - generic [ref=e48]:
+        - generic [ref=e50]:
+          - generic [ref=e51]:
+            - img [ref=e52]: payments
+            - generic [ref=e53]:
+              - heading [level=1] [ref=e323]: Payment Voucher
+              - paragraph [ref=e55]: Record and manage expense payments
+          - button [ref=e324]:
+            - img [ref=e57]: add
+            - generic [ref=e58]: New Voucher
+        - generic [ref=e61]:
+          - generic [ref=e65]:
+            - generic [ref=e66]: Search Vouchers
+            - textbox [ref=e325]:
+              - /placeholder: Search by number, vendor, category or event
+            - img [ref=e70]: search
+          - generic [ref=e72]:
+            - table [ref=e73]:
+              - rowgroup [ref=e74]:
+                - row [ref=e326]:
+                  - columnheader [ref=e327]: Voucher No.
+                  - columnheader [ref=e328]: Voucher Date
+                  - columnheader [ref=e329]: Payment Date
+                  - columnheader [ref=e330]: Vendor
+                  - columnheader [ref=e331]: Category
+                  - columnheader [ref=e332]: Event Group
+                  - columnheader [ref=e333]: Event
+                  - columnheader [ref=e334]: Amount
+                  - columnheader [ref=e335]: Mode
+                  - columnheader [ref=e336]: Actions
+              - rowgroup [ref=e86]:
+                - row [ref=e337]:
+                  - cell [ref=e338]: 2026-001
+                  - cell [ref=e339]: 04-Feb-2026
+                  - cell [ref=e340]: 30-Jan-2026
+                  - cell [ref=e341]: Varsha Printers
+                  - cell [ref=e342]: Printing & Stationery
+                  - cell [ref=e343]: Drama Fest 2026
+                  - cell [ref=e344]: "-"
+                  - cell [ref=e345]: ₹2,500.00
+                  - cell [ref=e346]: Bank
+                  - cell [ref=e97]:
+                    - generic [ref=e98]:
+                      - button [ref=e99] [cursor=pointer]:
+                        - img [ref=e100]: edit
+                      - button [ref=e103] [cursor=pointer]:
+                        - img [ref=e104]: delete
+                - row [ref=e347]:
+                  - cell [ref=e348]: 2026-002
+                  - cell [ref=e349]: 04-Feb-2026
+                  - cell [ref=e350]: 30-Jan-2026
+                  - cell [ref=e351]: Bank Charges
+                  - cell [ref=e352]: Bank Charges
+                  - cell [ref=e353]: Drama Fest 2026
+                  - cell [ref=e354]: "-"
+                  - cell [ref=e355]: ₹7.08
+                  - cell [ref=e356]: Bank
+                  - cell [ref=e117]:
+                    - generic [ref=e118]:
+                      - button [ref=e119] [cursor=pointer]:
+                        - img [ref=e120]: edit
+                      - button [ref=e123] [cursor=pointer]:
+                        - img [ref=e124]: delete
+                - row [ref=e357]:
+                  - cell [ref=e358]: 2026-003
+                  - cell [ref=e359]: 15-Feb-2026
+                  - cell [ref=e360]: 09-Feb-2026
+                  - cell [ref=e361]: Varsha Printers
+                  - cell [ref=e362]: Printing & Stationery
+                  - cell [ref=e363]: Drama Fest 2026
+                  - cell [ref=e364]: "-"
+                  - cell [ref=e365]: ₹1,000.00
+                  - cell [ref=e366]: Cash
+                  - cell [ref=e137]:
+                    - generic [ref=e138]:
+                      - button [ref=e139] [cursor=pointer]:
+                        - img [ref=e140]: edit
+                      - button [ref=e143] [cursor=pointer]:
+                        - img [ref=e144]: delete
+                - row [ref=e367]:
+                  - cell [ref=e368]: 2026-004
+                  - cell [ref=e369]: 15-Feb-2026
+                  - cell [ref=e370]: 09-Feb-2026
+                  - cell [ref=e371]: Bank Charges
+                  - cell [ref=e372]: Bank Charges
+                  - cell [ref=e373]: Drama Fest 2026
+                  - cell [ref=e374]: "-"
+                  - cell [ref=e375]: ₹7.08
+                  - cell [ref=e376]: Bank
+                  - cell [ref=e157]:
+                    - generic [ref=e158]:
+                      - button [ref=e159] [cursor=pointer]:
+                        - img [ref=e160]: edit
+                      - button [ref=e163] [cursor=pointer]:
+                        - img [ref=e164]: delete
+                - row [ref=e377]:
+                  - cell [ref=e378]: 2026-005
+                  - cell [ref=e379]: 14-Feb-2026
+                  - cell [ref=e380]: 11-Feb-2026
+                  - cell [ref=e381]: Little Earth School Of Theatre
+                  - cell [ref=e382]: Drama Team Payment
+                  - cell [ref=e383]: Drama Fest 2026
+                  - cell [ref=e384]: "-"
+                  - cell [ref=e385]: ₹25,000.00
+                  - cell [ref=e386]: Bank
+                  - cell [ref=e177]:
+                    - generic [ref=e178]:
+                      - button [ref=e179] [cursor=pointer]:
+                        - img [ref=e180]: edit
+                      - button [ref=e183] [cursor=pointer]:
+                        - img [ref=e184]: delete
+                - row [ref=e387]:
+                  - cell [ref=e388]: 2026-006
+                  - cell [ref=e389]: 15-Feb-2026
+                  - cell [ref=e390]: 11-Feb-2026
+                  - cell [ref=e391]: Bank Charges
+                  - cell [ref=e392]: Bank Charges
+                  - cell [ref=e393]: Drama Fest 2026
+                  - cell [ref=e394]: "-"
+                  - cell [ref=e395]: ₹11.80
+                  - cell [ref=e396]: Bank
+                  - cell [ref=e197]:
+                    - generic [ref=e198]:
+                      - button [ref=e199] [cursor=pointer]:
+                        - img [ref=e200]: edit
+                      - button [ref=e203] [cursor=pointer]:
+                        - img [ref=e204]: delete
+                - row [ref=e397]:
+                  - cell [ref=e398]: 2026-007
+                  - cell [ref=e399]: 12-Feb-2026
+                  - cell [ref=e400]: 11-Feb-2026
+                  - cell [ref=e401]: Little Earth School Of Theatre
+                  - cell [ref=e402]: Drama Team Payment
+                  - cell [ref=e403]: Drama Fest 2026
+                  - cell [ref=e404]: "-"
+                  - cell [ref=e405]: ₹20,000.00
+                  - cell [ref=e406]: Bank
+                  - cell [ref=e217]:
+                    - generic [ref=e218]:
+                      - button [ref=e219] [cursor=pointer]:
+                        - img [ref=e220]: edit
+                      - button [ref=e223] [cursor=pointer]:
+                        - img [ref=e224]: delete
+                - row [ref=e407]:
+                  - cell [ref=e408]: 2026-008
+                  - cell [ref=e409]: 15-Feb-2026
+                  - cell [ref=e410]: 11-Feb-2026
+                  - cell [ref=e411]: Bank Charges
+                  - cell [ref=e412]: Bank Charges
+                  - cell [ref=e413]: Drama Fest 2026
+                  - cell [ref=e414]: "-"
+                  - cell [ref=e415]: ₹11.80
+                  - cell [ref=e416]: Bank
+                  - cell [ref=e237]:
+                    - generic [ref=e238]:
+                      - button [ref=e239] [cursor=pointer]:
+                        - img [ref=e240]: edit
+                      - button [ref=e243] [cursor=pointer]:
+                        - img [ref=e244]: delete
+                - row [ref=e417]:
+                  - cell [ref=e418]: 2026-009
+                  - cell [ref=e419]: 15-Feb-2026
+                  - cell [ref=e420]: 11-Feb-2026
+                  - cell [ref=e421]: Prasad Creations
+                  - cell [ref=e422]: Printing & Stationery
+                  - cell [ref=e423]: Drama Fest 2026
+                  - cell [ref=e424]: "-"
+                  - cell [ref=e425]: ₹4,500.00
+                  - cell [ref=e426]: Bank
+                  - cell [ref=e257]:
+                    - generic [ref=e258]:
+                      - button [ref=e259] [cursor=pointer]:
+                        - img [ref=e260]: edit
+                      - button [ref=e263] [cursor=pointer]:
+                        - img [ref=e264]: delete
+                - row [ref=e427]:
+                  - cell [ref=e428]: 2026-010
+                  - cell [ref=e429]: 15-Feb-2026
+                  - cell [ref=e430]: 11-Feb-2026
+                  - cell [ref=e431]: Bank Charges
+                  - cell [ref=e432]: Bank Charges
+                  - cell [ref=e433]: Drama Fest 2026
+                  - cell [ref=e434]: "-"
+                  - cell [ref=e435]: ₹7.08
+                  - cell [ref=e436]: Bank
+                  - cell [ref=e277]:
+                    - generic [ref=e278]:
+                      - button [ref=e279] [cursor=pointer]:
+                        - img [ref=e280]: edit
+                      - button [ref=e283] [cursor=pointer]:
+                        - img [ref=e284]: delete
+            - group [ref=e437]:
+              - generic [ref=e289]:
+                - generic [ref=e290]:
+                  - generic [ref=e291]: "Items per page:"
+                  - combobox [ref=e438] [cursor=pointer]:
+                    - generic [ref=e297]:
+                      - generic [ref=e299]: "10"
+                      - img [ref=e302]
+                - generic [ref=e304]:
+                  - generic [ref=e305]: 1 – 10 of 55
+                  - button [disabled]:
+                    - img
+                  - button [disabled]:
+                    - img
+                  - button [ref=e439] [cursor=pointer]:
+                    - img [ref=e307]
+                  - button [ref=e440] [cursor=pointer]:
+                    - img [ref=e312]
+  - dialog "New Payment Voucher" [ref=e444]:
+    - generic [ref=e446]:
+      - heading "New Payment Voucher" [level=2] [ref=e447]:
+        - img [ref=e448]: add_circle
+        - text: New Payment Voucher
+      - generic [ref=e450]:
+        - generic [ref=e451]:
+          - generic [ref=e454]:
+            - generic [ref=e455]:
+              - text: Voucher Number
+              - generic [ref=e456]: "*"
+            - img [ref=e458]: receipt
+            - textbox "Voucher Number" [ref=e460]:
+              - /placeholder: V-001
+          - generic [ref=e464]:
+            - generic [ref=e465]:
+              - text: Voucher Date
+              - generic [ref=e466]: "*"
+            - textbox "Voucher Date" [ref=e468]: 17/6/2026
+            - button "Open calendar" [ref=e471] [cursor=pointer]:
+              - img [ref=e472]
+        - generic [ref=e477]:
+          - generic [ref=e480]:
+            - generic [ref=e481]:
+              - text: Payment Date
+              - generic [ref=e482]: "*"
+            - textbox "Payment Date" [ref=e484]: 17/6/2026
+            - button "Open calendar" [ref=e487] [cursor=pointer]:
+              - img [ref=e488]
+          - generic [ref=e495] [cursor=pointer]:
+            - generic [ref=e496]:
+              - text: Payment Type
+              - generic [ref=e497]: "*"
+            - img [ref=e499]: category
+            - combobox "Payment Type Multiple Payments" [expanded] [active] [ref=e632]:
+              - generic [ref=e502]:
+                - generic [ref=e504]: Multiple Payments
+                - img [ref=e507]
+        - generic [ref=e510]:
+          - generic [ref=e513] [cursor=pointer]:
+            - generic [ref=e514]: Vendor
+            - img [ref=e516]: storefront
+            - combobox "Vendor" [ref=e518]:
+              - img [ref=e524]
+          - generic [ref=e529] [cursor=pointer]:
+            - generic [ref=e530]: Expense Category
+            - img [ref=e532]: category
+            - combobox "Expense Category" [ref=e534]:
+              - img [ref=e540]
+        - generic [ref=e543]:
+          - generic [ref=e546] [cursor=pointer]:
+            - generic [ref=e547]: Payment Mode
+            - img [ref=e549]: payments
+            - combobox "Payment Mode Cash" [ref=e551]:
+              - generic [ref=e552]:
+                - generic [ref=e554]: Cash
+                - img [ref=e557]
+          - generic [ref=e562]:
+            - generic [ref=e563]:
+              - text: Debit Amount
+              - generic [ref=e564]: "*"
+            - img [ref=e566]: currency_rupee
+            - spinbutton "Debit Amount" [ref=e568]: "0"
+        - generic [ref=e571]:
+          - generic [ref=e573]:
+            - generic [ref=e574]: Related Payment (Optional)
+            - img [ref=e576]: link
+            - combobox "Related Payment (Optional)" [ref=e578]
+          - generic [ref=e581]: Link bank charges or transaction fees to original payment
+        - generic [ref=e585]:
+          - switch "Bill Available" [ref=e586] [cursor=pointer]:
+            - generic [ref=e591]:
+              - img [ref=e592]
+              - img [ref=e594]
+          - generic [ref=e596] [cursor=pointer]: Bill Available
+        - generic [ref=e599]:
+          - generic [ref=e600]: Description
+          - textbox "Description" [ref=e602]
+        - generic [ref=e633]:
+          - generic [ref=e634]:
+            - heading "Selected Linked Expenses" [level=3] [ref=e635]:
+              - img [ref=e636]: checklist
+              - text: Selected Linked Expenses
+            - button "Link Expenses" [ref=e637]:
+              - img [ref=e638]: link
+              - generic [ref=e639]: Link Expenses
+          - generic [ref=e642]:
+            - img [ref=e643]: info_outline
+            - paragraph [ref=e644]: No expenses linked yet. Click 'Link Expenses' to select pending expenses.
+        - generic [ref=e604]:
+          - generic [ref=e605]:
+            - heading "Event Expense Allocation" [level=3] [ref=e606]:
+              - img [ref=e607]: account_tree
+              - text: Event Expense Allocation
+            - button "Add Event Expense" [ref=e608]:
+              - img [ref=e609]: add
+              - generic [ref=e610]: Add Event Expense
+          - generic [ref=e613]:
+            - img [ref=e614]: info_outline
+            - paragraph [ref=e615]: No event expenses allocated yet. Click the button above to add expenses.
+      - generic [ref=e616]:
+        - button "Cancel" [ref=e617]:
+          - generic [ref=e618]: Cancel
+        - button "Save" [disabled]:
+          - img: save
+          - generic: Save
+    - listbox "Payment Type" [ref=e645]:
+      - option "Normal" [ref=e623] [cursor=pointer]:
+        - generic [ref=e624]: Normal
+      - option "Re-Imbursement" [ref=e626] [cursor=pointer]:
+        - generic [ref=e627]: Re-Imbursement
+      - option "Multiple Payments" [selected] [ref=e628] [cursor=pointer]:
+        - generic [ref=e629]: Multiple Payments

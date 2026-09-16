@@ -1,0 +1,326 @@
+<h2 mat-dialog-title>
+  <mat-icon class="dialog-icon">{{ data.mode === 'add' ? 'add_circle' : 'edit' }}</mat-icon>
+  {{ data.mode === 'add' ? 'New Payment Voucher ' : 'Edit Payment Voucher ' }}
+</h2>
+<mat-dialog-content>
+  <form #paymentForm="ngForm" class="payment-form">
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Voucher Number</mat-label>
+        <input matInput [(ngModel)]="voucherNumber" name="voucherNumber" required placeholder="V-001">
+        <mat-icon matPrefix>receipt</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Voucher Date</mat-label>
+        <input matInput [matDatepicker]="vPicker" [(ngModel)]="voucherDate" name="voucherDate" required>
+        <mat-datepicker-toggle matSuffix [for]="vPicker"></mat-datepicker-toggle>
+        <mat-datepicker #vPicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Payment Date</mat-label>
+        <input matInput [matDatepicker]="pPicker" [(ngModel)]="paymentDate" name="paymentDate" required>
+        <mat-datepicker-toggle matSuffix [for]="pPicker"></mat-datepicker-toggle>
+        <mat-datepicker #pPicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Payment Type</mat-label>
+        <mat-select [(ngModel)]="paymentType" name="paymentType" (selectionChange)="onPaymentTypeChange()" required>
+          <mat-option *ngFor="let type of paymentTypes" [value]="type">{{ type }}</mat-option>
+        </mat-select>
+        <mat-icon matPrefix>category</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <!-- Member Section for Reimbursements -->
+    <div class="form-row" *ngIf="paymentType === 'Re-Imbursement'">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Member</mat-label>
+        <mat-select [(ngModel)]="memberId" name="memberId" (selectionChange)="onMemberChange()" required>
+          <mat-option *ngFor="let member of members" [value]="member.memberKey">{{ member.memberName }}</mat-option>
+        </mat-select>
+        <mat-icon matPrefix>person</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <!-- Event Group and Event -->
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Event Group</mat-label>
+        <mat-select [(ngModel)]="eventGroupKey" name="eventGroupKey" (selectionChange)="onEventGroupChange($event.value)">
+          <div class="select-search-container">
+            <mat-form-field appearance="outline" class="select-search-field">
+              <input matInput (input)="filterEventGroups($event)" placeholder="Search event group..." (click)="$event.stopPropagation()">
+              <mat-icon matPrefix>search</mat-icon>
+            </mat-form-field>
+          </div>
+          <mat-option [value]="null">None</mat-option>
+          <mat-option *ngFor="let eg of filteredEventGroups" [value]="eg.eventGroupId">{{ eg.eventGroupName }}</mat-option>
+        </mat-select>
+        <mat-icon matPrefix>folder</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Event</mat-label>
+        <mat-select [(ngModel)]="eventKey" name="eventKey" [disabled]="!eventGroupKey">
+          <mat-option [value]="null">None</mat-option>
+          <mat-option *ngFor="let ev of filteredEventDetails" [value]="ev.eventKey">{{ ev.eventName }}</mat-option>
+        </mat-select>
+        <mat-icon matPrefix>event</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Vendor</mat-label>
+        <mat-select [(ngModel)]="vendorId" name="vendorId">
+          <div class="select-search-container">
+            <mat-form-field appearance="outline" class="select-search-field">
+              <input matInput (input)="filterVendors($event)" placeholder="Search vendor..." (click)="$event.stopPropagation()">
+              <mat-icon matPrefix>search</mat-icon>
+            </mat-form-field>
+          </div>
+          <mat-option [value]="null">None</mat-option>
+          <mat-option *ngFor="let vendor of filteredVendors" [value]="vendor.vendorId">{{ vendor.vendorName }}</mat-option>
+        </mat-select>
+        <mat-icon matPrefix>storefront</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Expense Category</mat-label>
+        <mat-select [(ngModel)]="expenseCategoryId" name="expenseCategoryId">
+          <div class="select-search-container">
+            <mat-form-field appearance="outline" class="select-search-field">
+              <input matInput (input)="filterCategories($event)" placeholder="Search category..." (click)="$event.stopPropagation()">
+              <mat-icon matPrefix>search</mat-icon>
+            </mat-form-field>
+          </div>
+          <mat-option [value]="null">None</mat-option>
+          <mat-option *ngFor="let cat of filteredCategories" [value]="cat.categoryId">{{ cat.categoryName }}</mat-option>
+        </mat-select>
+        <mat-icon matPrefix>category</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Payment Mode</mat-label>
+        <mat-select [(ngModel)]="paymentMode" name="paymentMode">
+          <mat-option *ngFor="let mode of paymentModes" [value]="mode">{{ mode }}</mat-option>
+        </mat-select>
+        <mat-icon matPrefix>payments</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Debit Amount</mat-label>
+        <input matInput type="number" [(ngModel)]="debitAmount" name="debitAmount" required placeholder="0.00">
+        <mat-icon matPrefix>currency_rupee</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Related Payment (Optional)</mat-label>
+        <input type="text"
+               placeholder="Search Voucher / Vendor / Amount"
+               matInput
+               [(ngModel)]="selectedRelatedPayment"
+               name="selectedRelatedPayment"
+               [matAutocomplete]="auto"
+               (input)="filterPayments($event)">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayPayment" (optionSelected)="onPaymentSelected($event)">
+          <mat-option *ngFor="let payment of filteredPayments" [value]="payment">
+            {{payment.voucherNumber}} | {{payment.vendorName || 'Unknown'}} | {{payment.amount | currency:'INR'}} | {{payment.paymentDate | date:'dd-MMM-yyyy'}}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-icon matPrefix>link</mat-icon>
+        <mat-hint>Link bank charges or transaction fees to original payment</mat-hint>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row" *ngIf="paymentMode === 'Bank'">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Reference Number (Cheque/UTR)</mat-label>
+        <input matInput [(ngModel)]="referenceNumber" name="referenceNumber" placeholder="Enter reference number">
+        <mat-icon matPrefix>tag</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row status-row">
+      <mat-slide-toggle [(ngModel)]="billAvailable" name="billAvailable" color="primary">
+        Bill Available
+      </mat-slide-toggle>
+      <mat-checkbox [(ngModel)]="isVoucherOnly" name="isVoucherOnly" color="primary" style="margin-left: 20px;">
+        Is Voucher Only
+      </mat-checkbox>
+    </div>
+
+    <div class="form-row" *ngIf="billAvailable">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Bill Number</mat-label>
+        <input matInput [(ngModel)]="billNumber" name="billNumber">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Bill Date</mat-label>
+        <input matInput [matDatepicker]="bPicker" [(ngModel)]="billDate" name="billDate">
+        <mat-datepicker-toggle matSuffix [for]="bPicker"></mat-datepicker-toggle>
+        <mat-datepicker #bPicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput [(ngModel)]="description" name="description" rows="2"></textarea>
+    </mat-form-field>
+
+    <!-- Reimbursement Links Selection -->
+    <div class="allocation-section" *ngIf="(paymentType === 'Re-Imbursement' && memberId) || paymentType === 'Multiple Payments'">
+      <div class="section-header">
+        <h3 class="section-title">
+          <mat-icon>checklist</mat-icon>
+          Selected Linked Expenses
+        </h3>
+        <button mat-stroked-button color="primary" type="button" (click)="openReimbursementLinkDialog()">
+          <mat-icon>link</mat-icon>
+          Link Expenses
+        </button>
+      </div>
+
+      <div class="table-container mat-elevation-z1" *ngIf="selectedLinks.length > 0">
+        <table class="mat-table" style="width: 100%;">
+          <thead>
+            <tr class="mat-header-row">
+              <th class="mat-header-cell">Member</th>
+              <th class="mat-header-cell">Event Group</th>
+              <th class="mat-header-cell">Category</th>
+              <th class="mat-header-cell">Details</th>
+              <th class="mat-header-cell">Amount</th>
+              <th class="mat-header-cell"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let link of selectedLinks" class="mat-row">
+              <td class="mat-cell">{{link.memberName}}</td>
+              <td class="mat-cell">{{link.eventGroupName}}</td>
+              <td class="mat-cell">{{link.categoryName}}</td>
+              <td class="mat-cell">{{link.expenseDetails}}</td>
+              <td class="mat-cell">{{link.amount | currency:'INR'}}</td>
+              <td class="mat-cell">
+                <button mat-icon-button color="warn" (click)="removeSelectedLink(link.expenseId)">
+                  <mat-icon>delete_outline</mat-icon>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="empty-state" *ngIf="selectedLinks.length === 0">
+        <mat-icon>info_outline</mat-icon>
+        <p>No expenses linked yet. Click 'Link Expenses' to select pending expenses.</p>
+      </div>
+
+      <div class="allocation-summary" *ngIf="reimbursementTotal > 0">
+        <div class="summary-item balance">
+          <span class="label">Total Linked Amount:</span>
+          <span class="value success">{{reimbursementTotal | currency:'INR'}}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Normal Event Expense Allocation -->
+    <div class="allocation-section">
+      <div class="section-header">
+        <h3 class="section-title">
+          <mat-icon>account_tree</mat-icon>
+          Event Expense Allocation
+        </h3>
+        <button mat-stroked-button color="primary" type="button" (click)="openSelectionDialog()">
+          <mat-icon>add</mat-icon>
+          Add Event Expense
+        </button>
+      </div>
+
+      <div class="table-container mat-elevation-z1" *ngIf="eventExpenseMappings.length > 0">
+        <table mat-table [dataSource]="eventExpenseMappings">
+          <ng-container matColumnDef="eventGroupName">
+            <th mat-header-cell *matHeaderCellDef> Event Group </th>
+            <td mat-cell *matCellDef="let element"> {{element.eventGroupName}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="expenseCode">
+            <th mat-header-cell *matHeaderCellDef> Code </th>
+            <td mat-cell *matCellDef="let element"> 
+              <span class="badge">{{element.expenseCode}}</span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="expenseDetails">
+            <th mat-header-cell *matHeaderCellDef> Details </th>
+            <td mat-cell *matCellDef="let element"> {{element.expenseDetails}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="pendingAmount">
+            <th mat-header-cell *matHeaderCellDef> Pending </th>
+            <td mat-cell *matCellDef="let element"> {{element.pendingAmount | currency:'INR'}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef> Allocate </th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              <mat-form-field appearance="outline" class="compact-field">
+                <input matInput type="number" [(ngModel)]="element.amount" [name]="'allocAmount_' + i" required>
+              </mat-form-field>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> </th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              <button mat-icon-button color="warn" (click)="removeMapping(i)">
+                <mat-icon>delete_outline</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+
+      <div class="empty-state" *ngIf="eventExpenseMappings.length === 0">
+        <mat-icon>info_outline</mat-icon>
+        <p>No event expenses allocated yet. Click the button above to add expenses.</p>
+      </div>
+
+      <div class="allocation-summary" *ngIf="debitAmount > 0">
+        <div class="summary-item">
+          <span class="label">Payment Amount:</span>
+          <span class="value">{{debitAmount | currency:'INR'}}</span>
+        </div>
+        <div class="summary-item">
+          <span class="label">Total Allocated:</span>
+          <span class="value" [class.error]="getTotalAllocated() > debitAmount">{{getTotalAllocated() | currency:'INR'}}</span>
+        </div>
+        <div class="summary-item balance">
+          <span class="label">Balance:</span>
+          <span class="value" [class.success]="getBalanceAmount() === 0" [class.warning]="getBalanceAmount() > 0" [class.error]="getBalanceAmount() < 0">
+            {{getBalanceAmount() | currency:'INR'}}
+          </span>
+        </div>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close style="color: #64748b;">Cancel</button>
+  <button class="btn-gradient" [disabled]="!voucherNumber || !debitAmount" (click)="onSave()">
+    <mat-icon style="font-size: 18px; width: 18px; height: 18px;">save</mat-icon>
+    {{ data.mode === 'add' ? 'Save' : 'Update' }}
+  </button>
+</mat-dialog-actions>

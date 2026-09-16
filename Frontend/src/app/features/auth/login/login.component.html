@@ -1,0 +1,56 @@
+<div class="login-split-container">
+  
+  <!-- Left Branding Section -->
+  <div class="login-brand-panel">
+    <div class="brand-content">
+      <mat-icon class="brand-icon">account_balance</mat-icon>
+      <h1 class="brand-title">AccSoft</h1>
+      <p class="brand-tagline">Welcome back to your workspace</p>
+    </div>
+  </div>
+
+  <!-- Right Login Section -->
+  <div class="login-form-panel">
+    <div class="login-form-wrapper">
+      <div class="login-header">
+        <h2>Sign In</h2>
+        <p>Please enter your credentials to continue</p>
+      </div>
+
+      <div *ngIf="sessionExpired" class="error-banner">
+        <mat-icon>error_outline</mat-icon>
+        <span>Session Expired. Please Login Again.</span>
+      </div>
+      <div *ngIf="errorMessage" class="error-banner">
+        <mat-icon>error_outline</mat-icon>
+        <span>{{ errorMessage }}</span>
+      </div>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Login ID</mat-label>
+          <mat-icon matPrefix style="margin-right: 8px;">person</mat-icon>
+          <input matInput formControlName="loginId" required>
+          <mat-error *ngIf="loginForm.get('loginId')?.hasError('required')">Login ID is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Password</mat-label>
+          <mat-icon matPrefix style="margin-right: 8px;">lock</mat-icon>
+          <input matInput formControlName="password" type="password" required>
+          <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Password is required</mat-error>
+        </mat-form-field>
+
+        <div class="form-options">
+          <mat-checkbox color="primary">Remember me</mat-checkbox>
+          <a class="forgot-password-link" disabled>Forgot Password?</a>
+        </div>
+
+        <button class="btn-gradient full-width login-btn" type="submit" [disabled]="loginForm.invalid">
+          Login to Dashboard
+        </button>
+      </form>
+    </div>
+  </div>
+
+</div>

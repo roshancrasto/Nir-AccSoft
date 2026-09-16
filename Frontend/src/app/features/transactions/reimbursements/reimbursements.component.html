@@ -1,0 +1,103 @@
+<div class="container">
+
+  <!-- KPI CARDS -->
+  <div class="cards">
+    <div class="card blue">
+      <h4>Total Settlements</h4>
+      <h2>{{ dataSource.data.length || 0 }}</h2>
+    </div>
+    <div class="card green">
+      <h4>Total Amount</h4>
+      <h2>{{ 0 | currency:'INR':'symbol':'1.0-0' }}</h2>
+    </div>
+    <div class="card orange">
+      <h4>This Month</h4>
+      <h2>{{ 0 | currency:'INR':'symbol':'1.0-0' }}</h2>
+    </div>
+    <div class="card purple">
+      <h4>Pending</h4>
+      <h2>0</h2>
+    </div>
+  </div>
+
+  <div class="table-card">
+    <div class="table-header" style="display: flex; justify-content: space-between; align-items: center;">
+      <div style="flex: 1; display: flex; justify-content: flex-start;">
+        <input type="text" placeholder="Search..." (keyup)="applyFilter($event)" style="min-width: 200px; padding: 8px 12px; border-radius: 6px; border: 1px solid #ddd; outline: none;">
+      </div>
+      
+      <div style="flex: 1; text-align: center;">
+        <h3 style="margin: 0;">Settlement Expenses</h3>
+      </div>
+
+      <div style="flex: 1; display: flex; justify-content: flex-end;">
+        <button [disabled]="!canAdd" class="btn-gradient" (click)="openDialog()" style="padding: 8px 16px;">
+          <mat-icon style="font-size: 18px; width: 18px; height: 18px; margin-right: 4px;">add</mat-icon> Record Expense
+        </button>
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table mat-table [dataSource]="dataSource">
+        
+        <ng-container matColumnDef="memberName">
+          <th mat-header-cell *matHeaderCellDef> Member </th>
+          <td mat-cell *matCellDef="let element"> {{element.memberName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="eventGroupName">
+          <th mat-header-cell *matHeaderCellDef> Event Group </th>
+          <td mat-cell *matCellDef="let element"> {{element.eventGroupName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="categoryName">
+          <th mat-header-cell *matHeaderCellDef> Category </th>
+          <td mat-cell *matCellDef="let element"> {{element.categoryName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="expenseDetails">
+          <th mat-header-cell *matHeaderCellDef> Expense Details </th>
+          <td mat-cell *matCellDef="let element"> {{element.expenseDetails}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="amount">
+          <th mat-header-cell *matHeaderCellDef> Amount </th>
+          <td mat-cell *matCellDef="let element"> {{element.amount | currency:'INR'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="isSettled">
+          <th mat-header-cell *matHeaderCellDef> Status </th>
+          <td mat-cell *matCellDef="let element"> 
+            <span class="badge" [ngClass]="element.isSettled ? 'bank' : 'cash'">
+              {{element.isSettled ? 'Settled' : 'Pending'}}
+            </span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions" stickyEnd>
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let element">
+            <div class="actions">
+              <button [disabled]="element.isSettled || !canEdit" class="btn-edit" (click)="openDialog(element)" title="Edit">
+                <mat-icon style="font-size: 18px; width: 18px; height: 18px;">edit</mat-icon>
+              </button>
+              <button [disabled]="!canDelete" class="btn-delete" (click)="deleteLink(element.expenseId)" title="Delete">
+                <mat-icon style="font-size: 18px; width: 18px; height: 18px;">delete</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="7">No settlement expenses found.</td>
+        </tr>
+      </table>
+    </div>
+    
+    <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" [showFirstLastButtons]="true" aria-label="Select page of expenses"></mat-paginator>
+
+  </div>
+</div>

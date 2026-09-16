@@ -1,0 +1,62 @@
+<h2 mat-dialog-title>
+  <mat-icon class="dialog-icon">{{ data.mode === 'add' ? 'event_available' : 'event' }}</mat-icon>
+  {{ data.mode === 'add' ? 'Add New Event Group' : 'Edit Event Group' }}
+</h2>
+<mat-dialog-content>
+  <form #eventGroupForm="ngForm" class="event-form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Event Group Name</mat-label>
+      <input matInput [(ngModel)]="eventGroupName" name="eventGroupName" required placeholder="Enter event group name" #nameField="ngModel">
+      <mat-error *ngIf="nameField.hasError('required')">Event group name is required</mat-error>
+    </mat-form-field>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Start Date</mat-label>
+        <input matInput [matDatepicker]="picker1" [(ngModel)]="startDate" name="startDate" required>
+        <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>End Date</mat-label>
+        <input matInput [matDatepicker]="picker2" [(ngModel)]="endDate" name="endDate" required>
+        <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Budget Amount</mat-label>
+        <input matInput type="number" [(ngModel)]="budgetAmount" name="budgetAmount" placeholder="0.00">
+        <span matPrefix>₹&nbsp;</span>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Status</mat-label>
+        <mat-select [(ngModel)]="status" name="status">
+          <mat-option *ngFor="let s of statuses" [value]="s">{{ s }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput [(ngModel)]="description" name="description" rows="3" placeholder="Enter event group description"></textarea>
+    </mat-form-field>
+
+    <div class="toggle-row" *ngIf="data.mode === 'edit'">
+      <mat-slide-toggle [(ngModel)]="isActive" name="isActive" color="primary">
+        {{ isActive ? 'Active' : 'Inactive' }}
+      </mat-slide-toggle>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close style="color: #64748b;">Cancel</button>
+  <button class="btn-gradient" [disabled]="!eventGroupName.trim()" (click)="onSave()">
+    <mat-icon style="font-size: 18px; width: 18px; height: 18px;">save</mat-icon>
+    {{ data.mode === 'add' ? 'Save' : 'Update' }}
+  </button>
+</mat-dialog-actions>

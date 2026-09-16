@@ -1,0 +1,4 @@
+[     251ms] [LOG] Angular is running in development mode. @ http://localhost:4200/@fs/E:/Work/AccSoft/Frontend/.angular/cache/17.3.17/vite/deps/chunk-BP2GZ5XF.js?v=8e40507e:20481
+[ 6336030ms] [LOG] [vite] server connection lost. Polling for restart... @ http://localhost:4200/@vite/client:553
+[ 6336038ms] [ERROR] Failed to load resource: net::ERR_NETWORK_IO_SUSPENDED @ http://localhost:4200/:0
+[12622300ms] [LOG] Angular is running in development mode. @ http://localhost:4200/@fs/E:/Work/AccSoft/Frontend/.angular/cache/17.3.17/vite/deps/chunk-BP2GZ5XF.js?v=8e40507e:20481

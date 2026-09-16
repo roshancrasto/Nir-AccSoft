@@ -1,0 +1,114 @@
+<div class="print-container" id="printArea">
+  <div class="voucher-header">
+    <div class="org-logo">
+      <mat-icon class="org-icon">account_balance</mat-icon>
+    </div>
+    <div class="org-info">
+      <h1>DemoProject</h1>
+      <p>NGO Registration No: XXXX-XXXX-XXXX</p>
+      <p>Address Line 1, City, State - PIN Code</p>
+    </div>
+    <div class="voucher-badge">
+      <span class="badge">PAYMENT VOUCHER</span>
+    </div>
+  </div>
+
+  <div class="voucher-meta">
+    <div class="meta-row">
+      <div class="meta-item">
+        <label>Voucher No:</label>
+        <span class="value">{{voucher?.voucherNumber || 'PV-0001'}}</span>
+      </div>
+      <div class="meta-item">
+        <label>Voucher Date:</label>
+        <span class="value">{{voucher?.voucherDate | date:'dd/MM/yyyy'}}</span>
+      </div>
+      <div class="meta-item">
+        <label>Payment Date:</label>
+        <span class="value">{{voucher?.paymentDate | date:'dd/MM/yyyy'}}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="voucher-body">
+    <div class="info-grid">
+      <div class="info-item">
+        <label>Pay To (Vendor):</label>
+        <span class="value underline">{{voucher?.vendorName || 'N/A'}}</span>
+      </div>
+      <div class="info-item">
+        <label>Event/Project:</label>
+        <span class="value underline">{{voucher?.eventName || 'General Expense'}}</span>
+      </div>
+      <div class="info-item">
+        <label>Expense Category:</label>
+        <span class="value underline">{{voucher?.categoryName || 'Miscellaneous'}}</span>
+      </div>
+      <div class="info-item">
+        <label>Payment Mode:</label>
+        <span class="value underline">{{voucher?.paymentMode || 'Cash'}}</span>
+      </div>
+    </div>
+
+    <div class="description-section">
+      <label>Description / Purpose:</label>
+      <p class="description-text">{{voucher?.description || 'Payment for services rendered'}}</p>
+    </div>
+
+    <div class="amount-section">
+      <table class="amount-table">
+        <thead>
+          <tr>
+            <th>Particulars</th>
+            <th class="text-right">Debit Amount (₹)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{voucher?.categoryName || 'Expense'}} — {{voucher?.description || 'Payment'}}</td>
+            <td class="text-right">{{voucher?.debitAmount | number:'1.2-2'}}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr class="total-row">
+            <td><strong>Total Debit</strong></td>
+            <td class="text-right"><strong>₹ {{voucher?.debitAmount | number:'1.2-2'}}</strong></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <div class="amount-words">
+      <label>Amount in Words:</label>
+      <span class="value">Rupees ________________________________ Only</span>
+    </div>
+
+    <div class="bill-info" *ngIf="voucher?.billAvailable">
+      <mat-icon>description</mat-icon>
+      <span>Bill No: {{voucher?.billNumber}} dated {{voucher?.billDate | date:'dd/MM/yyyy'}} attached.</span>
+    </div>
+  </div>
+
+  <div class="voucher-footer">
+    <div class="signature-block">
+      <div class="signature">
+        <div class="sig-line"></div>
+        <span>Prepared By</span>
+      </div>
+      <div class="signature">
+        <div class="sig-line"></div>
+        <span>Authorised Signature</span>
+      </div>
+    </div>
+    <p class="disclaimer">This is a computer-generated payment voucher.</p>
+  </div>
+</div>
+
+<div class="print-actions no-print">
+  <button mat-raised-button color="primary" (click)="printVoucher()">
+    <mat-icon>print</mat-icon> Print Voucher
+  </button>
+  <button mat-stroked-button (click)="goBack()">
+    <mat-icon>arrow_back</mat-icon> Go Back
+  </button>
+</div>

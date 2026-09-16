@@ -1,0 +1,21 @@
+.lang-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 8px 0;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.toggle-row {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.dialog-icon {
+  vertical-align: middle;
+  margin-right: 8px;
+}

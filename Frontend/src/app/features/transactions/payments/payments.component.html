@@ -1,0 +1,114 @@
+<div class="container">
+    <!-- KPI CARDS -->
+  <div class="cards">
+    <div class="card blue">
+      <h4>Total Payment Vouchers</h4>
+      <h2>{{ dataSource.data.length || 0 }}</h2>
+    </div>
+    <div class="card green">
+      <h4>Total Amount</h4>
+      <h2>{{ 0 | currency:'INR':'symbol':'1.0-0' }}</h2>
+    </div>
+    <div class="card orange">
+      <h4>This Month</h4>
+      <h2>{{ 0 | currency:'INR':'symbol':'1.0-0' }}</h2>
+    </div>
+    <div class="card purple">
+      <h4>Pending</h4>
+      <h2>0</h2>
+    </div>
+  </div>
+
+  <div class="table-card">
+    <div class="table-header" style="display: flex; justify-content: space-between; align-items: center;">
+      <div style="flex: 1; display: flex; justify-content: flex-start;">
+        <input type="text" placeholder="Search..." (keyup)="applyFilter($event)" style="min-width: 200px; padding: 8px 12px; border-radius: 6px; border: 1px solid #ddd; outline: none;">
+      </div>
+      
+      <div style="flex: 1; text-align: center;">
+        <h3 style="margin: 0;">Payment Register</h3>
+      </div>
+
+      <div style="flex: 1; display: flex; justify-content: flex-end;">
+        <button [disabled]="!canAdd" class="btn-gradient" (click)="openAddDialog()" style="padding: 8px 16px;">
+          <mat-icon style="font-size: 18px; width: 18px; height: 18px; margin-right: 4px;">add</mat-icon> New Voucher
+        </button>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table mat-table [dataSource]="dataSource" >
+        <ng-container matColumnDef="voucherNumber">
+          <th mat-header-cell *matHeaderCellDef> Voucher No. </th>
+          <td mat-cell *matCellDef="let payment"> 
+            <span class="voucher-no">{{ payment.voucherNumber }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="voucherDate">
+          <th mat-header-cell *matHeaderCellDef> Voucher Date </th>
+          <td mat-cell *matCellDef="let payment"> {{ payment.voucherDate | date:'dd-MMM-yyyy' }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="paymentDate">
+          <th mat-header-cell *matHeaderCellDef> Payment Date </th>
+          <td mat-cell *matCellDef="let payment"> {{ payment.paymentDate | date:'dd-MMM-yyyy' }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="vendorName">
+          <th mat-header-cell *matHeaderCellDef> Vendor </th>
+          <td mat-cell *matCellDef="let payment"> {{ payment.vendorName || '-' }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="categoryName">
+          <th mat-header-cell *matHeaderCellDef> Category </th>
+          <td mat-cell *matCellDef="let payment"> {{ payment.categoryName || '-' }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="eventGroupName">
+          <th mat-header-cell *matHeaderCellDef> Event Group </th>
+          <td mat-cell *matCellDef="let payment"> {{ payment.eventGroupName || '-' }} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="amount">
+          <th mat-header-cell *matHeaderCellDef> Amount </th>
+          <td mat-cell *matCellDef="let payment" class="amount-cell"> 
+            {{ payment.debitAmount | currency:'INR' }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="paymentMode">
+          <th mat-header-cell *matHeaderCellDef> Mode </th>
+          <td mat-cell *matCellDef="let payment">
+            <span class="badge" [ngClass]="payment.paymentMode.toLowerCase()">
+              {{ payment.paymentMode }}
+            </span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions" stickyEnd>
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let payment">
+            <div class="actions">
+              <button [disabled]="!canEdit" class="btn-edit" (click)="openEditDialog(payment)" title="Edit">
+              <mat-icon style="font-size: 18px; width: 18px; height: 18px;">edit</mat-icon>
+            </button>
+              <button [disabled]="!canDelete" class="btn-delete" (click)="deletePayment(payment)" title="Delete">
+              <mat-icon style="font-size: 18px; width: 18px; height: 18px;">delete</mat-icon>
+            </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="10" style="text-align: center; padding: 20px;">No vouchers found.</td>
+        </tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" [showFirstLastButtons]="true" aria-label="Select page of vouchers"></mat-paginator>
+    </div>
+  </div>
+</div>

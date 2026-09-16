@@ -1,0 +1,67 @@
+.dialog-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+    padding: 16px 24px;
+    margin: -24px -24px 20px -24px;
+}
+
+.dialog-content {
+    min-width: 700px;
+    max-height: 70vh;
+}
+
+.search-container {
+    margin-bottom: 16px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.table-container {
+    max-height: 400px;
+    overflow: auto;
+    border-radius: 8px;
+}
+
+table {
+    width: 100%;
+}
+
+.clickable-row:hover {
+    cursor: pointer;
+}
+
+.amount-cell {
+    font-weight: 600;
+    color: #1e40af;
+}
+
+.badge {
+    color: #1e40af;
+    padding: 2px 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.dialog-actions {
+    padding: 16px 24px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.btn-primary {
+    border-radius: 8px;
+    padding: 0 24px;
+}
+
+.btn-secondary {
+    border-radius: 8px;
+    margin-right: 8px;
+}
+
+::ng-deep .mat-mdc-dialog-container {
+    padding: 0 !important;
+    overflow: hidden !important;
+}

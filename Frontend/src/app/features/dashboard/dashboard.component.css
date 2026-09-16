@@ -1,0 +1,352 @@
+/* Modern Dashboard Styles */
+:host {
+  display: block;
+  background-color: #f4f6f8; /* Soft background */
+  min-height: calc(100vh - 64px); /* assuming navbar */
+}
+
+.dashboard-container {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  font-family: 'Inter', 'Roboto', sans-serif;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Loading State */
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  color: #637381;
+}
+
+.loading-state p {
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+.welcome-banner {
+  margin-bottom: 2.5rem;
+}
+
+.welcome-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.welcome-banner h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #212b36;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.02em;
+}
+
+.welcome-banner p {
+  color: #637381;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* Summary Cards */
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.summary-card {
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px 0 rgba(0,0,0,0.05) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(145, 158, 171, 0.16);
+  background: white;
+}
+
+.summary-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px -4px rgba(0,0,0,0.12) !important;
+}
+
+.summary-card mat-card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.card-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+}
+
+.card-icon mat-icon {
+  font-size: 28px;
+  height: 28px;
+  width: 28px;
+}
+
+.cash-icon {
+  background-color: rgba(0, 167, 111, 0.12);
+  color: #00a76f;
+}
+
+.bank-icon {
+  background-color: rgba(24, 119, 242, 0.12);
+  color: #1877f2;
+}
+
+.event-icon {
+  background-color: rgba(255, 171, 0, 0.12);
+  color: #ffab00;
+}
+
+.card-titles {
+  display: flex;
+  flex-direction: column;
+}
+
+.summary-card mat-card-title {
+  font-size: 1.1rem !important;
+  font-weight: 600;
+  color: #212b36;
+  margin-bottom: 4px;
+}
+
+.summary-card mat-card-subtitle {
+  font-size: 0.875rem;
+  color: #919eab;
+  margin: 0;
+}
+
+.summary-card mat-card-content h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #212b36;
+  margin: 0;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.text-sm {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #637381;
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2.5rem;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #212b36;
+  margin-bottom: 1.5rem;
+}
+
+/* Quick Actions */
+.links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.link-card {
+  display: flex;
+  flex-direction: row !important;
+  align-items: center;
+  padding: 1.5rem !important;
+  border-radius: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03) !important;
+  border: 1px solid rgba(145, 158, 171, 0.16);
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.link-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -4px rgba(0,0,0,0.1) !important;
+  border-color: rgba(145, 158, 171, 0.24);
+}
+
+.link-card .icon-wrapper {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1.25rem;
+  flex-shrink: 0;
+}
+
+.link-text {
+  flex-grow: 1;
+}
+
+.link-text h3 {
+  margin: 0 0 4px 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #212b36;
+}
+
+.link-text p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #637381;
+  line-height: 1.4;
+}
+
+.arrow-icon {
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+  color: #919eab;
+}
+
+.link-card:hover .arrow-icon {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Recent Activity */
+.activity-card {
+  border-radius: 16px;
+  padding: 0 !important;
+  box-shadow: 0 4px 20px 0 rgba(0,0,0,0.05) !important;
+  border: 1px solid rgba(145, 158, 171, 0.16);
+  background: white;
+  overflow: hidden;
+}
+
+.activity-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.activity-item {
+  display: flex;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px dashed rgba(145, 158, 171, 0.24);
+  transition: background-color 0.2s;
+}
+
+.activity-item:last-child {
+  border-bottom: none;
+}
+
+.activity-item:hover {
+  background-color: rgba(145, 158, 171, 0.04);
+}
+
+.activity-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.activity-icon mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.activity-details {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-right: 1rem;
+}
+
+.activity-details .action {
+  font-weight: 600;
+  color: #212b36;
+  font-size: 0.95rem;
+  margin-bottom: 2px;
+}
+
+.activity-details .detail {
+  font-size: 0.85rem;
+  color: #637381;
+}
+
+.activity-item .time {
+  font-size: 0.8rem;
+  color: #919eab;
+  white-space: nowrap;
+}
+
+.no-activity {
+  padding: 3rem;
+  text-align: center;
+  color: #919eab;
+}
+
+.no-activity mat-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 1rem;
+  }
+  
+  .summary-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .welcome-banner h1 {
+    font-size: 1.75rem;
+  }
+}

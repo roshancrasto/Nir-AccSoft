@@ -1,0 +1,36 @@
+.dialog-title {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 24px;
+}
+
+.title-icon {
+  color: #1976d2;
+}
+
+.dialog-content {
+  min-height: 200px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.row {
+  display: flex;
+  gap: 16px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.dialog-actions {
+  padding: 16px 24px;
+  border-top: 1px solid #e0e0e0;
+  margin-bottom: 0;
+}

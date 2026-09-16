@@ -1,0 +1,200 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]: DemoProject - NGO Accounting System
+      - button [ref=e68]:
+        - img [ref=e6]: account_circle
+        - generic [ref=e7]: Admin
+      - button [ref=e10] [cursor=pointer]:
+        - img [ref=e11]: logout
+    - generic [ref=e15]:
+      - link [ref=e69] [cursor=pointer]:
+        - /url: /dashboard
+        - img [ref=e17]: dashboard
+        - generic [ref=e18]: Dashboard
+      - button [ref=e70]:
+        - img [ref=e22]: category
+        - img [ref=e23]: arrow_drop_down
+        - generic [ref=e24]: Masters
+      - button [ref=e71]:
+        - img [ref=e28]: receipt_long
+        - img [ref=e29]: arrow_drop_down
+        - generic [ref=e30]: Transactions
+      - button [ref=e72]:
+        - img [ref=e34]: business_center
+        - img [ref=e35]: arrow_drop_down
+        - generic [ref=e36]: Internal
+      - button [ref=e73]:
+        - img [ref=e40]: summarize
+        - img [ref=e41]: arrow_drop_down
+        - generic [ref=e42]: Reports
+    - main [ref=e45]:
+      - generic [ref=e48]:
+        - generic [ref=e49]:
+          - heading [level=2] [ref=e74]: Settlement Expenses
+          - button [ref=e75]:
+            - img [ref=e52]: add
+            - generic [ref=e53]: Record Expense
+        - table [ref=e57]:
+          - rowgroup [ref=e58]:
+            - row [ref=e76]:
+              - columnheader [ref=e77]: Member
+              - columnheader [ref=e78]: Event Group
+              - columnheader [ref=e79]: Category
+              - columnheader [ref=e80]: Expense Details
+              - columnheader [ref=e81]: Amount
+              - columnheader [ref=e82]: Status
+              - columnheader [ref=e83]: Actions
+          - rowgroup [ref=e84]:
+            - row [ref=e85]:
+              - cell [ref=e86]
+              - cell [ref=e87]: Film Festival 2025
+              - cell [ref=e88]: Food and Hospitality
+              - cell [ref=e89]
+              - cell [ref=e90]: ₹999.00
+              - cell [ref=e91]: Pending
+              - cell [ref=e92]:
+                - button [ref=e93] [cursor=pointer]:
+                  - img [ref=e94]: edit
+                - button [ref=e97] [cursor=pointer]:
+                  - img [ref=e98]: delete
+            - row [ref=e101]:
+              - cell [ref=e102]: Roshan Crasto
+              - cell [ref=e103]: Film Festival 2025
+              - cell [ref=e104]: Remuneration Charges
+              - cell [ref=e105]
+              - cell [ref=e106]: ₹20,000.00
+              - cell [ref=e107]: Pending
+              - cell [ref=e108]:
+                - button [ref=e109] [cursor=pointer]:
+                  - img [ref=e110]: edit
+                - button [ref=e113] [cursor=pointer]:
+                  - img [ref=e114]: delete
+            - row [ref=e117]:
+              - cell [ref=e118]: Roshan Crasto
+              - cell [ref=e119]: Film Festival 2025
+              - cell [ref=e120]: Food and Hospitality
+              - cell [ref=e121]
+              - cell [ref=e122]: ₹1,000.00
+              - cell [ref=e123]: Pending
+              - cell [ref=e124]:
+                - button [ref=e125] [cursor=pointer]:
+                  - img [ref=e126]: edit
+                - button [ref=e129] [cursor=pointer]:
+                  - img [ref=e130]: delete
+            - row [ref=e133]:
+              - cell [ref=e134]
+              - cell [ref=e135]: Film Festival 2025
+              - cell [ref=e136]: Bank Charges
+              - cell [ref=e137]
+              - cell [ref=e138]: ₹7.08
+              - cell [ref=e139]: Pending
+              - cell [ref=e140]:
+                - button [ref=e141] [cursor=pointer]:
+                  - img [ref=e142]: edit
+                - button [ref=e145] [cursor=pointer]:
+                  - img [ref=e146]: delete
+            - row [ref=e149]:
+              - cell [ref=e150]
+              - cell [ref=e151]: Film Festival 2025
+              - cell [ref=e152]: Food and Hospitality
+              - cell [ref=e153]: sss
+              - cell [ref=e154]: ₹5,478.00
+              - cell [ref=e155]: Pending
+              - cell [ref=e156]:
+                - button [ref=e157] [cursor=pointer]:
+                  - img [ref=e158]: edit
+                - button [ref=e161] [cursor=pointer]:
+                  - img [ref=e162]: delete
+            - row [ref=e165]:
+              - cell [ref=e166]: Oliveera Mathias
+              - cell [ref=e167]: Film Festival 2025
+              - cell [ref=e168]: Postage
+              - cell [ref=e169]: qweqr
+              - cell [ref=e170]: ₹2,785.00
+              - cell [ref=e171]: Settled
+              - cell [ref=e172]:
+                - button [disabled]:
+                  - img: edit
+                - button [disabled]:
+                  - img: delete
+            - row [ref=e173]:
+              - cell [ref=e174]: Oliveera Mathias
+              - cell [ref=e175]: Drama Fest 2026
+              - cell [ref=e176]: Event Infrastructure
+              - cell [ref=e177]: fgfgf
+              - cell [ref=e178]: ₹2,000.00
+              - cell [ref=e179]: Settled
+              - cell [ref=e180]:
+                - button [disabled]:
+                  - img: edit
+                - button [disabled]:
+                  - img: delete
+  - dialog "Record Member Expense" [ref=e184]:
+    - generic [ref=e186]:
+      - heading "Record Member Expense" [level=2] [ref=e187]
+      - generic [ref=e189]:
+        - generic [ref=e190]:
+          - generic [ref=e193] [cursor=pointer]:
+            - generic [ref=e194]:
+              - text: Event Group
+              - generic [ref=e195]: "*"
+            - combobox "Event Group Film Festival 2025" [ref=e379]:
+              - generic [ref=e198]:
+                - generic [ref=e380]: Film Festival 2025
+                - img [ref=e203]
+          - generic [ref=e208] [cursor=pointer]:
+            - generic [ref=e209]:
+              - text: Category
+              - generic [ref=e210]: "*"
+            - combobox "Category" [ref=e212]:
+              - img [ref=e218]
+        - generic [ref=e223]:
+          - generic [ref=e224]: Expense Details (Optional)
+          - textbox "Expense Details (Optional)" [ref=e226]
+        - generic [ref=e228]:
+          - generic [ref=e231] [cursor=pointer]:
+            - generic [ref=e232]: Vendor (Optional)
+            - combobox "Vendor (Optional)" [ref=e234]:
+              - img [ref=e240]
+          - generic [ref=e245]:
+            - generic [ref=e246]:
+              - text: Amount (₹)
+              - generic [ref=e247]: "*"
+            - spinbutton "Amount (₹)" [ref=e249]: "0"
+        - generic [ref=e251]:
+          - generic [ref=e254] [cursor=pointer]:
+            - generic [ref=e255]: Payment Mode
+            - img [ref=e257]: payments
+            - combobox "Payment Mode Cash" [ref=e259]:
+              - generic [ref=e260]:
+                - generic [ref=e262]: Cash
+                - img [ref=e265]
+          - generic [ref=e270] [cursor=pointer]:
+            - generic [ref=e271]: Paid By Member (Optional)
+            - combobox "Paid By Member (Optional)" [ref=e273]:
+              - img [ref=e279]
+        - generic [ref=e284]:
+          - generic [ref=e285]: Related Payment (Optional)
+          - img [ref=e287]: link
+          - combobox "Related Payment (Optional)" [expanded] [active] [ref=e289]
+        - generic [ref=e291]:
+          - generic [ref=e294]:
+            - generic [ref=e295]: Bill No (Optional)
+            - textbox "Bill No (Optional)" [ref=e297]
+          - generic [ref=e301]:
+            - generic [ref=e302]: Bill Date (Optional)
+            - textbox "Bill Date (Optional)" [ref=e304]
+            - button "Open calendar" [ref=e307] [cursor=pointer]:
+              - img [ref=e308]
+        - generic [ref=e315]:
+          - generic [ref=e316]: Remarks
+          - textbox "Remarks" [ref=e318]
+      - generic [ref=e320]:
+        - button "Cancel" [ref=e321]:
+          - generic [ref=e322]: Cancel
+        - button "Save" [disabled]:
+          - generic: Save
+    - listbox "Related Payment (Optional)" [ref=e381]:
+      - option "Food and Hospitality | No details | ₹999.00" [ref=e382] [cursor=pointer]:
+        - generic [ref=e383]: Food and Hospitality | No details | ₹999.00

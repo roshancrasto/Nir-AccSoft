@@ -1,0 +1,171 @@
+/* ===========================
+   NAVBAR
+=========================== */
+
+.navbar {
+    height: 55px;
+    background: linear-gradient(135deg, #2563eb, #4f46e5);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px;
+    color: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,.15);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+}
+
+.nav-links li {
+    position: relative;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.menu {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: .3s;
+}
+
+.menu li:hover {
+    transform: translateY(-2px);
+}
+
+.menu li a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.menu li a.active-nav {
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,.15);
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-size: 13px;
+}
+
+.user-profile img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+/* Main Content Area */
+.main-content {
+    padding: 25px;
+    padding-top: 80px; /* navbar 55px + gap 25px */
+}
+
+.content-wrapper {
+    width: 100%;
+}
+
+.main-content.no-nav {
+    padding: 0 !important;
+}
+
+@media(max-width:768px) {
+    .menu {
+        display: none;
+    }
+}
+
+/* ===========================
+   SUBMENU ENHANCEMENTS
+=========================== */
+
+/* Make submenus more attractive and remove extra vertical space */
+::ng-deep .mat-mdc-menu-panel.nav-menu {
+    border-radius: 12px !important;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important;
+    min-width: 220px !important;
+    padding: 8px 0 !important;
+}
+
+::ng-deep .nav-menu .mat-mdc-menu-item {
+    min-height: 40px !important;
+    height: 40px !important;
+    line-height: 40px !important;
+    margin: 4px 8px !important;
+    border-radius: 8px !important;
+    transition: all 0.2s ease-in-out !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    width: auto !important; /* to account for margin */
+}
+
+::ng-deep .nav-menu .mat-mdc-menu-item:hover {
+    background-color: #f1f5f9 !important;
+    transform: translateX(4px) !important;
+}
+
+::ng-deep .nav-menu .mat-mdc-menu-item .mat-icon {
+    margin-right: 12px !important;
+}
+
+/* Multi-color icons in submenu based on position */
+::ng-deep .nav-menu .mat-mdc-menu-item:nth-child(1) .mat-icon { color: #e91e63 !important; } /* Pink */
+::ng-deep .nav-menu .mat-mdc-menu-item:nth-child(2) .mat-icon { color: #9c27b0 !important; } /* Purple */
+::ng-deep .nav-menu .mat-mdc-menu-item:nth-child(3) .mat-icon { color: #3f51b5 !important; } /* Indigo */
+::ng-deep .nav-menu .mat-mdc-menu-item:nth-child(4) .mat-icon { color: #00bcd4 !important; } /* Cyan */
+::ng-deep .nav-menu .mat-mdc-menu-item:nth-child(5) .mat-icon { color: #4caf50 !important; } /* Green */
+::ng-deep .nav-menu .mat-mdc-menu-item:nth-child(6) .mat-icon { color: #ff9800 !important; } /* Orange */
+::ng-deep .nav-menu .mat-mdc-menu-item:nth-child(7) .mat-icon { color: #f44336 !important; } /* Red */
+::ng-deep .nav-menu .mat-mdc-menu-item:nth-child(8) .mat-icon { color: #795548 !important; } /* Brown */
+::ng-deep .nav-menu .mat-mdc-menu-item:nth-child(9) .mat-icon { color: #607d8b !important; } /* Blue Grey */
+::ng-deep .nav-menu .mat-mdc-menu-item:nth-child(10) .mat-icon { color: #2196f3 !important; } /* Blue */

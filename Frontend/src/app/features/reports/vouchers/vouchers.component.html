@@ -1,0 +1,188 @@
+<div class="container">
+    <!-- HEADER -->
+    <div class="page-header">
+        <div class="title-section">
+            <h2>Vouchers Report</h2>
+        </div>
+    </div>
+
+    <!-- FILTERS -->
+    <div class="filter-panel" [formGroup]="filterForm">
+        <div class="filter-row">
+            <div class="filter-inputs">
+                <input type="text" formControlName="voucherNo" placeholder="Search Voucher No">
+
+                <select formControlName="financialYear">
+                    <option value="">All Financial Years</option>
+                    <option *ngFor="let fy of financialYears" [value]="fy">{{ fy }}</option>
+                </select>
+
+                <select formControlName="vendorId">
+                    <option [ngValue]="null">All Vendors</option>
+                    <option *ngFor="let vendor of vendors" [value]="vendor.vendorId">{{ vendor.vendorName }}</option>
+                </select>
+
+                <select formControlName="categoryId">
+                    <option [ngValue]="null">All Categories</option>
+                    <option *ngFor="let category of categories" [value]="category.categoryId">{{ category.categoryName }}</option>
+                </select>
+
+                <button class="btn-search" (click)="onSearch()" [disabled]="loading">
+                    <i class="fa-solid fa-spinner fa-spin" *ngIf="loading"></i>
+                    <i class="fa-solid fa-search" *ngIf="!loading"></i>
+                    {{ loading ? 'Searching...' : 'Search' }}
+                </button>
+
+                <button class="btn-export" (click)="exportPdf()" *ngIf="reports.length > 0">
+                    <i class="fa-solid fa-file-pdf"></i> Export PDF
+                </button>
+            </div>
+
+            <div class="pagination-controls" *ngIf="reports.length > 0">
+                <button class="btn-outline" [disabled]="!hasPrevious" (click)="previousReport()">
+                    <i class="fa-solid fa-arrow-left"></i> Previous
+                </button>
+                <span class="pagination-count">Voucher {{ currentIndex + 1 }} of {{ reports.length }}</span>
+                <button class="btn-outline" [disabled]="!hasNext" (click)="nextReport()">
+                    Next <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- No Data State -->
+    <ng-template #noData>
+        <div class="no-data" *ngIf="!loading">
+            <p>No vouchers found for the selected criteria.</p>
+        </div>
+    </ng-template>
+
+    <div class="page-container" *ngIf="reports.length > 0; else noData">
+        
+        <!-- Loading Overlay -->
+        <div class="loading-overlay" *ngIf="isExporting">
+            <i class="fa-solid fa-spinner fa-spin fa-3x"></i>
+            <p style="margin-top: 15px; font-weight: bold; color: #1e3a8a;">Generating PDF... Please wait.</p>
+        </div>
+
+        <!-- Screen View (Single Voucher with Pagination) -->
+        <div class="screen-view" [style.display]="isExporting ? 'none' : 'block'">
+            <ng-container *ngTemplateOutlet="voucherTemplate; context: { report: currentReport }"></ng-container>
+        </div>
+
+        <!-- Print View (All Vouchers) -->
+        <div class="print-view" *ngIf="isExporting" id="print-view-container">
+            <ng-container *ngFor="let rep of reports; let i = index; let last = last">
+                <div [id]="'voucher-page-' + i">
+                    <ng-container *ngTemplateOutlet="voucherTemplate; context: { report: rep }"></ng-container>
+                </div>
+                <div class="page-break" *ngIf="!last"></div>
+            </ng-container>
+        </div>
+        
+    </div>
+</div>
+
+<!-- Reusable Voucher Template -->
+<ng-template #voucherTemplate let-report="report">
+    <div class="page">
+        <header class="header">
+            <div class="brand">
+                <img class="logo-img" src="assets/images/niranthar-logo.png" alt="Niranthar Udyavar" onerror="this.src='https://via.placeholder.com/62x62/3157d5/ffffff?text=Logo'">
+                <div>
+                    <h1>Niranthar Udyavar &reg;</h1>
+                    <small>Udyavara - 574118</small>
+                </div>
+            </div>
+            <div class="voucher-title">
+                <h2>PAYMENT VOUCHER</h2>
+                <div>Voucher No :  <b>{{ report.voucherNumber }}</b></div>
+                <div>Voucher Date :  <b>{{ report.voucherDate | date:'dd-MMM-yyyy' }}</b></div>
+            </div>
+        </header>
+
+        <div class="top-grid">
+            <div class="field">
+                <div class="label">Payment Date</div>
+                <div class="value">{{ report.paymentDate | date:'dd-MMM-yyyy' }}</div>
+            </div>
+            <div class="field">
+                <div class="label">Payment Account</div>
+                <div class="value">{{ report.accountName }}</div>
+            </div>
+            <div class="field">
+                <div class="label">Pay To</div>
+                <div class="value">{{ report.payTo }}</div>
+            </div>
+            <div class="field">
+                <div class="label">Payment Mode</div>
+                <div class="value">{{ report.paymentMode }}</div>
+            </div>
+        </div>
+
+        <div class="typebar">
+            <strong>Voucher Type</strong>
+            <span class="pill active">{{ report.voucherType || 'Normal' }}</span>
+        </div>
+
+        <div class="section">
+            <table>
+                <thead>
+                    <tr>
+                        <th width="12%">Expense ID</th>
+                        <th width="35%">Expense / Description</th>
+                        <th width="20%">Party</th>
+                        <th width="15%">Bill No.</th>
+                        <th width="15%">Bill Date</th>
+                        <th width="18%" class="amount">Amount (₹)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let detail of report.details">
+                        <td>{{ detail.expenseID }}</td>
+                        <td>
+                            <b>{{ detail.categoryName }}</b><br>
+                            <span class="muted" style="white-space: pre-wrap;">{{ detail.expDesc || detail.eventGroupName }}</span>
+                        </td>
+                        <td>{{ detail.party }}</td>
+                        <td>{{ detail.billNo || '—' }}</td>
+                        <td>{{ detail.billDate | date:'dd-MMM-yyyy' }}</td>
+                        <td class="amount"><b>{{ detail.amount | number:'1.2-2' }}</b></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="total-box">
+                <div class="total">
+                    <div><span>Expense Total</span><b>₹{{ getExpenseTotal(report) | number:'1.2-2' }}</b></div>
+                    <div [style.background-color]="isTotalMismatch(report) ? '#dc2626' : null">
+                        <span>Voucher Payment</span><b>₹{{ report.debitAmount | number:'1.2-2' }}</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <span>Other Details</span>
+            </div>
+            <table>
+                <tbody>
+                    <tr><td width="25%"><b>Amount in Words</b></td><td>{{ amountInWords(report.debitAmount) }}</td></tr>
+                    <tr><td><b>Narration</b></td><td style="white-space: pre-wrap;">{{ report.narration || 'N/A' }}</td></tr>
+                    <tr><td><b>Remarks</b></td><td>{{ report.remarks || 'N/A' }}</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="signatures">
+            <div class="sig">Prepared By</div>
+            <div class="sig">Authorized Signatory</div>
+        </div>
+
+        <footer class="footer">
+            <span>System Generated Payment Voucher</span>
+            <span>Niranthar Udyavar (R) &bull; Payment & Expense Management</span>
+        </footer>
+    </div>
+</ng-template>

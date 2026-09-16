@@ -1,0 +1,468 @@
+IMPLEMENT A COMPLETE USER LOGIN, SECURITY, MENU PERMISSION, AUDIT AND SESSION MANAGEMENT MODULE FOR THE EXISTING ACCSOFT APPLICATION BUILT USING ANGULAR, ASP.NET CORE WEB API AND SQL SERVER.
+IMPORTANT:
+This application is intended for a small organization with limited users. The security model must remain simple and maintainable.
+DO NOT implement:
+Role Based Security
+OAuth
+Google Login
+Microsoft Login
+MFA
+Identity Server
+Implement only:
+User → Menu Permissions
+====================================================
+EXISTING DATABASE
+Reuse existing table:
+NU_Users
+Current Structure:
+UserId
+FullName
+Email
+PasswordHash
+RoleId
+IsActive
+CreatedBy
+ModifiedBy
+ModifiedDate
+DeletedFlag
+Do NOT remove or modify existing functionality.
+====================================================
+NU_USERS ENHANCEMENT
+Add columns:
+LoginId
+ 
+NVARCHAR(
+50)
+LastLoginDate
+ DATETIME NULL
+CreatedDate
+ DATETIME NULL
+DeletedBy
+ INT NULL
+DeletedDate
+ DATETIME NULL
+Keep 
+RoleId
+ as-is.
+RoleId
+ should not be used for security.
+Security must be based entirely on User Menu Permissions.
+====================================================
+NEW 
+TABLE :
+ NU_MENUS
+Create:
+NU_Menus
+Fields:
+MenuId
+ INT 
+IDENTITY(
+1,1)
+ParentMenuId
+ INT NULL
+MenuName
+ 
+NVARCHAR(
+100)
+MenuRoute
+ 
+NVARCHAR(
+200)
+MenuIcon
+ 
+NVARCHAR(
+100)
+DisplayOrder
+ INT
+IsActive
+ BIT DEFAULT 1
+CreatedBy
+ INT
+CreatedDate
+ DATETIME
+ModifiedBy
+ INT
+ModifiedDate
+ DATETIME
+DeletedFlag
+ BIT DEFAULT 0
+DeletedBy
+ INT NULL
+DeletedDate
+ DATETIME NULL
+====================================================
+MENU STRUCTURE
+Masters
+Categories
+Donors
+Vendors
+Event Categories
+Event Groups
+Event Details
+Bank Accounts
+Transactions
+Opening Balance
+Receipts
+Payments
+Payment Expense Link
+Bank Transfers
+Box Collection
+Govt Grants
+Assets
+Reports
+Account Ledger
+Receipt Register
+Payment Register
+Event Expenses
+Event Group PNL
+Income Expenditure
+Receipts &amp; Payments Account
+Admin
+Users
+User Permissions
+Login Audit Report
+====================================================
+NEW 
+TABLE :
+ 
+NU_UserMenuPermissions
+Fields:
+PermissionId
+ INT IDENTITY
+UserId
+ INT
+MenuId
+ INT
+CanView
+ BIT DEFAULT 0
+CanAdd
+ BIT DEFAULT 0
+CanEdit
+ BIT DEFAULT 0
+CanDelete
+ BIT DEFAULT 0
+CreatedBy
+ INT
+CreatedDate
+ DATETIME
+ModifiedBy
+ INT
+ModifiedDate
+ DATETIME
+DeletedFlag
+ BIT DEFAULT 0
+====================================================
+NEW 
+TABLE :
+ 
+NU_UserLoginLogs
+Fields:
+LoginLogId
+ INT IDENTITY
+UserId
+ INT
+LoginDateTime
+ DATETIME
+LogoutDateTime
+ DATETIME NULL
+IPAddress
+ 
+NVARCHAR(
+100)
+BrowserInfo
+ 
+NVARCHAR(
+500)
+CreatedDate
+ DATETIME
+====================================================
+PASSWORD SECURITY
+Use 
+BCrypt
+ password hashing.
+Never store plain text passwords.
+Implement:
+Create User
+Change Password
+Reset Password
+Password Validation
+====================================================
+LOGIN SCREEN
+Create Angular Login Page.
+Fields:
+Login ID
+Password
+Login Button
+Forgot Password (Disabled)
+Show validation messages.
+Responsive design.
+====================================================
+LOGIN PROCESS
+User enters:
+LoginId
+Password
+Validate against 
+NU_Users
+.
+Check:
+IsActive
+ = 1
+DeletedFlag
+ = 0
+Verify 
+BCrypt
+ Password.
+If valid:
+Generate JWT Token.
+Insert Login Log.
+Update 
+LastLoginDate
+.
+Return:
+Token
+UserId
+FullName
+Email
+====================================================
+JWT SECURITY
+Implement JWT Authentication.
+Token should contain:
+UserId
+FullName
+Email
+Expiry = 8 Hours
+====================================================
+TOKEN STORAGE
+Store JWT Token in:
+Session Storage
+Do NOT use Local Storage.
+====================================================
+HTTP INTERCEPTOR
+Create Angular HTTP Interceptor.
+Automatically append:
+Authorization: Bearer Token
+to every API request.
+====================================================
+SESSION EXPIRY
+When token expires:
+Clear Session Storage.
+Redirect to Login Page.
+Display:
+Session Expired. Please Login Again.
+====================================================
+LOGOUT PROCESS
+When Logout clicked:
+Update 
+LogoutDateTime
+ in 
+NU_UserLoginLogs
+.
+Clear Session Storage.
+Redirect to Login Page.
+====================================================
+USER MASTER SCREEN
+Create:
+Admin → Users
+Fields:
+Full Name
+Email
+Login ID
+Password
+Confirm Password
+Is Active
+Grid:
+View
+Edit
+Reset Password
+Deactivate User
+====================================================
+RESET PASSWORD
+Admin can reset password.
+System should:
+Hash password using 
+BCrypt
+.
+Update 
+PasswordHash
+.
+No email-based password reset required.
+====================================================
+USER PERMISSION SCREEN
+Create:
+Admin → User Permissions
+Top Section:
+User Dropdown
+When User selected:
+Load all menus from 
+NU_Menus
+.
+Display:
+Menu Name
+Can View
+Can Add
+Can Edit
+Can Delete
+Checkboxes.
+Save Button.
+====================================================
+DYNAMIC MENU LOADING
+After Login:
+Call:
+GetUserMenus
+(
+UserId
+)
+Return only authorized menus.
+Angular should build menu dynamically.
+User should only see menus where:
+CanView
+ = 1
+IMPORTANT:
+When new menus are added in future, they should automatically appear in User Permission Screen without any code changes.
+====================================================
+ANGULAR ROUTE SECURITY
+Implement Route Guards.
+Even if user manually enters URL:
+/
+payments
+/
+payment
+-register
+/
+account
+-ledger
+System must verify permission before allowing access.
+Unauthorized users should be redirected.
+====================================================
+API SECURITY
+Apply:
+[Authorize]
+on all Controllers.
+Except:
+Login API
+Every API should validate:
+CanView
+CanAdd
+CanEdit
+CanDelete
+based on User Permission.
+Do not rely only on Angular security.
+====================================================
+ADMIN USER
+If User is marked as Admin:
+Grant access to all menus.
+Bypass menu permission checks.
+====================================================
+LOGIN AUDIT REPORT
+Create:
+Admin → Login Audit Report
+Columns:
+User Name
+Login Time
+Logout Time
+Duration
+IP Address
+Browser
+Date Filters
+Export to Excel.
+====================================================
+CREATED BY / MODIFIED BY TRACKING
+Use 
+UserId
+ from JWT Token.
+Automatically populate:
+CreatedBy
+ModifiedBy
+for all Masters and Transactions.
+====================================================
+TABLES TO TRACK
+Categories
+Donors
+Vendors
+Event Categories
+Event Groups
+Event Details
+Bank Accounts
+Opening Balances
+Receipts
+Payments
+Payment Expense Link
+Bank Transfers
+Box Collections
+Govt Grants
+Assets
+Any future transaction table
+====================================================
+AUDIT INFORMATION
+In View Mode display:
+Created By
+Created Date
+Modified By
+Modified Date
+====================================================
+SOFT DELETE IMPLEMENTATION
+Never physically delete records.
+Use:
+DeletedFlag
+ = 1
+DeletedBy
+ = Logged 
+In
+ User
+DeletedDate
+ = Current 
+DateTime
+Reports and Grids must automatically exclude deleted records.
+====================================================
+REPORT SECURITY
+Reports should respect menu permissions.
+User should not access report APIs without permission.
+====================================================
+ANGULAR REQUIREMENTS
+Angular Material
+Responsive Design
+Reactive Forms
+Session Handling
+Route Guards
+HTTP Interceptors
+Loading Indicators
+Validation Messages
+Reusable Permission Service
+Reusable Authentication Service
+====================================================
+BACKEND REQUIREMENTS
+Generate:
+SQL Scripts
+Stored Procedures
+Entities
+DTOs
+Repository Layer
+Business Layer
+JWT Service
+Authentication Service
+Password Service
+Permission Service
+Login Log Service
+API Controllers
+====================================================
+DELIVERABLE
+Provide a complete production-ready implementation including:
+Database Scripts
+Stored Procedures
+.NET API
+JWT Authentication
+Angular Screens
+Angular Services
+Angular Guards
+Permission Framework
+Dynamic Menu Framework
+Login Audit Logs
+CreatedBy
+/
+ModifiedBy
+ Tracking
+Soft Delete Support
+Excel Export for Login Audit Report
+The solution must be fully integrated with the existing 
+AccSoft
+ application and must not break any existing functionality.

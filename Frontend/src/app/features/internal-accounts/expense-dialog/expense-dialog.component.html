@@ -1,0 +1,55 @@
+<h2 mat-dialog-title>
+  <mat-icon class="dialog-icon">{{ isEdit ? 'edit' : 'add_circle' }}</mat-icon>
+  {{ isEdit ? 'Edit' : 'Add New' }} Event Expense
+</h2>
+<mat-dialog-content>
+  <form [formGroup]="expenseForm" class="expense-form">
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Expense Code</mat-label>
+        <input matInput formControlName="expenseCode" placeholder="Ex. FOOD001">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Payment Mode</mat-label>
+        <mat-select formControlName="paymentMode">
+          <mat-option value="Bank">Bank</mat-option>
+          <mat-option value="Cash">Cash</mat-option>
+        </mat-select>
+        <mat-error *ngIf="expenseForm.get('paymentMode')?.hasError('required')">
+          Payment mode is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Expense Details</mat-label>
+      <input matInput formControlName="expenseDetails" placeholder="Short description of expense">
+    </mat-form-field>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Amount</mat-label>
+        <input matInput type="number" formControlName="amount" placeholder="0.00">
+        <span matPrefix>₹&nbsp;</span>
+        <mat-error *ngIf="expenseForm.get('amount')?.hasError('required')">
+          Amount is required
+        </mat-error>
+        <mat-error *ngIf="expenseForm.get('amount')?.hasError('min')">
+          Amount must be greater than 0
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Expense Description</mat-label>
+      <textarea matInput formControlName="expenseDesc" rows="2" placeholder="Detailed notes..."></textarea>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()" style="color: #64748b;">Cancel</button>
+  <button class="btn-gradient" [disabled]="expenseForm.invalid" (click)="onSave()">
+    <mat-icon style="font-size: 18px; width: 18px; height: 18px;">save</mat-icon> {{ isEdit ? 'Update' : 'Add' }}
+  </button>
+</mat-dialog-actions>

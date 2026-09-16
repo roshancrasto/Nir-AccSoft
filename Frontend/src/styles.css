@@ -1,0 +1,686 @@
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: 'Inter', 'Roboto', 'Segoe UI', sans-serif;
+  background: #f1f5f9;
+  color: #1e293b;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Clean Flat Design Pattern */
+.mat-toolbar.mat-primary {
+  background: #ffffff;
+  color: #0f172a;
+  border-bottom: 1px solid #f1f5f9; /* Subtle divider */
+  box-shadow: none !important;
+}
+
+.mat-mdc-raised-button.mat-primary {
+  background-color: #0f172a;
+  color: #ffffff;
+  border-radius: 6px;
+  box-shadow: none !important;
+  transition: background-color 0.2s ease;
+}
+
+.mat-mdc-raised-button.mat-primary:hover {
+  background-color: #334155;
+  box-shadow: none !important;
+}
+
+/* Global card styling - Remove shadows and borders */
+.mat-mdc-card {
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  border: 1px solid #f1f5f9; /* Very subtle border */
+  background-color: #ffffff;
+}
+
+.mat-mdc-card-content, .mat-mdc-card-header, .mat-mdc-card-actions {
+  padding: 16px !important; /* Standardize padding, prevent excessive spacing */
+}
+
+/* Table styling - Clean and minimal */
+table, .mat-mdc-table {
+  border: none !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+}
+
+.mat-mdc-header-row {
+  background-color: #ffffff !important;
+  border-bottom: 2px solid #f1f5f9 !important;
+}
+
+.mat-mdc-row {
+  border-bottom: 1px solid #f8fafc !important;
+}
+
+.mat-mdc-header-cell {
+  color: #475569;
+  font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  border: none !important;
+  border-bottom: 2px solid #f1f5f9 !important;
+  padding: 8px 16px !important; /* Reduced padding */
+}
+
+.mat-mdc-cell {
+  border: none !important;
+  border-bottom: 1px solid #f8fafc !important;
+  padding: 8px 16px !important; /* Reduced padding */
+  color: #334155;
+}
+
+.mat-mdc-row:hover {
+  background-color: #f8fafc !important;
+}
+
+/* Form field styling */
+.mat-mdc-form-field {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Remove outer table borders if any container has them */
+.table-container {
+  border: none !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Action column styling */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  white-space: nowrap;
+  justify-content: flex-start;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Animation utilities */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* Global fixes for layout padding */
+.main-content {
+  padding: 16px 0 !important;
+  padding-top: 60px !important; /* 55px navbar + 5px gap */
+  width: 100%;
+}
+.container, .page-container {
+  padding: 16px 0 !important; /* Unified padding, 0 horizontal so grid touches edges */
+  width: 100%;
+}
+
+/* Global Dialog Styling */
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: 16px !important;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.1) !important;
+  overflow: hidden;
+}
+
+.mat-mdc-dialog-title {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 1.25rem !important;
+  font-weight: 600 !important;
+  color: #1e293b !important;
+  padding: 20px 24px !important;
+  border-bottom: 1px solid #e2e8f0;
+  margin-bottom: 0 !important;
+  display: flex !important;
+  align-items: center;
+  gap: 12px;
+}
+
+.mat-mdc-dialog-title .dialog-icon {
+  color: #2563eb;
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+.mat-mdc-dialog-content {
+  padding: 24px !important;
+}
+
+.mat-mdc-dialog-actions {
+  padding: 16px 24px !important;
+  border-top: 1px solid #e2e8f0;
+  margin-bottom: 0 !important;
+}
+
+/* Compact Form Fields in Dialogs - Safe Approach */
+.mat-mdc-dialog-content .mat-mdc-form-field-subscript-wrapper {
+  height: 12px !important;
+}
+
+.mat-mdc-dialog-content .form-row {
+  margin-bottom: 8px;
+}
+
+/* Print global styles */
+@media print {
+  .mat-toolbar,
+  .mat-sidenav,
+  .no-print {
+    display: none !important;
+  }
+
+  .mat-sidenav-content {
+    margin-left: 0 !important;
+  }
+
+  body {
+    background: white;
+  }
+}
+
+/* ===========================
+   DESIGN.HTML LAYOUT SYSTEM
+=========================== */
+
+/* HERO */
+.hero {
+    background: linear-gradient(135deg, #2563eb, #4f46e5);
+    color: white;
+    border-radius: 12px;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 12px rgba(37,99,235,.25);
+}
+
+.hero h1 {
+    font-size: 24px;
+    margin-bottom: 4px;
+    margin-top: 0;
+}
+
+.hero p {
+    opacity: .9;
+    margin-bottom: 0;
+    font-size: 14px;
+}
+
+.btn-primary {
+    border: none;
+    background: white;
+    color: #2563eb;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+}
+
+.btn-gradient {
+    background: linear-gradient(135deg, #2563eb, #4f46e5);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(37,99,235,0.25);
+    transition: 0.3s;
+}
+
+.btn-gradient:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(37,99,235,0.35);
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, #2563eb, #4f46e5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
+}
+
+/* KPI CARDS */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 16px;
+    padding: 0 16px; /* Added to keep cards away from the screen edge */
+}
+
+.card {
+    padding: 12px 16px;
+    border-radius: 12px;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card h4 {
+    font-size: 14px;
+    opacity: .9;
+    margin: 0;
+}
+
+.card h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.blue { background: linear-gradient(135deg, #2563eb, #60a5fa); }
+.green { background: linear-gradient(135deg, #16a34a, #4ade80); }
+.orange { background: linear-gradient(135deg, #ea580c, #fb923c); }
+.purple { background: linear-gradient(135deg, #7c3aed, #a78bfa); }
+
+/* FILTER PANEL */
+.filter-panel {
+    background: white;
+    padding: 20px;
+    border-radius: 18px;
+    box-shadow: 0 3px 12px rgba(0,0,0,.06);
+    margin-bottom: 25px;
+}
+
+.filter-row {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.filter-row input,
+.filter-row select {
+    padding: 12px;
+    border: 1px solid #dbe2ea;
+    border-radius: 10px;
+    min-width: 220px;
+    font-family: inherit;
+}
+
+.filter-row input:focus,
+.filter-row select:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+/* TABLE CARD */
+.table-card {
+    background: white;
+    border-radius: 0;
+    overflow: visible !important;
+    box-shadow: 0 3px 12px rgba(0,0,0,.06);
+    padding-bottom: 60px; /* Space for fixed paginator */
+}
+
+.table-header {
+    padding: 20px;
+    border-bottom: 1px solid #edf2f7;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.table-header h3 {
+    font-size: 20px;
+    margin: 0;
+}
+
+.table-responsive {
+    width: 100%;
+    overflow: visible !important; 
+}
+
+.table-card table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-card thead, .mat-mdc-header-row, .mat-header-row {
+    background-color: #e0e7ff !important;
+    min-height: 40px !important;
+    height: 40px !important;
+    position: sticky !important;
+    top: 55px !important; /* Stick right below the 55px navbar */
+    z-index: 100 !important;
+}
+
+.table-card th, .mat-mdc-header-cell, .mat-header-cell {
+    text-align: center !important;
+    padding: 8px 16px !important;
+    color: #312e81 !important; /* Indigo text for contrast */
+    font-size: 13px !important;
+    font-weight: 700 !important; /* Bold */
+    text-transform: uppercase !important; /* Capital */
+    font-family: 'Inter', 'Roboto', 'Segoe UI', sans-serif !important;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    border-right: 2px solid #a5b4fc !important; /* Thicker vertical separation */
+}
+
+/* Fix sticky header position inside dialogs where there is no 55px navbar */
+.mat-mdc-dialog-container .mat-mdc-header-row,
+.mat-mdc-dialog-container .mat-header-row {
+    top: 0 !important;
+}
+
+.table-card th:last-child, .mat-mdc-header-cell:last-child, .mat-header-cell:last-child {
+    border-right: none !important; /* Remove separator for the last column */
+}
+
+.table-card td, .mat-mdc-cell, .mat-cell {
+    padding: 16px;
+    border-bottom: 1px solid #e2e8f0 !important; /* Thin visible bottom border */
+    white-space: nowrap;
+    background-color: white; /* Required for sticky columns to hide scrolling data */
+}
+
+.table-card tbody tr:hover td, .table-card tbody tr:hover .mat-mdc-cell {
+    background-color: #f8fafc; /* Keep hover effect on sticky cells too */
+}
+
+/* BADGES & UTILS */
+.receipt-link {
+    color: #2563eb;
+    font-weight: 600;
+}
+
+.amount {
+    font-weight: 700;
+}
+
+.badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.cash { background: #dcfce7; color: #166534; }
+.bank { background: #dbeafe; color: #1d4ed8; }
+
+.mat-column-actions {
+    min-width: 140px !important;
+    width: 140px !important;
+    text-align: right !important;
+    padding-right: 16px !important;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.btn-edit {
+    width: 38px;
+    height: 38px;
+    border: none;
+    border-radius: 10px;
+    background: #dbeafe;
+    color: #2563eb;
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-delete {
+    width: 38px;
+    height: 38px;
+    border: none;
+    border-radius: 10px;
+    background: #fee2e2;
+    color: #dc2626;
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Data Column Alignment Rules */
+.table-card td.mat-column-amount,
+.table-card td.mat-column-totalAmount,
+.table-card td.mat-column-paidAmount,
+.table-card td.mat-column-pendingAmount,
+.table-card td.mat-column-totalReceipts,
+.table-card td.mat-column-receiptsCreated,
+.table-card td.mat-column-pendingReceipts,
+.table-card td.mat-column-totalExpenseAmount,
+.table-card td.mat-column-balance,
+.table-card td.mat-column-budgetAmount,
+.table-card td.mat-column-openingAmount,
+.table-card td.amount-cell {
+    text-align: right !important;
+}
+
+.table-card td.mat-column-receiptDate,
+.table-card td.mat-column-voucherDate,
+.table-card td.mat-column-paymentDate,
+.table-card td.mat-column-grantDate,
+.table-card td.mat-column-createdDate,
+.table-card td.mat-column-dates,
+.table-card td.mat-column-paymentMode,
+.table-card td.mat-column-mode,
+.table-card td.mat-column-isActive,
+.table-card td.mat-column-status,
+.table-card td.date-range,
+.table-card td.date-cell {
+    text-align: center !important;
+}
+
+/* RESPONSIVE */
+@media(max-width:1200px) {
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width:768px) {
+    .hero {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    .cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===========================
+   ATTRACTIVE MATERIAL MENUS
+=========================== */
+mat-paginator, .mat-mdc-paginator {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 1000 !important;
+    background-color: white !important;
+    border-top: 1px solid #edf2f7;
+    box-shadow: 0 -4px 15px rgba(0,0,0,0.08) !important;
+}
+
+/* ===========================
+   COMPACT MATERIAL PAGINATOR
+=========================== */
+mat-paginator, .mat-mdc-paginator {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 1000 !important;
+    background-color: white !important;
+    border-top: 1px solid #edf2f7;
+    box-shadow: 0 -4px 15px rgba(0,0,0,0.08) !important;
+    --mat-paginator-container-size: 40px !important; /* Angular 15+ var */
+}
+
+/* Reset paginator position when inside a dialog */
+.mat-mdc-dialog-container mat-paginator,
+.mat-mdc-dialog-container .mat-mdc-paginator {
+    position: relative !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    box-shadow: none !important;
+    border-top: none !important;
+    z-index: 1 !important;
+}
+
+/* Force container height */
+.mat-mdc-paginator-container {
+    min-height: 40px !important;
+    height: 40px !important;
+    padding: 0 16px !important;
+}
+
+/* Reduce text size and margins */
+.mat-mdc-paginator-page-size-label,
+.mat-mdc-paginator-range-label {
+    margin: 0 8px !important;
+    font-size: 12px !important;
+}
+
+/* Force dropdown size */
+.mat-mdc-paginator-page-size-select {
+    width: 65px !important;
+    margin: 0 4px !important;
+}
+
+/* Aggressively override the form field inside the paginator */
+.mat-mdc-paginator .mdc-text-field--outlined {
+    height: 30px !important;
+}
+.mat-mdc-paginator .mat-mdc-form-field-flex {
+    height: 30px !important;
+    padding: 0 8px !important;
+    align-items: center !important;
+}
+.mat-mdc-paginator .mat-mdc-form-field-infix {
+    padding: 0 !important;
+    min-height: 30px !important;
+    display: flex !important;
+    align-items: center !important;
+}
+.mat-mdc-paginator .mat-mdc-select-trigger {
+    height: 30px !important;
+    align-items: center !important;
+}
+.mat-mdc-paginator .mat-mdc-select-value {
+    font-size: 12px !important;
+}
+.mat-mdc-paginator .mat-mdc-form-field-subscript-wrapper {
+    display: none !important;
+}
+
+/* Make buttons smaller */
+.mat-mdc-paginator .mat-mdc-icon-button {
+    width: 32px !important;
+    height: 32px !important;
+    padding: 4px !important;
+}
+.mat-mdc-paginator .mat-mdc-icon-button .mat-icon {
+    font-size: 20px !important;
+    width: 20px !important;
+    height: 20px !important;
+}
+
+.mat-mdc-menu-panel, .mat-menu-panel {
+    border-radius: 8px !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+    border: 1px solid #f1f5f9;
+    padding: 4px 0 !important;
+    min-width: 180px !important;
+}
+
+.mat-mdc-menu-item, .mat-menu-item {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    color: #334155 !important;
+    padding: 0 12px !important;
+    min-height: 36px !important;
+    transition: all 0.2s ease !important;
+    margin: 2px 4px !important;
+    border-radius: 6px !important;
+    width: calc(100% - 8px) !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    line-height: 36px !important;
+}
+
+.mat-mdc-menu-item:hover, .mat-menu-item:hover {
+    background: #f8fafc !important; 
+    color: #0f172a !important; 
+    transform: translateX(2px);
+}
+
+.mat-mdc-menu-item .mat-icon, .mat-menu-item .mat-icon {
+    margin-right: 8px !important;
+    font-size: 18px !important;
+    height: 18px !important;
+    width: 18px !important;
+    transition: transform 0.2s ease;
+}
+
+/* Multi-color icons for dropdown items */
+.mat-mdc-menu-item:nth-child(6n+1) .mat-icon, .mat-menu-item:nth-child(6n+1) .mat-icon { color: #ef4444 !important; }
+.mat-mdc-menu-item:nth-child(6n+2) .mat-icon, .mat-menu-item:nth-child(6n+2) .mat-icon { color: #f59e0b !important; }
+.mat-mdc-menu-item:nth-child(6n+3) .mat-icon, .mat-menu-item:nth-child(6n+3) .mat-icon { color: #10b981 !important; }
+.mat-mdc-menu-item:nth-child(6n+4) .mat-icon, .mat-menu-item:nth-child(6n+4) .mat-icon { color: #3b82f6 !important; }
+.mat-mdc-menu-item:nth-child(6n+5) .mat-icon, .mat-menu-item:nth-child(6n+5) .mat-icon { color: #8b5cf6 !important; }
+.mat-mdc-menu-item:nth-child(6n+0) .mat-icon, .mat-menu-item:nth-child(6n+0) .mat-icon { color: #ec4899 !important; }
+
+.mat-mdc-menu-item:hover .mat-icon, .mat-menu-item:hover .mat-icon {
+    transform: scale(1.15);
+}

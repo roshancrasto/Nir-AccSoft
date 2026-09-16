@@ -1,0 +1,105 @@
+<div class="container">
+
+  <!-- KPI CARDS -->
+  <div class="cards">
+    <div class="card blue">
+      <h4>Total Balances</h4>
+      <h2>{{ dataSource.data.length || 0 }}</h2>
+    </div>
+    <div class="card green">
+      <h4>Total Amount</h4>
+      <h2>{{ 0 | currency:'INR':'symbol':'1.0-0' }}</h2>
+    </div>
+    <div class="card orange">
+      <h4>Cash Balances</h4>
+      <h2>0</h2>
+    </div>
+    <div class="card purple">
+      <h4>Bank Balances</h4>
+      <h2>0</h2>
+    </div>
+  </div>
+
+  <div class="table-card">
+    <div class="table-header" style="display: flex; justify-content: space-between; align-items: center;">
+      <div style="flex: 1; display: flex; justify-content: flex-start;">
+        <input type="text" placeholder="Search..." (keyup)="applyFilter($event)" style="min-width: 200px; padding: 8px 12px; border-radius: 6px; border: 1px solid #ddd; outline: none;">
+      </div>
+      
+      <div style="flex: 1; text-align: center;">
+        <h3 style="margin: 0;">Opening Balances</h3>
+      </div>
+
+      <div style="flex: 1; display: flex; justify-content: flex-end;">
+        <button [disabled]="!canAdd" class="btn-gradient" (click)="openDialog('Add', {})" style="padding: 8px 16px;">
+          <mat-icon style="font-size: 18px; width: 18px; height: 18px; margin-right: 4px;">add</mat-icon> Add Balance
+        </button>
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <!-- Financial Year Column -->
+        <ng-container matColumnDef="financialYear">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Financial Year </th>
+          <td mat-cell *matCellDef="let row"> {{row.financialYear}} </td>
+        </ng-container>
+
+        <!-- Balance Type Column -->
+        <ng-container matColumnDef="balanceType">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Balance Type </th>
+          <td mat-cell *matCellDef="let row">
+            <span class="badge" [ngClass]="row.balanceType === 'Bank' ? 'bank' : 'cash'">
+              {{row.balanceType}}
+            </span>
+          </td>
+        </ng-container>
+
+        <!-- Bank Account Column -->
+        <ng-container matColumnDef="bankAccount">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Bank Account </th>
+          <td mat-cell *matCellDef="let row"> 
+            {{row.bankName ? row.bankName + ' - ' + row.branch : '-'}} 
+          </td>
+        </ng-container>
+
+        <!-- Opening Amount Column -->
+        <ng-container matColumnDef="openingAmount">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Opening Amount </th>
+          <td mat-cell *matCellDef="let row"> {{row.openingAmount | currency:'INR'}} </td>
+        </ng-container>
+
+        <!-- Remarks Column -->
+        <ng-container matColumnDef="remarks">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Remarks </th>
+          <td mat-cell *matCellDef="let row"> {{row.remarks}} </td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions" stickyEnd>
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let row">
+            <div class="actions">
+              <button [disabled]="!canEdit" class="btn-edit" (click)="openDialog('Update', row)" title="Edit">
+                <mat-icon style="font-size: 18px; width: 18px; height: 18px;">edit</mat-icon>
+              </button>
+              <button [disabled]="!canDelete" class="btn-delete" (click)="deleteRow(row)" title="Delete">
+                <mat-icon style="font-size: 18px; width: 18px; height: 18px;">delete</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="6">No opening balances found.</td>
+        </tr>
+      </table>
+    </div>
+
+    <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" [showFirstLastButtons]="true" aria-label="Select page of opening balances"></mat-paginator>
+  </div>
+</div>

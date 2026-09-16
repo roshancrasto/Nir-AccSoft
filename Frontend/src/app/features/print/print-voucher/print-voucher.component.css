@@ -1,0 +1,221 @@
+.print-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px;
+  border: 2px solid #333;
+  font-family: 'Georgia', serif;
+}
+
+.voucher-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 3px double #333;
+  padding-bottom: 20px;
+  margin-bottom: 24px;
+}
+
+.org-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  color: #1a237e;
+}
+
+.org-info {
+  text-align: center;
+  flex: 1;
+}
+
+.org-info h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #1a237e;
+  letter-spacing: 2px;
+}
+
+.org-info p {
+  margin: 2px 0;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.voucher-badge .badge {
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.voucher-meta {
+  margin-bottom: 24px;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.meta-item label {
+  font-weight: 700;
+  color: #333;
+  margin-right: 8px;
+}
+
+.meta-item .value {
+  font-size: 1.1rem;
+  color: #b71c1c;
+  font-weight: 600;
+}
+
+.voucher-body {
+  margin-bottom: 32px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-item label {
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: 600;
+}
+
+.info-item .value.underline {
+  border-bottom: 1px dashed #999;
+  padding-bottom: 4px;
+  font-size: 1rem;
+  color: #222;
+}
+
+.description-section {
+  margin-bottom: 20px;
+  padding: 12px 16px;
+  border-left: 4px solid #b71c1c;
+  border-radius: 0 4px 4px 0;
+}
+
+.description-section label {
+  font-weight: 700;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.description-text {
+  margin: 8px 0 0 0;
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.5;
+}
+
+.amount-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.amount-table th,
+.amount-table td {
+  padding: 12px 16px;
+  font-size: 1rem;
+}
+
+.amount-table thead {
+}
+
+.amount-table th {
+  font-weight: 700;
+  color: #333;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.total-row td {
+  font-size: 1.1rem;
+}
+
+.amount-words {
+  margin-bottom: 16px;
+}
+
+.amount-words label {
+  font-weight: 700;
+  margin-right: 8px;
+}
+
+.bill-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  color: #1565c0;
+  font-size: 0.9rem;
+}
+
+.voucher-footer {
+  border-top: 2px solid #333;
+  padding-top: 24px;
+}
+
+.signature-block {
+  display: flex;
+  justify-content: flex-end;
+  gap: 80px;
+  margin-bottom: 24px;
+}
+
+.signature {
+  text-align: center;
+}
+
+.sig-line {
+  width: 200px;
+  margin-bottom: 8px;
+  height: 80px;
+}
+
+.signature span {
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.disclaimer {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #888;
+  font-style: italic;
+}
+
+.print-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  .print-container {
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+}

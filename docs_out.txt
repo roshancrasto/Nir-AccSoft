@@ -1,0 +1,243 @@
+Enhance the existing Bank Transfer module in the Angular + ASP.NET Core + SQL Server accounting application to support multiple accounts, Fixed Deposits, and future accounting reports.
+IMPORTANT:
+The Bank Transfer module already exists.
+The following tables already exist:
+1. NU_BankTransfers
+2. NU_BankAccountDetails
+3. NU_OpeningBalances
+Do NOT break existing functionality.
+Enhance the existing design.
+====================================================
+BUSINESS OBJECTIVE
+====================================================
+Create a scalable accounting structure suitable for a cultural organization/non-profit that manages:
+- Cash
+- Bank Accounts
+- Fixed Deposits
+- Receipts
+- Payments
+- Opening Balances
+- Future Financial Reports
+Bank Transfers must represent movement of funds only.
+Bank Transfers must NEVER be treated as:
+- Income
+- Expense
+====================================================
+ACCOUNT MASTER ENHANCEMENT
+====================================================
+Enhance existing table:
+NU_BankAccountDetails
+Add:
+AccountType VARCHAR(30)
+Supported Values:
+- Cash
+- Bank
+- Fixed Deposit
+Examples:
+Main Cash
+Petty Cash
+Union Bank Current Account
+Canara Bank Current Account
+FD-001
+FD-002
+====================================================
+OPENING BALANCE
+====================================================
+Opening balances are already maintained in:
+NU_OpeningBalances
+Use these balances for future account balance calculations.
+Examples:
+Main Cash = 5000
+Union Bank = 25000
+FD-001 = 100000
+====================================================
+BANK TRANSFER SCREEN CHANGES
+====================================================
+Modify existing Bank Transfer screen.
+Fields:
+Transfer Number
+Transfer Date
+Transfer Type
+From Account Type
+From Account
+To Account Type
+To Account
+Amount
+Reference Number
+Remarks
+====================================================
+ACCOUNT TYPE VALUES
+====================================================
+Cash
+Bank
+Fixed Deposit
+====================================================
+ACCOUNT DROPDOWN BEHAVIOUR
+====================================================
+When From Account Type changes:
+Load accounts from NU_BankAccountDetails
+filtered by selected Account Type.
+When To Account Type changes:
+Load accounts from NU_BankAccountDetails
+filtered by selected Account Type.
+Display Format:
+Account Name
+Example:
+Main Cash
+Union Bank Current Account
+FD-001
+====================================================
+SHOW BALANCE
+====================================================
+When account selected:
+Display current balance beside account.
+Example:
+Union Bank Current Account
+Current Balance: ₹1,25,000
+FD-001
+Current Balance: ₹1,00,000
+====================================================
+TRANSFER TYPES
+====================================================
+Support:
+Cash Deposit
+Cash Withdrawal
+Bank To Bank
+Transfer To Petty Cash
+Transfer To Fixed Deposit
+Fixed Deposit Maturity
+General Transfer
+====================================================
+VALIDATION RULES
+====================================================
+Cash Deposit
+From Account Type = Cash
+To Account Type = Bank
+====================================================
+Cash Withdrawal
+From Account Type = Bank
+To Account Type = Cash
+====================================================
+Bank To Bank
+From Account Type = Bank
+To Account Type = Bank
+====================================================
+Transfer To Fixed Deposit
+From Account Type = Bank
+To Account Type = Fixed Deposit
+====================================================
+Fixed Deposit Maturity
+From Account Type = Fixed Deposit
+To Account Type = Bank
+====================================================
+General Transfer
+Allow any valid account combination.
+====================================================
+ADDITIONAL VALIDATIONS
+====================================================
+Amount > 0
+From Account cannot equal To Account
+Transfer Date mandatory
+Reference Number optional
+====================================================
+ACCOUNTING RULE
+====================================================
+This module creates ONLY transfer entries.
+Example:
+Bank → Bank
+Bank → FD
+FD → Bank
+Cash → Bank
+These are fund movements only.
+No Income Entry
+No Expense Entry
+====================================================
+FIXED DEPOSIT HANDLING
+====================================================
+Fixed Deposits must be maintained as separate accounts.
+Example:
+Account Name:
+FD-001
+Account Type:
+Fixed Deposit
+====================================================
+NEW FD CREATION
+====================================================
+Transfer Type:
+Transfer To Fixed Deposit
+From:
+Union Bank
+To:
+FD-001
+Amount:
+100000
+====================================================
+FD MATURITY
+====================================================
+Transfer Type:
+Fixed Deposit Maturity
+From:
+FD-001
+To:
+Union Bank
+Amount:
+100000
+====================================================
+IMPORTANT
+====================================================
+FD Interest must NOT be automatically generated.
+Interest income will be entered separately using Receipt Entry.
+====================================================
+REPORTING REQUIREMENTS
+====================================================
+All transfers must be available for future reports.
+Required fields:
+Transfer Number
+Transfer Date
+Transfer Type
+From Account
+To Account
+Amount
+Reference Number
+Remarks
+====================================================
+FUTURE REPORTS USING THIS DATA
+====================================================
+Bank Statement
+Cash Book
+Account Ledger
+Fixed Deposit Register
+Receipts & Payments Account
+Annual Financial Statements
+====================================================
+ANGULAR UI REQUIREMENTS
+====================================================
+Keep existing screen layout as much as possible.
+Use:
+Angular Material
+Reactive Forms
+Responsive Design
+====================================================
+USER EXPERIENCE
+====================================================
+Show balances beside selected accounts.
+Auto-filter account dropdowns.
+Maintain existing transaction history.
+Do not break existing Bank Transfer records.
+====================================================
+EXPECTED OUTPUT
+====================================================
+Generate complete:
+1. SQL ALTER Scripts
+2. Entity Framework Changes
+3. DTO Changes
+4. Repository Layer
+5. Service Layer
+6. API Controller Changes
+7. Angular HTML
+8. Angular TypeScript
+9. Angular Services
+10. Validation Logic
+11. Balance Calculation Logic
+12. Migration Scripts
+The implementation should be fully functional and production-ready.

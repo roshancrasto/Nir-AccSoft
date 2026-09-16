@@ -1,0 +1,94 @@
+.report-container {
+}
+
+.report-header {
+  margin-bottom: 24px;
+}
+
+.report-header h2 {
+  margin: 0 0 4px 0;
+  font-size: 1.5rem;
+  color: #1a237e;
+}
+
+.subtitle {
+  color: #666;
+  margin: 0;
+}
+
+.filter-card {
+  margin-bottom: 24px;
+  border-radius: 8px;
+}
+
+.filter-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.filter-row mat-form-field {
+  flex: 0 0 200px;
+}
+
+.filter-row button {
+  height: 56px;
+}
+
+.search-field {
+  width: 100%;
+  max-width: 400px;
+}
+
+.table-wrapper {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+table {
+  width: 100%;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+.amount {
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 500;
+}
+
+.mode-chip {
+  display: inline-block;
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.mode-chip.cash {
+  color: #2e7d32;
+}
+
+.mode-chip.bank {
+  color: #1565c0;
+}
+
+.mode-chip.cheque {
+  color: #e65100;
+}
+
+.no-data {
+  text-align: center;
+  padding: 48px !important;
+  color: #999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+mat-paginator {
+  border-top: 1px solid #eee;
+}

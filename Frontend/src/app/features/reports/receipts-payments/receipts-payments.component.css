@@ -1,0 +1,161 @@
+.page-container {
+}
+
+.page-header {
+  margin-bottom: 20px;
+}
+
+.page-title {
+  margin: 0;
+  color: #333;
+  font-weight: 500;
+  font-size: 24px;
+}
+
+.filter-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: #666;
+  border-radius: 8px;
+  margin: 0 20px;
+}
+
+.empty-state mat-icon {
+  font-size: 48px;
+  height: 48px;
+  width: 48px;
+  color: #ccc;
+  margin-bottom: 16px;
+}
+
+/* Report Styles */
+.report-container {
+  padding: 40px;
+  margin: 20px;
+  border-radius: 8px;
+}
+
+.report-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.org-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0 0 8px 0;
+}
+
+.report-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+}
+
+.report-period {
+  font-size: 16px;
+  color: #555;
+  margin: 0;
+}
+
+.accounting-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 2px solid #000;
+}
+
+.accounting-table th,
+.accounting-table td {
+  padding: 8px 12px;
+}
+
+.accounting-table th {
+  font-weight: bold;
+  text-align: left;
+  border-bottom: 2px solid #000;
+}
+
+.desc-col {
+  width: 35%;
+}
+
+.amt-col {
+  width: 15%;
+  text-align: right !important;
+}
+
+.amt-cell {
+  text-align: right;
+  font-family: monospace;
+  font-size: 14px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.sub-item {
+  padding-left: 32px !important;
+}
+
+.intermediate-total td {
+  border-top: 1px dashed #666;
+  padding-top: 16px;
+}
+
+.closing-balance-text {
+  color: #1976d2;
+}
+
+.closing-balance-amt {
+  color: #1976d2;
+}
+
+.final-total td {
+  border-top: 2px solid #000;
+  border-bottom: 2px solid #000;
+  font-size: 16px;
+}
+
+.double-underline {
+  border-bottom: 3px double #000;
+}
+
+/* Print Styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+  }
+  
+  .report-container {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  /* To force landscape, some browsers support this */
+  @page {
+    size: A4 landscape;
+    margin: 1cm;
+  }
+}

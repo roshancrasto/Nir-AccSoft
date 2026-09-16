@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="table-card">
+    <div class="table-header" style="display: flex; justify-content: space-between; align-items: center;">
+      <div style="flex: 1; display: flex; justify-content: flex-start;">
+        <input type="text" placeholder="Search Categories..." (keyup)="applyFilter($event)" style="min-width: 200px; padding: 8px 12px; border-radius: 6px; border: 1px solid #ddd; outline: none;">
+      </div>
+      
+      <div style="flex: 1; text-align: center;">
+        <h3 style="margin: 0;">Expense Categories</h3>
+      </div>
+
+      <div style="flex: 1; display: flex; justify-content: flex-end;">
+        <button [disabled]="!canAdd" class="btn-gradient" (click)="openAddDialog()" style="padding: 8px 16px;">
+          <mat-icon style="font-size: 18px; width: 18px; height: 18px; margin-right: 4px;">add</mat-icon> Add Category
+        </button>
+      </div>
+    </div>
+    
+    <div class="loading-container" *ngIf="isLoading" style="padding: 20px; text-align: center;">
+      <mat-spinner diameter="40" style="margin: 0 auto;"></mat-spinner>
+      <p>Loading categories...</p>
+    </div>
+
+    <div class="table-responsive" *ngIf="!isLoading">
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="categoryId">
+          <th mat-header-cell *matHeaderCellDef> ID </th>
+          <td mat-cell *matCellDef="let element"> {{element.categoryId}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="categoryName">
+          <th mat-header-cell *matHeaderCellDef> Category Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.categoryName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="isActive">
+          <th mat-header-cell *matHeaderCellDef> Status </th>
+          <td mat-cell *matCellDef="let element"> 
+            <span class="badge" [ngClass]="element.isActive ? 'bank' : 'cash'">
+              {{element.isActive ? 'Active' : 'Inactive'}}
+            </span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions" stickyEnd>
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let element">
+            <div class="actions">
+              <button [disabled]="!canEdit" class="btn-edit" matTooltip="Edit" (click)="openEditDialog(element)">
+                <mat-icon style="font-size: 18px; width: 18px; height: 18px;">edit</mat-icon>
+              </button>
+              <button class="btn-delete" matTooltip="Delete" (click)="deleteCategory(element.categoryId)">
+                <mat-icon style="font-size: 18px; width: 18px; height: 18px;">delete</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4" style="text-align: center; padding: 20px;">No categories found.</td>
+        </tr>
+      </table>
+    </div>
+    <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" [showFirstLastButtons]="true" aria-label="Select page of categories"></mat-paginator>
+  </div>
+</div>

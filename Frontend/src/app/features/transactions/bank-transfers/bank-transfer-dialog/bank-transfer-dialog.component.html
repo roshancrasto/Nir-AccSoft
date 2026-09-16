@@ -1,0 +1,100 @@
+<h2 mat-dialog-title>
+  <mat-icon class="dialog-icon">{{ data.mode === 'add' ? 'add_circle' : 'edit' }}</mat-icon>
+  {{ data.mode === 'add' ? 'Record Bank Transfer' : 'Edit Bank Transfer' }}
+</h2>
+<mat-dialog-content>
+  <form #transferForm="ngForm" class="transfer-form">
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Transfer Date</mat-label>
+        <input matInput [matDatepicker]="tPicker" [(ngModel)]="transferDate" name="transferDate" required>
+        <mat-datepicker-toggle matSuffix [for]="tPicker"></mat-datepicker-toggle>
+        <mat-datepicker #tPicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Transfer Type</mat-label>
+        <mat-select [(ngModel)]="transferType" name="transferType" (selectionChange)="onTransferTypeChange()" required>
+          <mat-option *ngFor="let type of transferTypes" [value]="type">{{ type }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>From Account Type</mat-label>
+        <mat-select [(ngModel)]="fromAccountType" name="fromAccountType" (selectionChange)="onFromAccountTypeChange()" required>
+          <mat-option *ngFor="let type of accountTypes" [value]="type">{{ type }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>To Account Type</mat-label>
+        <mat-select [(ngModel)]="toAccountType" name="toAccountType" (selectionChange)="onToAccountTypeChange()" required>
+          <mat-option *ngFor="let type of accountTypes" [value]="type">{{ type }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <div class="half-width account-selection">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>From Account</mat-label>
+          <mat-select [(ngModel)]="fromAccountID" name="fromAccountID" required>
+            <mat-option *ngFor="let acc of getFilteredAccounts(fromAccountType)" [value]="acc.bankAccountKey">
+              {{ getAccountDisplay(acc) }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="balance-display" *ngIf="fromAccountID">
+          <small>Current Balance: <span class="balance-amount">{{ getBalance(fromAccountID) | currency:'INR' }}</span></small>
+        </div>
+      </div>
+
+      <div class="half-width account-selection">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>To Account</mat-label>
+          <mat-select [(ngModel)]="toAccountID" name="toAccountID" required>
+            <mat-option *ngFor="let acc of getFilteredAccounts(toAccountType)" [value]="acc.bankAccountKey">
+              {{ getAccountDisplay(acc) }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="balance-display" *ngIf="toAccountID">
+          <small>Current Balance: <span class="balance-amount">{{ getBalance(toAccountID) | currency:'INR' }}</span></small>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width mt-3">
+        <mat-label>Amount</mat-label>
+        <input matInput type="number" [(ngModel)]="amount" name="amount" required placeholder="0.00">
+        <mat-icon matPrefix>currency_rupee</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width mt-3">
+        <mat-label>Reference Number</mat-label>
+        <input matInput [(ngModel)]="referenceNumber" name="referenceNumber" placeholder="Cheque/UTR No.">
+        <mat-icon matPrefix>tag</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Remarks / Description</mat-label>
+      <textarea matInput [(ngModel)]="remarks" name="remarks" rows="2" placeholder="Purpose of transfer"></textarea>
+    </mat-form-field>
+
+    <div class="alert alert-info" *ngIf="fromAccountType === toAccountType && transferType !== 'Bank To Bank' && transferType !== 'Transfer To Petty Cash' && transferType !== 'General Transfer'">
+      <mat-icon>info</mat-icon>
+      <span>Transferring between the same account type ({{fromAccountType}} to {{toAccountType}}) is usually used for internal sub-accounts.</span>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close style="color: #64748b;">Cancel</button>
+  <button class="btn-gradient" [disabled]="!transferForm.form.valid || amount <= 0 || (fromAccountID === toAccountID && fromAccountID !== null)" (click)="onSave()">
+    <mat-icon style="font-size: 18px; width: 18px; height: 18px;">save</mat-icon>
+    {{ data.mode === 'add' ? 'Save' : 'Update' }}
+  </button>
+</mat-dialog-actions>

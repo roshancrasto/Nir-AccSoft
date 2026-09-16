@@ -1,0 +1,58 @@
+<h2 mat-dialog-title>
+  <mat-icon class="dialog-icon">{{ data.mode === 'add' ? 'add_circle' : 'edit' }}</mat-icon>
+  {{ data.mode === 'add' ? 'Add Event Detail' : 'Edit Event Detail' }}
+</h2>
+<mat-dialog-content>
+  <form #eventForm="ngForm" class="event-form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Event Name</mat-label>
+      <input matInput [(ngModel)]="eventName" name="eventName" required placeholder="Enter event name" #nameField="ngModel">
+      <mat-error *ngIf="nameField.hasError('required')">Event name is required</mat-error>
+    </mat-form-field>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Event Category</mat-label>
+        <mat-select [(ngModel)]="eventCategoryKey" name="eventCategoryKey" required>
+          <mat-option *ngFor="let cat of categories" [value]="cat.eventCatKey">{{ cat.eventCatName }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Event Group</mat-label>
+        <mat-select [(ngModel)]="eventGroupKey" name="eventGroupKey" required>
+          <mat-option *ngFor="let group of eventGroups" [value]="group.eventGroupId">{{ group.eventGroupName }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Language</mat-label>
+        <mat-select [(ngModel)]="languageKey" name="languageKey" required>
+          <mat-option *ngFor="let lang of languages" [value]="lang.langKey">{{ lang.langName }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Event Date</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="eventDate" name="eventDate" required>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="toggle-row" *ngIf="data.mode === 'edit'">
+      <mat-slide-toggle [(ngModel)]="isActive" name="isActive" color="primary">
+        {{ isActive ? 'Active' : 'Inactive' }}
+      </mat-slide-toggle>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close style="color: #64748b;">Cancel</button>
+  <button class="btn-gradient" [disabled]="!eventName.trim() || !eventCategoryKey || !eventGroupKey || !languageKey" (click)="onSave()">
+    <mat-icon style="font-size: 18px; width: 18px; height: 18px;">save</mat-icon>
+    {{ data.mode === 'add' ? 'Save' : 'Update' }}
+  </button>
+</mat-dialog-actions>

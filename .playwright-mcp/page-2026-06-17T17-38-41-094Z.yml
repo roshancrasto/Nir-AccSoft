@@ -1,0 +1,49 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - generic [ref=e4]: DemoProject - NGO Accounting System
+    - button "Admin" [ref=e5]:
+      - img [ref=e6]: account_circle
+      - generic [ref=e7]: Admin
+    - button [ref=e10] [cursor=pointer]:
+      - img [ref=e11]: logout
+  - generic [ref=e15]:
+    - link "Dashboard" [ref=e16] [cursor=pointer]:
+      - /url: /dashboard
+      - img [ref=e17]: dashboard
+      - generic [ref=e18]: Dashboard
+    - button "Masters" [ref=e21]:
+      - img [ref=e22]: category
+      - img [ref=e23]: arrow_drop_down
+      - generic [ref=e24]: Masters
+    - button "Transactions" [ref=e27]:
+      - img [ref=e28]: receipt_long
+      - img [ref=e29]: arrow_drop_down
+      - generic [ref=e30]: Transactions
+    - button "Internal" [ref=e33]:
+      - img [ref=e34]: business_center
+      - img [ref=e35]: arrow_drop_down
+      - generic [ref=e36]: Internal
+    - button "Reports" [ref=e39]:
+      - img [ref=e40]: summarize
+      - img [ref=e41]: arrow_drop_down
+      - generic [ref=e42]: Reports
+  - main [ref=e45]:
+    - generic [ref=e48]:
+      - generic [ref=e49]:
+        - heading "Settlement Expenses" [level=2] [ref=e50]
+        - button "Record Expense" [ref=e51]:
+          - img [ref=e52]: add
+          - generic [ref=e53]: Record Expense
+      - generic [ref=e56]:
+        - table [ref=e57]:
+          - rowgroup [ref=e58]:
+            - row "Member Event Group Category Expense Details Amount Status Actions" [ref=e59]:
+              - columnheader "Member" [ref=e60]
+              - columnheader "Event Group" [ref=e61]
+              - columnheader "Category" [ref=e62]
+              - columnheader "Expense Details" [ref=e63]
+              - columnheader "Amount" [ref=e64]
+              - columnheader "Status" [ref=e65]
+              - columnheader "Actions" [ref=e66]
+          - rowgroup
+        - generic [ref=e67]: No expense records found.

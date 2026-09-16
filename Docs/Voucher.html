@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AccSoft Payment Voucher</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#eef2f7;font-family:Segoe UI,Arial,sans-serif;color:#172033}
+.page{width:210mm;min-height:297mm;margin:20px auto;background:#fff;box-shadow:0 8px 30px #0002;padding:18mm}
+.header{display:flex;justify-content:space-between;border-bottom:3px solid #3157d5;padding-bottom:14px}
+.brand{display:flex;gap:12px;align-items:center}.logo-img{width:62px;height:62px;object-fit:contain}.logo{width:48px;height:48px;border-radius:10px;background:#3157d5;color:white;display:grid;place-items:center;font-weight:bold;font-size:20px}
+.brand h1{margin:0;font-size:24px}.brand small{color:#64748b}.voucher-title{text-align:right}.voucher-title h2{margin:0;color:#3157d5}.voucher-title div{font-size:13px;color:#64748b;margin-top:5px}
+.top-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}.field{border:1px solid #dbe2ea;border-radius:8px;padding:10px 12px}.label{font-size:10px;text-transform:uppercase;color:#64748b;font-weight:bold}.value{font-size:14px;font-weight:600;margin-top:4px}
+.typebar{margin-top:16px;background:#f3f6ff;border:1px solid #d8e0ff;border-radius:10px;padding:12px}.typebar strong{color:#3157d5;margin-right:15px}.pill{display:inline-block;padding:6px 13px;border-radius:20px;background:#fff;border:1px solid #cbd5e1;font-size:12px;margin-right:5px}.pill.active{background:#3157d5;color:#fff;border-color:#3157d5}
+.section{margin-top:18px}.section-title{display:flex;justify-content:space-between;background:#f7f9fc;border-left:4px solid #3157d5;padding:9px 12px;font-weight:bold;font-size:14px}
+table{width:100%;border-collapse:collapse;margin-top:9px;font-size:11px}th{background:#edf2ff;color:#263b80;text-align:left;padding:8px;border:1px solid #dce3ee}td{padding:8px;border:1px solid #e1e6ed;vertical-align:top}.amount{text-align:right}.muted{color:#64748b}.tag{display:inline-block;padding:3px 7px;border-radius:12px;background:#eef2ff;color:#3157d5;font-size:9px;font-weight:bold}
+.total-box{display:flex;justify-content:flex-end;margin-top:10px}.total{width:280px;border:1px solid #cfd8e5;border-radius:8px;overflow:hidden}.total div{display:flex;justify-content:space-between;padding:8px 12px;border-bottom:1px solid #e5e7eb}.total div:last-child{border:0;background:#3157d5;color:white;font-size:15px;font-weight:bold}
+.note{background:#fff8e6;border:1px solid #f1d38b;border-radius:8px;padding:10px 12px;font-size:10px;line-height:1.5;margin-top:14px}.signatures{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:55px}.sig{border-top:1px solid #9aa5b5;text-align:center;padding-top:8px;font-size:10px;color:#64748b}.footer{margin-top:25px;padding-top:10px;border-top:1px solid #e5e7eb;display:flex;justify-content:space-between;font-size:9px;color:#7b8794}
+.controls{position:fixed;right:20px;top:20px;background:#172033;color:#fff;padding:10px;border-radius:9px;z-index:5}.controls select{padding:6px;border-radius:5px}
+@media print{body{background:#fff}.page{margin:0;box-shadow:none;padding:15mm}.controls{display:none}}
+@media(max-width:900px){.page{width:100%;margin:0}.top-grid,.signatures{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="page">
+<header class="header">
+<div class="brand"><img class="logo-img" src="niranthar-logo.png" alt="Niranthar Udyavar"><div><h1>Niranthar Udyavar (R)</h1><small>Udyavara - 574118</small></div></div>
+<div class="voucher-title"><h2>PAYMENT VOUCHER</h2><div>Voucher No :  <b>PAY-2026-00458</b></div><div>Voucher Date :  <b>19-Aug-2026</b></div></div>
+
+</header>
+
+<div class="top-grid">
+    <div class="field"><div class="label">Payment Date</div><div class="value">19-Aug-2026</div></div>
+    <div class="field"><div class="label">Payment Account</div><div class="value">Union Bank of India - Niranthar</div></div>
+    <div class="field"><div class="label">Pay To</div><div class="value" id="payee">Roshan Crasto</div></div>
+    <div class="field"><div class="label">Payment Mode</div><div class="value">Bank Transfer</div></div>
+</div>
+
+<div class="typebar"><strong>Voucher Type</strong>
+<span class="pill">Normal</span><span class="pill">Re-imbursement</span><span class="pill active">Multiple Payments</span></div>
+
+<div class="section">
+<!--<div class="section-title"><span>Linked Expenses / Bills</span><span class="tag">3 Expenses Linked</span></div>-->
+<table><thead><tr><th>Expense ID</th><th>Expense / Description</th><th>Party</th><th>Bill No.</th><th>Bill Date</th><th class="amount">Amount (₹)</th></tr></thead>
+<tbody>
+<tr><td>EXP-1042</td><td><b>Artist Accommodation</b><br><span class="muted">Hotel advance paid earlier</span></td><td>Hotel Udupi Residency</td><td>HTL/2841</td><td>18-Aug-2026</td><td class="amount">1,000.00</td></tr>
+<tr><td>EXP-1043</td><td><b>Artist Accommodation</b><br><span class="muted">Balance settlement</span></td><td>Hotel Udupi Residency</td><td>HTL/2841</td><td>18-Aug-2026</td><td class="amount">4,000.00</td></tr>
+<tr><td>EXP-1044</td><td><b>Sound Operator Charges</b><br><span class="muted">Cinema Utsav 2026</span></td><td>Local Sound Services</td><td>—</td><td>19-Aug-2026</td><td class="amount">2,500.00</td></tr>
+</tbody></table>
+<div class="total-box"><div class="total"><div><span>Expense Total</span><b>₹7,500.00</b></div><div><span>Voucher Payment</span><b>₹7,500.00</b></div></div></div>
+</div>
+
+<div class="section"><div class="section-title">Other Details</div>
+<table><tbody>
+    <tr><td><b>Amount in Words</b></td><td>Rupees Seven Thousand Five Hundred Only</td></tr>
+    <tr><td><b>Narration</b></td><td>Payment against linked expenses/bills including hotel accommodation and sound operator charges.</td></tr>
+    <tr><td><b>Remarks</b></td><td>Payment against linked expenses/bills including hotel accommodation and sound operator charges.</td></tr>
+</tbody></table></div>
+
+
+
+<div class="signatures"><div class="sig">Prepared By</div><div class="sig">Checked / Verified By</div><div class="sig">Authorized Signatory</div></div>
+<div class="footer"><span>Niranthar Udyavar (R) • Payment & Expense Management</span><span>System Generated Payment Voucher</span></div>
+</div>
+
+
+</body></html>

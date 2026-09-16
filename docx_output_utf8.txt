@@ -1,0 +1,266 @@
+Create a complete Report Module page in the existing Angular + ASP.NET Core + SQL Server accounting application.
+====================================================
+REPORT NAME
+====================================================
+Reports
+→ Event Expenses
+====================================================
+BUSINESS REQUIREMENT
+====================================================
+The report should display complete Event-wise
+Receipts and Payments summary in a side-by-side format exactly similar to the attached design.
+The report data will come from existing stored procedure:
+NU_GetEventGroupExpenses
+Input Parameter:
+EventGroupKey
+====================================================
+STORED PROCEDURE RESPONSE FORMAT
+====================================================
+The SP returns JSON response in below format:
+{
+  "Receipts": [
+    {
+      "Receipts": "Donations",
+      "Amount": 40000
+    },
+    {
+      "Receipts": "Box Collection",
+      "Amount": 18500
+    },
+    {
+      "Receipts": "Govt Grants",
+      "Amount": 25000
+    }
+  ],
+  "Payments": [
+    {
+      "ExpenseDetails": "Printing - Rohit",
+      "Amount": 2500
+    },
+    {
+      "ExpenseDetails": "Mangalore Lunch - Collection",
+      "Amount": 1900
+    }
+  ]
+}
+====================================================
+REPORT DESIGN REQUIREMENT
+====================================================
+The page layout should exactly follow traditional:
+Receipts & Payments format
+====================================================
+LAYOUT STRUCTURE
+====================================================
+Top Center Header:
+EVENT GROUP NAME
+Example:
+DRAMA FEST - 2026
+====================================================
+TABLE STRUCTURE
+====================================================
+| Receipts | Amount | Payments | Amount |
+====================================================
+LEFT SIDE
+====================================================
+Display:
+Receipts
+Columns:
+1. Receipt Description
+2. Amount
+====================================================
+RIGHT SIDE
+====================================================
+Display:
+Payments
+Columns:
+1. Expense Details
+2. Amount
+====================================================
+IMPORTANT REQUIREMENT
+====================================================
+Both sections should align side-by-side exactly like accounting statements.
+If payments contain more rows than receipts,
+empty rows should be added in receipts side.
+If receipts contain more rows than payments,
+empty rows should be added in payments side.
+====================================================
+TOTALS SECTION
+====================================================
+At bottom display:
+====================================================
+Total Receipts
+Total Payments
+Income Over Expenditure
+====================================================
+====================================================
+CALCULATIONS
+====================================================
+Total Receipts =
+SUM(Receipts.Amount)
+Total Payments =
+SUM(Payments.Amount)
+Income Over Expenditure =
+Total Receipts - Total Payments
+====================================================
+FINAL TOTAL ROW
+====================================================
+Final TOTAL row should display:
+LEFT:
+Total Receipts
+RIGHT:
+Total Payments + Income Over Expenditure
+Both totals should match.
+====================================================
+ANGULAR FRONTEND REQUIREMENTS
+====================================================
+====================================================
+MENU STRUCTURE
+====================================================
+Reports
+→ Event Expenses
+====================================================
+FILTER SECTION
+====================================================
+Provide:
+1. Event Group Dropdown
+Load from:
+NU_EventGroups
+====================================================
+BUTTONS
+====================================================
+1. View Report
+2. Export Excel
+3. Export PDF
+====================================================
+PAGE DESIGN
+====================================================
+Use:
+- Angular Material
+- Clean accounting-style table
+- Responsive layout
+- Proper borders
+- Bold totals
+- Currency formatting
+====================================================
+UI REQUIREMENTS
+====================================================
+1. Center aligned heading
+2. Traditional accounting statement design
+3. Proper table borders
+4. Bold totals
+5. Right-align amount columns
+====================================================
+EXPORT REQUIREMENTS
+====================================================
+====================================================
+1. EXPORT TO EXCEL
+====================================================
+Generate properly formatted Excel file.
+Requirements:
+- Same layout as screen
+- Proper headers
+- Bold totals
+- Currency formatting
+- Auto column width
+====================================================
+2. EXPORT TO PDF
+====================================================
+Generate printable PDF.
+Requirements:
+- A4 landscape
+- Proper borders
+- Proper alignment
+- Page title
+- Totals section
+====================================================
+BACKEND REQUIREMENTS
+====================================================
+Create API:
+GET /api/reports/eventexpenses/{eventGroupKey}
+====================================================
+API RESPONSE
+====================================================
+Return:
+{
+  "eventGroupName": "DRAMA FEST - 2026",
+  "receipts": [
+    {
+      "receipts": "Donations",
+      "amount": 40000
+    }
+  ],
+  "payments": [
+    {
+      "expenseDetails": "Printing - Rohit",
+      "amount": 2500
+    }
+  ],
+  "totalReceipts": 83500,
+  "totalPayments": 32000,
+  "incomeOverExpenditure": 51500
+}
+====================================================
+BACKEND IMPLEMENTATION REQUIREMENTS
+====================================================
+1. Call existing SP:
+NU_GetEventGroupExpenses
+2. Deserialize JSON response properly
+3. Calculate totals in backend OR frontend
+4. Handle null/empty values safely
+====================================================
+ANGULAR IMPLEMENTATION REQUIREMENTS
+====================================================
+Generate:
+1. Angular Component
+2. Angular Service
+3. Angular Routing
+4. HTML
+5. TypeScript
+6. CSS
+====================================================
+TABLE RENDERING REQUIREMENT
+====================================================
+Create merged side-by-side rendering.
+Both Receipts and Payments should display together in one table.
+====================================================
+EXAMPLE
+====================================================
+| Receipts           | Amount     | Payments                | Amount     |
+|-------------------|------------|-------------------------|------------|
+| Donations         | 40,000     | Printing - Rohit        | 2,500      |
+| Box Collection    | 18,500     | Lunch Expense           | 1,900      |
+| Govt Grants       | 25,000     | Generator & Lights      | 34,400     |
+====================================================
+TOTALS DISPLAY
+====================================================
+Display:
+Total Expenses
+Income Over Expenditure
+Final Total
+Exactly like accounting statement.
+====================================================
+ADDITIONAL REQUIREMENTS
+====================================================
+1. Existing modules should remain unchanged
+2. Use responsive design
+3. Use proper decimal formatting
+4. Use currency formatting
+5. Handle dynamic row count properly
+6. Ensure printable layout
+====================================================
+EXPECTED OUTPUT
+====================================================
+Generate complete:
+1. ASP.NET Core API
+2. Service Layer
+3. Repository Layer
+4. Angular Component
+5. Angular Service
+6. Angular Routing
+7. HTML
+8. CSS
+9. TypeScript
+10. Excel Export Logic
+11. PDF Export Logic
+12. Dynamic table rendering logic
+The implementation should be fully functional and production-ready.

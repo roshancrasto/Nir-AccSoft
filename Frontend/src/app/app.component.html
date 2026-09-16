@@ -1,0 +1,47 @@
+<div *ngIf="currentUser">
+  <!-- NAVBAR from design.html -->
+  <div class="navbar">
+    <div class="logo">
+      <i class="fa-solid fa-building-columns"></i>
+      AccSoft
+    </div>
+
+    <ul class="menu">
+      <li>
+        <a routerLink="/dashboard" routerLinkActive="active-nav">
+          <i class="fa-solid fa-chart-line"></i> Dashboard
+        </a>
+      </li>
+
+      <!-- Dynamic Menus -->
+      <ng-container *ngFor="let parent of menus">
+        <li>
+          <a [matMenuTriggerFor]="subMenu" routerLinkActive="active-nav">
+            <mat-icon>{{ parent.menuIcon || 'folder' }}</mat-icon> {{ parent.menuName }} 
+            <i class="fa-solid fa-caret-down dropdown-icon" *ngIf="parent.children && parent.children.length > 0"></i>
+          </a>
+          <mat-menu #subMenu="matMenu" class="nav-menu">
+            <a *ngFor="let child of parent.children" mat-menu-item [routerLink]="child.menuRoute">
+              <mat-icon>{{ child.menuIcon || 'insert_drive_file' }}</mat-icon> {{ child.menuName }}
+            </a>
+          </mat-menu>
+        </li>
+      </ng-container>
+    </ul>
+
+    <div class="user-profile" [matMenuTriggerFor]="userProfileMenu" style="cursor: pointer;" title="Profile">
+      <i class="fa-solid fa-user"></i>
+    </div>
+    <mat-menu #userProfileMenu="matMenu">
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon> Logout
+      </button>
+    </mat-menu>
+  </div>
+</div>
+
+<main class="main-content" [class.no-nav]="!currentUser">
+  <div class="content-wrapper">
+    <router-outlet></router-outlet>
+  </div>
+</main>

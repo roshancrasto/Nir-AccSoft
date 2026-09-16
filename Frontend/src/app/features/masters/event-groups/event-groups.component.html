@@ -1,0 +1,102 @@
+<div class="container">
+  <div class="table-card">
+    <div class="table-header" style="display: flex; justify-content: space-between; align-items: center;">
+      <div style="flex: 1; display: flex; justify-content: flex-start;">
+        <input type="text" placeholder="Search Event Groups..." (keyup)="applyFilter($event)" style="min-width: 200px; padding: 8px 12px; border-radius: 6px; border: 1px solid #ddd; outline: none;">
+      </div>
+      
+      <div style="flex: 1; text-align: center;">
+        <h3 style="margin: 0;">Event Group Master</h3>
+      </div>
+
+      <div style="flex: 1; display: flex; justify-content: flex-end;">
+        <button [disabled]="!canAdd" class="btn-gradient" (click)="openAddDialog()" style="padding: 8px 16px;">
+          <mat-icon style="font-size: 18px; width: 18px; height: 18px; margin-right: 4px;">add</mat-icon> Add Event Group
+        </button>
+      </div>
+    </div>
+    
+    <div class="loading-container" *ngIf="isLoading" style="padding: 20px; text-align: center;">
+      <mat-spinner diameter="40" style="margin: 0 auto;"></mat-spinner>
+      <p>Loading event groups...</p>
+    </div>
+
+    <div class="table-responsive" *ngIf="!isLoading">
+      <table mat-table [dataSource]="dataSource" class="full-width-table">
+        <!-- Event Group Name Column -->
+        <ng-container matColumnDef="eventGroupName">
+          <th mat-header-cell *matHeaderCellDef>Event Group Name</th>
+          <td mat-cell *matCellDef="let eventGroup">
+            <div class="entity-name">{{ eventGroup.eventGroupName }}</div>
+            <div class="entity-desc">{{ eventGroup.description | slice:0:50 }}{{ eventGroup.description.length > 50 ? '...' : '' }}</div>
+          </td>
+        </ng-container>
+
+        <!-- Dates Column -->
+        <ng-container matColumnDef="dates">
+          <th mat-header-cell *matHeaderCellDef>Dates</th>
+          <td mat-cell *matCellDef="let eventGroup">
+            <div class="date-range">
+              <span>{{ eventGroup.startDate | date:'mediumDate' }}</span>
+              <span class="date-sep">to</span>
+              <span>{{ eventGroup.endDate | date:'mediumDate' }}</span>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Budget Column -->
+        <ng-container matColumnDef="budgetAmount">
+          <th mat-header-cell *matHeaderCellDef>Budget</th>
+          <td mat-cell *matCellDef="let eventGroup" class="amount-cell">
+            {{ eventGroup.budgetAmount | currency:'INR' }}
+          </td>
+        </ng-container>
+
+        <!-- Status Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let eventGroup">
+            <mat-chip-set>
+              <mat-chip [color]="getStatusColor(eventGroup.status)" highlighted>{{ eventGroup.status }}</mat-chip>
+            </mat-chip-set>
+          </td>
+        </ng-container>
+
+        <!-- IsActive Column -->
+        <ng-container matColumnDef="isActive">
+          <th mat-header-cell *matHeaderCellDef>State</th>
+          <td mat-cell *matCellDef="let eventGroup">
+            <span class="badge" [ngClass]="eventGroup.isActive ? 'bank' : 'cash'">
+              {{ eventGroup.isActive ? 'Active' : 'Inactive' }}
+            </span>
+          </td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions" stickyEnd>
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let eventGroup">
+            <div class="actions">
+              <button [disabled]="!canEdit" class="btn-edit" (click)="openEditDialog(eventGroup)" matTooltip="Edit">
+                <mat-icon style="font-size: 18px; width: 18px; height: 18px;">edit</mat-icon>
+              </button>
+              <button [disabled]="!canDelete" class="btn-delete" (click)="deleteEventGroup(eventGroup.eventGroupId)" matTooltip="Delete">
+                <mat-icon style="font-size: 18px; width: 18px; height: 18px;">delete</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="6" style="text-align: center; padding: 20px;">
+            No event groups found.
+          </td>
+        </tr>
+      </table>
+    </div>
+    <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" [showFirstLastButtons]="true" aria-label="Select page of event groups"></mat-paginator>
+  </div>
+</div>

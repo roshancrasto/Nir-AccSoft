@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="table-card">
+    <div class="table-header" style="display: flex; justify-content: space-between; align-items: center;">
+      <div style="flex: 1; display: flex; justify-content: flex-start;">
+        <input type="text" placeholder="Search Languages..." (keyup)="applyFilter($event)" style="min-width: 200px; padding: 8px 12px; border-radius: 6px; border: 1px solid #ddd; outline: none;">
+      </div>
+      
+      <div style="flex: 1; text-align: center;">
+        <h3 style="margin: 0;">Event Languages</h3>
+      </div>
+
+      <div style="flex: 1; display: flex; justify-content: flex-end;">
+        <button [disabled]="!canAdd" class="btn-gradient" (click)="openAddDialog()" style="padding: 8px 16px;">
+          <mat-icon style="font-size: 18px; width: 18px; height: 18px; margin-right: 4px;">add</mat-icon> Add Language
+        </button>
+      </div>
+    </div>
+    
+    <div class="loading-container" *ngIf="isLoading" style="padding: 20px; text-align: center;">
+      <mat-spinner diameter="40" style="margin: 0 auto;"></mat-spinner>
+      <p>Loading languages...</p>
+    </div>
+
+    <div class="table-responsive" *ngIf="!isLoading">
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="langKey">
+          <th mat-header-cell *matHeaderCellDef> ID </th>
+          <td mat-cell *matCellDef="let language"> {{language.langKey}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="langName">
+          <th mat-header-cell *matHeaderCellDef> Language Name </th>
+          <td mat-cell *matCellDef="let language"> {{language.langName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="isActive">
+          <th mat-header-cell *matHeaderCellDef> Status </th>
+          <td mat-cell *matCellDef="let language">
+            <span class="badge" [ngClass]="language.isActive ? 'bank' : 'cash'">
+              {{language.isActive ? 'Active' : 'Inactive'}}
+            </span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions" stickyEnd>
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let language">
+            <div class="actions">
+              <button [disabled]="!canEdit" class="btn-edit" (click)="openEditDialog(language)" matTooltip="Edit">
+                <mat-icon style="font-size: 18px; width: 18px; height: 18px;">edit</mat-icon>
+              </button>
+              <button [disabled]="!canDelete" class="btn-delete" (click)="deleteLanguage(language.langKey)" matTooltip="Delete">
+                <mat-icon style="font-size: 18px; width: 18px; height: 18px;">delete</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4" style="text-align: center; padding: 20px;">
+            No languages found.
+          </td>
+        </tr>
+      </table>
+    </div>
+    <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" [showFirstLastButtons]="true" aria-label="Select page of languages"></mat-paginator>
+  </div>
+</div>

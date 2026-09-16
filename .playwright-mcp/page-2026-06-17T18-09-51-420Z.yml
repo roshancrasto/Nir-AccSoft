@@ -1,0 +1,239 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - generic [ref=e4]: DemoProject - NGO Accounting System
+    - button "Admin" [ref=e622]:
+      - img [ref=e6]: account_circle
+      - generic [ref=e7]: Admin
+    - button [ref=e10] [cursor=pointer]:
+      - img [ref=e11]: logout
+  - generic [ref=e15]:
+    - link "Dashboard" [ref=e623] [cursor=pointer]:
+      - /url: /dashboard
+      - img [ref=e17]: dashboard
+      - generic [ref=e18]: Dashboard
+    - button "Masters" [ref=e624]:
+      - img [ref=e22]: category
+      - img [ref=e23]: arrow_drop_down
+      - generic [ref=e24]: Masters
+    - button "Transactions" [ref=e625]:
+      - img [ref=e28]: receipt_long
+      - img [ref=e29]: arrow_drop_down
+      - generic [ref=e30]: Transactions
+    - button "Internal" [ref=e626]:
+      - img [ref=e34]: business_center
+      - img [ref=e35]: arrow_drop_down
+      - generic [ref=e36]: Internal
+    - button "Reports" [ref=e627]:
+      - img [ref=e40]: summarize
+      - img [ref=e41]: arrow_drop_down
+      - generic [ref=e42]: Reports
+  - main [ref=e45]:
+    - generic [ref=e48]:
+      - generic [ref=e50]:
+        - generic [ref=e51]:
+          - img [ref=e52]: payments
+          - generic [ref=e53]:
+            - heading "Payment Voucher" [level=1] [ref=e628]
+            - paragraph [ref=e55]: Record and manage expense payments
+        - button "New Voucher" [active] [ref=e629]:
+          - img [ref=e57]: add
+          - generic [ref=e58]: New Voucher
+      - generic [ref=e61]:
+        - generic [ref=e65]:
+          - generic [ref=e66]: Search Vouchers
+          - textbox "Search Vouchers" [ref=e630]:
+            - /placeholder: Search by number, vendor, category or event
+          - img [ref=e70]: search
+        - generic [ref=e72]:
+          - table [ref=e73]:
+            - rowgroup [ref=e74]:
+              - row "Voucher No. Voucher Date Payment Date Vendor Category Event Group Event Amount Mode Actions" [ref=e631]:
+                - columnheader "Voucher No." [ref=e632]
+                - columnheader "Voucher Date" [ref=e633]
+                - columnheader "Payment Date" [ref=e634]
+                - columnheader "Vendor" [ref=e635]
+                - columnheader "Category" [ref=e636]
+                - columnheader "Event Group" [ref=e637]
+                - columnheader "Event" [ref=e638]
+                - columnheader "Amount" [ref=e639]
+                - columnheader "Mode" [ref=e640]
+                - columnheader "Actions" [ref=e641]
+            - rowgroup [ref=e86]:
+              - row "2026-001 04-Feb-2026 30-Jan-2026 Varsha Printers Printing & Stationery Drama Fest 2026 - ₹2,500.00 Bank" [ref=e642]:
+                - cell "2026-001" [ref=e643]
+                - cell "04-Feb-2026" [ref=e644]
+                - cell "30-Jan-2026" [ref=e645]
+                - cell "Varsha Printers" [ref=e646]
+                - cell "Printing & Stationery" [ref=e647]
+                - cell "Drama Fest 2026" [ref=e648]
+                - cell "-" [ref=e649]
+                - cell "₹2,500.00" [ref=e650]
+                - cell "Bank" [ref=e651]
+                - cell [ref=e97]:
+                  - generic [ref=e98]:
+                    - button [ref=e99] [cursor=pointer]:
+                      - img [ref=e100]: edit
+                    - button [ref=e103] [cursor=pointer]:
+                      - img [ref=e104]: delete
+              - row "2026-002 04-Feb-2026 30-Jan-2026 Bank Charges Bank Charges Drama Fest 2026 - ₹7.08 Bank" [ref=e652]:
+                - cell "2026-002" [ref=e653]
+                - cell "04-Feb-2026" [ref=e654]
+                - cell "30-Jan-2026" [ref=e655]
+                - cell "Bank Charges" [ref=e656]
+                - cell "Bank Charges" [ref=e657]
+                - cell "Drama Fest 2026" [ref=e658]
+                - cell "-" [ref=e659]
+                - cell "₹7.08" [ref=e660]
+                - cell "Bank" [ref=e661]
+                - cell [ref=e117]:
+                  - generic [ref=e118]:
+                    - button [ref=e119] [cursor=pointer]:
+                      - img [ref=e120]: edit
+                    - button [ref=e123] [cursor=pointer]:
+                      - img [ref=e124]: delete
+              - row "2026-003 15-Feb-2026 09-Feb-2026 Varsha Printers Printing & Stationery Drama Fest 2026 - ₹1,000.00 Cash" [ref=e662]:
+                - cell "2026-003" [ref=e663]
+                - cell "15-Feb-2026" [ref=e664]
+                - cell "09-Feb-2026" [ref=e665]
+                - cell "Varsha Printers" [ref=e666]
+                - cell "Printing & Stationery" [ref=e667]
+                - cell "Drama Fest 2026" [ref=e668]
+                - cell "-" [ref=e669]
+                - cell "₹1,000.00" [ref=e670]
+                - cell "Cash" [ref=e671]
+                - cell [ref=e137]:
+                  - generic [ref=e138]:
+                    - button [ref=e139] [cursor=pointer]:
+                      - img [ref=e140]: edit
+                    - button [ref=e143] [cursor=pointer]:
+                      - img [ref=e144]: delete
+              - row "2026-004 15-Feb-2026 09-Feb-2026 Bank Charges Bank Charges Drama Fest 2026 - ₹7.08 Bank" [ref=e672]:
+                - cell "2026-004" [ref=e673]
+                - cell "15-Feb-2026" [ref=e674]
+                - cell "09-Feb-2026" [ref=e675]
+                - cell "Bank Charges" [ref=e676]
+                - cell "Bank Charges" [ref=e677]
+                - cell "Drama Fest 2026" [ref=e678]
+                - cell "-" [ref=e679]
+                - cell "₹7.08" [ref=e680]
+                - cell "Bank" [ref=e681]
+                - cell [ref=e157]:
+                  - generic [ref=e158]:
+                    - button [ref=e159] [cursor=pointer]:
+                      - img [ref=e160]: edit
+                    - button [ref=e163] [cursor=pointer]:
+                      - img [ref=e164]: delete
+              - row "2026-005 14-Feb-2026 11-Feb-2026 Little Earth School Of Theatre Drama Team Payment Drama Fest 2026 - ₹25,000.00 Bank" [ref=e682]:
+                - cell "2026-005" [ref=e683]
+                - cell "14-Feb-2026" [ref=e684]
+                - cell "11-Feb-2026" [ref=e685]
+                - cell "Little Earth School Of Theatre" [ref=e686]
+                - cell "Drama Team Payment" [ref=e687]
+                - cell "Drama Fest 2026" [ref=e688]
+                - cell "-" [ref=e689]
+                - cell "₹25,000.00" [ref=e690]
+                - cell "Bank" [ref=e691]
+                - cell [ref=e177]:
+                  - generic [ref=e178]:
+                    - button [ref=e179] [cursor=pointer]:
+                      - img [ref=e180]: edit
+                    - button [ref=e183] [cursor=pointer]:
+                      - img [ref=e184]: delete
+              - row "2026-006 15-Feb-2026 11-Feb-2026 Bank Charges Bank Charges Drama Fest 2026 - ₹11.80 Bank" [ref=e692]:
+                - cell "2026-006" [ref=e693]
+                - cell "15-Feb-2026" [ref=e694]
+                - cell "11-Feb-2026" [ref=e695]
+                - cell "Bank Charges" [ref=e696]
+                - cell "Bank Charges" [ref=e697]
+                - cell "Drama Fest 2026" [ref=e698]
+                - cell "-" [ref=e699]
+                - cell "₹11.80" [ref=e700]
+                - cell "Bank" [ref=e701]
+                - cell [ref=e197]:
+                  - generic [ref=e198]:
+                    - button [ref=e199] [cursor=pointer]:
+                      - img [ref=e200]: edit
+                    - button [ref=e203] [cursor=pointer]:
+                      - img [ref=e204]: delete
+              - row "2026-007 12-Feb-2026 11-Feb-2026 Little Earth School Of Theatre Drama Team Payment Drama Fest 2026 - ₹20,000.00 Bank" [ref=e702]:
+                - cell "2026-007" [ref=e703]
+                - cell "12-Feb-2026" [ref=e704]
+                - cell "11-Feb-2026" [ref=e705]
+                - cell "Little Earth School Of Theatre" [ref=e706]
+                - cell "Drama Team Payment" [ref=e707]
+                - cell "Drama Fest 2026" [ref=e708]
+                - cell "-" [ref=e709]
+                - cell "₹20,000.00" [ref=e710]
+                - cell "Bank" [ref=e711]
+                - cell [ref=e217]:
+                  - generic [ref=e218]:
+                    - button [ref=e219] [cursor=pointer]:
+                      - img [ref=e220]: edit
+                    - button [ref=e223] [cursor=pointer]:
+                      - img [ref=e224]: delete
+              - row "2026-008 15-Feb-2026 11-Feb-2026 Bank Charges Bank Charges Drama Fest 2026 - ₹11.80 Bank" [ref=e712]:
+                - cell "2026-008" [ref=e713]
+                - cell "15-Feb-2026" [ref=e714]
+                - cell "11-Feb-2026" [ref=e715]
+                - cell "Bank Charges" [ref=e716]
+                - cell "Bank Charges" [ref=e717]
+                - cell "Drama Fest 2026" [ref=e718]
+                - cell "-" [ref=e719]
+                - cell "₹11.80" [ref=e720]
+                - cell "Bank" [ref=e721]
+                - cell [ref=e237]:
+                  - generic [ref=e238]:
+                    - button [ref=e239] [cursor=pointer]:
+                      - img [ref=e240]: edit
+                    - button [ref=e243] [cursor=pointer]:
+                      - img [ref=e244]: delete
+              - row "2026-009 15-Feb-2026 11-Feb-2026 Prasad Creations Printing & Stationery Drama Fest 2026 - ₹4,500.00 Bank" [ref=e722]:
+                - cell "2026-009" [ref=e723]
+                - cell "15-Feb-2026" [ref=e724]
+                - cell "11-Feb-2026" [ref=e725]
+                - cell "Prasad Creations" [ref=e726]
+                - cell "Printing & Stationery" [ref=e727]
+                - cell "Drama Fest 2026" [ref=e728]
+                - cell "-" [ref=e729]
+                - cell "₹4,500.00" [ref=e730]
+                - cell "Bank" [ref=e731]
+                - cell [ref=e257]:
+                  - generic [ref=e258]:
+                    - button [ref=e259] [cursor=pointer]:
+                      - img [ref=e260]: edit
+                    - button [ref=e263] [cursor=pointer]:
+                      - img [ref=e264]: delete
+              - row "2026-010 15-Feb-2026 11-Feb-2026 Bank Charges Bank Charges Drama Fest 2026 - ₹7.08 Bank" [ref=e732]:
+                - cell "2026-010" [ref=e733]
+                - cell "15-Feb-2026" [ref=e734]
+                - cell "11-Feb-2026" [ref=e735]
+                - cell "Bank Charges" [ref=e736]
+                - cell "Bank Charges" [ref=e737]
+                - cell "Drama Fest 2026" [ref=e738]
+                - cell "-" [ref=e739]
+                - cell "₹7.08" [ref=e740]
+                - cell "Bank" [ref=e741]
+                - cell [ref=e277]:
+                  - generic [ref=e278]:
+                    - button [ref=e279] [cursor=pointer]:
+                      - img [ref=e280]: edit
+                    - button [ref=e283] [cursor=pointer]:
+                      - img [ref=e284]: delete
+          - group "Select page of vouchers" [ref=e742]:
+            - generic [ref=e289]:
+              - generic [ref=e290]:
+                - generic [ref=e291]: "Items per page:"
+                - combobox "10 Items per page:" [ref=e743] [cursor=pointer]:
+                  - generic [ref=e297]:
+                    - generic [ref=e299]: "10"
+                    - img [ref=e302]
+              - generic [ref=e304]:
+                - generic [ref=e305]: 1 – 10 of 56
+                - button "First page" [disabled]:
+                  - img
+                - button "Previous page" [disabled]:
+                  - img
+                - button "Next page" [ref=e744] [cursor=pointer]:
+                  - img [ref=e307]
+                - button "Last page" [ref=e745] [cursor=pointer]:
+                  - img [ref=e312]

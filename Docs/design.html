@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AccSoft - Receipt Entry</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
+body{
+    background:#f1f5f9;
+    color:#1e293b;
+}
+
+/* ===========================
+   NAVBAR
+=========================== */
+
+.navbar{
+    height:70px;
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 25px;
+    color:white;
+    box-shadow:0 4px 15px rgba(0,0,0,.15);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:24px;
+    font-weight:700;
+}
+
+.menu{
+    display:flex;
+    list-style:none;
+    gap:25px;
+}
+
+.menu li{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    cursor:pointer;
+    font-size:14px;
+    transition:.3s;
+}
+
+.menu li:hover{
+    transform:translateY(-2px);
+}
+
+.user-profile{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:rgba(255,255,255,.15);
+    padding:10px 15px;
+    border-radius:30px;
+}
+
+.user-profile img{
+    width:35px;
+    height:35px;
+    border-radius:50%;
+}
+
+/* ===========================
+   CONTAINER
+=========================== */
+
+.container{
+    padding:25px;
+}
+
+/* ===========================
+   HERO
+=========================== */
+
+.hero{
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+    color:white;
+    border-radius:20px;
+    padding:30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+    box-shadow:0 8px 20px rgba(37,99,235,.25);
+}
+
+.hero h1{
+    font-size:32px;
+    margin-bottom:8px;
+}
+
+.hero p{
+    opacity:.9;
+}
+
+.btn-primary{
+    border:none;
+    background:white;
+    color:#2563eb;
+    padding:14px 22px;
+    border-radius:12px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn-primary:hover{
+    transform:translateY(-2px);
+}
+
+/* ===========================
+   KPI CARDS
+=========================== */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+    margin-bottom:25px;
+}
+
+.card{
+    padding:22px;
+    border-radius:18px;
+    color:white;
+    box-shadow:0 6px 16px rgba(0,0,0,.08);
+}
+
+.card h4{
+    font-size:14px;
+    opacity:.9;
+}
+
+.card h2{
+    margin-top:10px;
+    font-size:28px;
+}
+
+.blue{
+    background:linear-gradient(135deg,#2563eb,#60a5fa);
+}
+
+.green{
+    background:linear-gradient(135deg,#16a34a,#4ade80);
+}
+
+.orange{
+    background:linear-gradient(135deg,#ea580c,#fb923c);
+}
+
+.purple{
+    background:linear-gradient(135deg,#7c3aed,#a78bfa);
+}
+
+/* ===========================
+   FILTER PANEL
+=========================== */
+
+.filter-panel{
+    background:white;
+    padding:20px;
+    border-radius:18px;
+    box-shadow:0 3px 12px rgba(0,0,0,.06);
+    margin-bottom:25px;
+}
+
+.filter-row{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.filter-row input,
+.filter-row select{
+    padding:12px;
+    border:1px solid #dbe2ea;
+    border-radius:10px;
+    min-width:220px;
+}
+
+.filter-row input:focus,
+.filter-row select:focus{
+    outline:none;
+    border-color:#2563eb;
+}
+
+/* ===========================
+   TABLE CARD
+=========================== */
+
+.table-card{
+    background:white;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 3px 12px rgba(0,0,0,.06);
+}
+
+.table-header{
+    padding:20px;
+    border-bottom:1px solid #edf2f7;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.table-header h3{
+    font-size:20px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+thead{
+    background:#f8fafc;
+}
+
+th{
+    text-align:left;
+    padding:16px;
+    color:#475569;
+    font-size:14px;
+}
+
+td{
+    padding:16px;
+    border-bottom:1px solid #f1f5f9;
+}
+
+tbody tr:hover{
+    background:#f8fafc;
+}
+
+.receipt-link{
+    color:#2563eb;
+    font-weight:600;
+}
+
+.amount{
+    font-weight:700;
+}
+
+.badge{
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+}
+
+.cash{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.bank{
+    background:#dbeafe;
+    color:#1d4ed8;
+}
+
+.actions{
+    display:flex;
+    gap:10px;
+}
+
+.btn-edit{
+    width:38px;
+    height:38px;
+    border:none;
+    border-radius:10px;
+    background:#dbeafe;
+    color:#2563eb;
+    cursor:pointer;
+}
+
+.btn-delete{
+    width:38px;
+    height:38px;
+    border:none;
+    border-radius:10px;
+    background:#fee2e2;
+    color:#dc2626;
+    cursor:pointer;
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+
+.footer{
+    text-align:center;
+    padding:20px;
+    color:#64748b;
+    font-size:13px;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:1200px){
+
+.cards{
+    grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+@media(max-width:768px){
+
+.hero{
+    flex-direction:column;
+    gap:20px;
+    text-align:center;
+}
+
+.cards{
+    grid-template-columns:1fr;
+}
+
+.menu{
+    display:none;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+    <div class="logo">
+        <i class="fa-solid fa-building-columns"></i>
+        AccSoft
+    </div>
+
+    <ul class="menu">
+        <li><i class="fa-solid fa-chart-line"></i> Dashboard</li>
+        <li><i class="fa-solid fa-layer-group"></i> Masters</li>
+        <li><i class="fa-solid fa-money-bill-transfer"></i> Transactions</li>
+        <li><i class="fa-solid fa-file-lines"></i> Internal</li>
+        <li><i class="fa-solid fa-chart-column"></i> Reports</li>
+        <li><i class="fa-solid fa-user-shield"></i> Admin</li>
+    </ul>
+
+    <div class="user-profile">
+        <i class="fa-solid fa-user"></i>
+        <span>Roshan Crasto</span>
+    </div>
+
+</div>
+
+<div class="container">
+
+    <!-- HERO -->
+
+    <div class="hero">
+
+        <div>
+            <h1>Receipt Entry</h1>
+            <p>Manage donor receipts and event collections efficiently</p>
+        </div>
+
+        <button class="btn-primary">
+            <i class="fa-solid fa-plus"></i>
+            New Receipt
+        </button>
+
+    </div>
+
+    <!-- KPI CARDS -->
+
+    <div class="cards">
+
+        <div class="card blue">
+            <h4>Total Receipts</h4>
+            <h2>1,245</h2>
+        </div>
+
+        <div class="card green">
+            <h4>Total Collection</h4>
+            <h2>₹12.45L</h2>
+        </div>
+
+        <div class="card orange">
+            <h4>This Month</h4>
+            <h2>₹85,400</h2>
+        </div>
+
+        <div class="card purple">
+            <h4>Pending Receipts</h4>
+            <h2>18</h2>
+        </div>
+
+    </div>
+
+    <!-- FILTERS -->
+
+    <div class="filter-panel">
+
+        <div class="filter-row">
+
+            <input type="text" placeholder="Search Receipt / Donor">
+
+            <select>
+                <option>All Event Groups</option>
+                <option>Drama Fest 2026</option>
+                <option>Mysterium 2026</option>
+            </select>
+
+            <select>
+                <option>All Modes</option>
+                <option>Cash</option>
+                <option>Bank</option>
+            </select>
+
+            <input type="date">
+
+        </div>
+
+    </div>
+
+    <!-- TABLE -->
+
+    <div class="table-card">
+
+        <div class="table-header">
+            <h3>Receipt Register</h3>
+        </div>
+
+        <table>
+
+            <thead>
+            <tr>
+                <th>Receipt No</th>
+                <th>Book Rno</th>
+                <th>Date</th>
+                <th>Donor</th>
+                <th>Event Group</th>
+                <th>Amount</th>
+                <th>Mode</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <tr>
+                <td class="receipt-link">REC-2026-001</td>
+                <td>1001</td>
+                <td>20-Jun-2026</td>
+                <td>Roshan Crasto</td>
+                <td>Drama Fest 2026</td>
+                <td class="amount">₹5,000</td>
+                <td><span class="badge cash">CASH</span></td>
+                <td>
+                    <div class="actions">
+                        <button class="btn-edit">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+
+                        <button class="btn-delete">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="receipt-link">REC-2026-002</td>
+                <td>1002</td>
+                <td>21-Jun-2026</td>
+                <td>Oliveera Mathias</td>
+                <td>Drama Fest 2026</td>
+                <td class="amount">₹10,000</td>
+                <td><span class="badge bank">BANK</span></td>
+                <td>
+                    <div class="actions">
+                        <button class="btn-edit">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+
+                        <button class="btn-delete">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="receipt-link">REC-2026-003</td>
+                <td>1003</td>
+                <td>22-Jun-2026</td>
+                <td>Sunil D'Souza</td>
+                <td>Mysterium 2026</td>
+                <td class="amount">₹25,000</td>
+                <td><span class="badge bank">BANK</span></td>
+                <td>
+                    <div class="actions">
+                        <button class="btn-edit">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+
+                        <button class="btn-delete">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<div class="footer">
+    © 2026 AccSoft NGO Accounting System
+</div>
+
+</body>
+</html>

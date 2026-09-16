@@ -1,0 +1,242 @@
+.report-container {
+  min-height: 100vh;
+}
+
+.report-header {
+  margin-bottom: 24px;
+}
+
+.report-header h2 {
+  margin: 0 0 4px 0;
+  font-size: 1.6rem;
+  color: #1a237e;
+  font-weight: 600;
+}
+
+.subtitle {
+  color: #64748b;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.filter-card {
+  padding: 16px 24px;
+  margin-bottom: 24px;
+}
+
+.filter-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.filter-row mat-form-field {
+  flex: 0 0 280px;
+  margin-bottom: -16px; /* offset standard material margin */
+}
+
+.action-btn {
+  height: 48px;
+  padding: 0 20px;
+  font-weight: 500;
+  border-radius: 8px;
+}
+
+.print-btn {
+  color: white;
+}
+
+.print-btn:hover {
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 0;
+  color: #64748b;
+  gap: 16px;
+}
+
+/* Statement Sheet Styling */
+.statement-card {
+  border-radius: 8px;
+  padding: 32px;
+  margin-bottom: 32px;
+}
+
+.statement-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.event-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.statement-table-wrapper {
+  overflow-x: auto;
+}
+
+.statement-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  color: #000000;
+  table-layout: fixed;
+}
+
+/* Column distribution */
+.col-receipts, .col-payments {
+  width: 26%;
+}
+
+.col-amount {
+  width: 12%;
+}
+
+.statement-table th {
+  padding: 10px 12px;
+  font-weight: 700;
+  color: #0f172a;
+  font-size: 0.95rem;
+}
+
+.statement-table td {
+  border-left: 1px solid #000000;
+  border-right: 1px solid #000000;
+  border-bottom: 1px dashed #e2e8f0;
+  padding: 8px 12px;
+  vertical-align: middle;
+  height: 38px;
+}
+
+/* Alternate row grid details */
+.statement-table tbody tr:hover td {
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+.amount-val {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 600;
+}
+
+/* Subtotals and Grand totals */
+.subtotal-row td {
+  height: 38px;
+}
+
+.empty-side {
+}
+
+.label-cellbold {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.amount-cellbold {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.grand-total-row td {
+  border-top: 1px solid #000000 !important;
+  border-bottom: 3px double #000000 !important;
+  font-weight: 800 !important;
+  font-size: 1.05rem;
+  color: #0f172a;
+  height: 42px;
+}
+
+.total-label {
+  font-weight: 800;
+}
+
+.total-val {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 800;
+}
+
+.no-data-card {
+  padding: 48px;
+  text-align: center;
+  color: #64748b;
+  border: 1px dashed #cbd5e1;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.no-data-card mat-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  color: #94a3b8;
+}
+
+/* ----------------------------------------------------
+   PRINT LAYOUT SUPPORT (A4 Landscape)
+---------------------------------------------------- */
+@media print {
+  /* Hide all generic workspace structures */
+  body {
+    font-size: 11pt;
+  }
+
+  .no-print, 
+  .report-header, 
+  .filter-card, 
+  .no-data-card, 
+  .spinner-container,
+  app-sidebar, 
+  .sidebar, 
+  mat-sidenav, 
+  header, 
+  .app-header {
+    display: none !important;
+  }
+
+  /* Maximize printable document scaling */
+  .report-container {
+    padding: 0 !important;
+  }
+
+  .statement-card {
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+
+  .statement-table-wrapper {
+  }
+
+  .statement-table th, 
+  .statement-table td {
+    padding: 6px 8px !important;
+  }
+
+  @page {
+    size: A4 landscape;
+    margin: 10mm 15mm 10mm 15mm;
+  }
+}

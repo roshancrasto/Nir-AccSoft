@@ -1,0 +1,65 @@
+<h2 mat-dialog-title>
+  <mat-icon class="dialog-icon">{{ data.mode === 'add' ? 'person_add' : 'person' }}</mat-icon>
+  {{ data.mode === 'add' ? 'Add New Vendor' : 'Edit Vendor' }}
+</h2>
+<mat-dialog-content>
+  <form #vendorForm="ngForm" class="vendor-form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Vendor Name</mat-label>
+      <input matInput [(ngModel)]="vendorName" name="vendorName" required placeholder="Enter vendor name" #nameField="ngModel">
+      <mat-error *ngIf="nameField.hasError('required')">Vendor name is required</mat-error>
+    </mat-form-field>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Contact Number</mat-label>
+        <input matInput [(ngModel)]="contactNumber" name="contactNumber" placeholder="Enter contact number">
+        <mat-icon matPrefix>phone</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Category</mat-label>
+        <mat-select [(ngModel)]="categoryId" name="categoryId" required #catField="ngModel">
+          <mat-option *ngFor="let cat of categories" [value]="cat.categoryId">
+            {{ cat.categoryName }}
+          </mat-option>
+        </mat-select>
+        <mat-icon matPrefix>category</mat-icon>
+        <mat-error *ngIf="catField.hasError('required')">Category is required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Address</mat-label>
+      <textarea matInput [(ngModel)]="address" name="address" rows="2" placeholder="Enter vendor address"></textarea>
+      <mat-icon matPrefix>place</mat-icon>
+    </mat-form-field>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>GST Number</mat-label>
+        <input matInput [(ngModel)]="gstNumber" name="gstNumber" placeholder="Enter GSTIN" style="text-transform: uppercase;">
+        <mat-icon matPrefix>receipt_long</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>PAN Number</mat-label>
+        <input matInput [(ngModel)]="panNumber" name="panNumber" placeholder="Enter PAN" style="text-transform: uppercase;">
+        <mat-icon matPrefix>badge</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div class="toggle-row" *ngIf="data.mode === 'edit'">
+      <mat-slide-toggle [(ngModel)]="isActive" name="isActive" color="primary">
+        {{ isActive ? 'Active' : 'Inactive' }}
+      </mat-slide-toggle>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close style="color: #64748b;">Cancel</button>
+  <button class="btn-gradient" [disabled]="!vendorName.trim() || !categoryId" (click)="onSave()">
+    <mat-icon style="font-size: 18px; width: 18px; height: 18px;">save</mat-icon>
+    {{ data.mode === 'add' ? 'Save' : 'Update' }}
+  </button>
+</mat-dialog-actions>

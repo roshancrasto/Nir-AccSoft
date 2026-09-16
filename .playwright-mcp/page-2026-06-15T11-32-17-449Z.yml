@@ -1,0 +1,101 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - generic [ref=e4]: DemoProject - NGO Accounting System
+    - button "Admin" [ref=e5]:
+      - img [ref=e6]: account_circle
+      - generic [ref=e7]: Admin
+    - button [ref=e10] [cursor=pointer]:
+      - img [ref=e11]: logout
+  - generic [ref=e15]:
+    - link "Dashboard" [ref=e16] [cursor=pointer]:
+      - /url: /dashboard
+      - img [ref=e17]: dashboard
+      - generic [ref=e18]: Dashboard
+    - button "Masters" [ref=e21]:
+      - img [ref=e22]: category
+      - img [ref=e23]: arrow_drop_down
+      - generic [ref=e24]: Masters
+    - button "Transactions" [ref=e27]:
+      - img [ref=e28]: receipt_long
+      - img [ref=e29]: arrow_drop_down
+      - generic [ref=e30]: Transactions
+    - button "Internal" [ref=e33]:
+      - img [ref=e34]: business_center
+      - img [ref=e35]: arrow_drop_down
+      - generic [ref=e36]: Internal
+    - button "Reports" [ref=e39]:
+      - img [ref=e40]: summarize
+      - img [ref=e41]: arrow_drop_down
+      - generic [ref=e42]: Reports
+  - main [ref=e45]:
+    - generic [ref=e48]:
+      - generic [ref=e49]:
+        - heading "Welcome back, Admin!" [level=1] [ref=e50]
+        - paragraph [ref=e51]: Here's what's happening with DemoProject today.
+      - generic [ref=e52]:
+        - generic [ref=e53]:
+          - generic [ref=e54]:
+            - img [ref=e55]: account_balance_wallet
+            - generic [ref=e56]:
+              - generic [ref=e57]: Cash in Hand
+              - generic [ref=e58]: As of today
+          - heading "₹45,250.00" [level=2] [ref=e60]
+        - generic [ref=e61]:
+          - generic [ref=e62]:
+            - img [ref=e63]: account_balance
+            - generic [ref=e64]:
+              - generic [ref=e65]: Bank Balance
+              - generic [ref=e66]: All Accounts
+          - heading "₹2,84,500.00" [level=2] [ref=e68]
+        - generic [ref=e69]:
+          - generic [ref=e70]:
+            - img [ref=e71]: event_available
+            - generic [ref=e72]:
+              - generic [ref=e73]: Active Events
+              - generic [ref=e74]: Ongoing
+          - heading "3 Events" [level=2] [ref=e76]
+      - generic [ref=e77]:
+        - generic [ref=e78]:
+          - heading "Quick Actions" [level=2] [ref=e79]
+          - generic [ref=e80]:
+            - generic [ref=e81] [cursor=pointer]:
+              - img [ref=e83]: receipt_long
+              - generic [ref=e84]:
+                - heading "Receipt Entry" [level=3] [ref=e85]
+                - paragraph [ref=e86]: Record incoming donations and fees
+            - generic [ref=e87] [cursor=pointer]:
+              - img [ref=e89]: payment
+              - generic [ref=e90]:
+                - heading "Payment Voucher" [level=3] [ref=e91]
+                - paragraph [ref=e92]: Process vendor and expense payments
+            - generic [ref=e93] [cursor=pointer]:
+              - img [ref=e95]: analytics
+              - generic [ref=e96]:
+                - heading "View Reports" [level=3] [ref=e97]
+                - paragraph [ref=e98]: Analyze income vs expenditure
+            - generic [ref=e99] [cursor=pointer]:
+              - img [ref=e101]: event
+              - generic [ref=e102]:
+                - heading "Manage Event Groups" [level=3] [ref=e103]
+                - paragraph [ref=e104]: Create and update upcoming event groups
+        - generic [ref=e105]:
+          - heading "Recent Activity" [level=2] [ref=e106]
+          - generic [ref=e107]:
+            - generic [ref=e108]:
+              - img [ref=e109]: add_circle
+              - generic [ref=e110]:
+                - generic [ref=e111]: Receipt Generated
+                - generic [ref=e112]: ₹5,000 from John Doe (Donation)
+              - generic [ref=e113]: 2 hours ago
+            - generic [ref=e114]:
+              - img [ref=e115]: remove_circle
+              - generic [ref=e116]:
+                - generic [ref=e117]: Payment Voucher
+                - generic [ref=e118]: ₹12,000 for Stage Decoration
+              - generic [ref=e119]: 5 hours ago
+            - generic [ref=e120]:
+              - img [ref=e121]: person_add
+              - generic [ref=e122]:
+                - generic [ref=e123]: New Donor Added
+                - generic [ref=e124]: Mary Jane registered
+              - generic [ref=e125]: 1 day ago

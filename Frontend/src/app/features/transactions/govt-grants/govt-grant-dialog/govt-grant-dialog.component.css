@@ -1,0 +1,37 @@
+.form-container {
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-row {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+  align-items: center;
+}
+
+.half-width {
+  flex: 1;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  height: 56px;
+  padding-left: 10px;
+}
+
+mat-icon[matPrefix] {
+  margin-right: 8px;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+textarea {
+  resize: vertical;
+}

@@ -1,0 +1,130 @@
+<h2 mat-dialog-title>{{ data.mode === 'add' ? 'New Receipt' : 'Edit Receipt' }}</h2>
+<mat-dialog-content>
+  <div class="form-container">
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Receipt Number</mat-label>
+        <input matInput [(ngModel)]="receiptNumber" name="receiptNumber" placeholder="R-001" required>
+        <mat-icon matPrefix>confirmation_number</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Receipt Book Rno (Optional)</mat-label>
+        <input matInput type="number" [(ngModel)]="receiptBook_Rno" name="receiptBook_Rno" placeholder="Book No">
+        <mat-icon matPrefix>menu_book</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Receipt Date</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="receiptDate" name="receiptDate" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Received Date (Optional)</mat-label>
+        <input matInput [matDatepicker]="receivedDatePicker" [(ngModel)]="receivedDate" name="receivedDate">
+        <mat-datepicker-toggle matSuffix [for]="receivedDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #receivedDatePicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Donor</mat-label>
+        <mat-select [(ngModel)]="donorId" name="donorId" required>
+          <div class="select-search-container">
+            <mat-form-field appearance="outline" class="select-search-field">
+              <input matInput (input)="filterDonors($event)" placeholder="Search donor..." (click)="$event.stopPropagation()">
+              <mat-icon matPrefix>search</mat-icon>
+            </mat-form-field>
+          </div>
+          <mat-option *ngFor="let donor of filteredDonors" [value]="donor.donorId">
+            {{ donor.donorName }} <ng-container *ngIf="donor.dPlace">- {{ donor.dPlace }}</ng-container>
+          </mat-option>
+        </mat-select>
+        <mat-icon matPrefix>person</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Event Group</mat-label>
+        <mat-select [(ngModel)]="eventGroupKey" name="eventGroupKey" (selectionChange)="onEventGroupChange($event.value)">
+          <div class="select-search-container">
+            <mat-form-field appearance="outline" class="select-search-field">
+              <input matInput (input)="filterEventGroups($event)" placeholder="Search event group..." (click)="$event.stopPropagation()">
+              <mat-icon matPrefix>search</mat-icon>
+            </mat-form-field>
+          </div>
+          <mat-option [value]="null">None</mat-option>
+          <mat-option *ngFor="let eg of filteredEventGroups" [value]="eg.eventGroupId">
+            {{ eg.eventGroupName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Event Details (Optional)</mat-label>
+        <mat-select [(ngModel)]="eventKey" name="eventKey">
+          <mat-option [value]="null">None</mat-option>
+          <mat-option *ngFor="let event of filteredEventDetails" [value]="event.eventKey">
+            {{ event.eventName }}
+          </mat-option>
+        </mat-select>
+        <mat-icon matPrefix>event</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Payment Mode</mat-label>
+        <mat-select [(ngModel)]="paymentMode" name="paymentMode">
+          <mat-option *ngFor="let mode of paymentModes" [value]="mode">{{ mode }}</mat-option>
+        </mat-select>
+        <mat-icon matPrefix>payments</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Reference Number</mat-label>
+        <input matInput [(ngModel)]="referenceNumber" name="referenceNumber" placeholder="Cheque/UTR No">
+        <mat-icon matPrefix>tag</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Cash Amount</mat-label>
+        <input matInput type="number" [(ngModel)]="cashAmount" name="cashAmount" placeholder="0.00">
+        <mat-icon matPrefix>money</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Bank Amount</mat-label>
+        <input matInput type="number" [(ngModel)]="bankAmount" name="bankAmount" placeholder="0.00">
+        <mat-icon matPrefix>account_balance</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row status-row">
+      <mat-slide-toggle [(ngModel)]="panAvailable" name="panAvailable" color="primary">
+        PAN Available
+      </mat-slide-toggle>
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput [(ngModel)]="description" name="description" rows="3" placeholder="Enter details..."></textarea>
+      <mat-icon matPrefix>description</mat-icon>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close style="color: #64748b;">Cancel</button>
+  <button class="btn-gradient" [disabled]="!receiptNumber || !donorId" (click)="onSave()">
+    <mat-icon style="font-size: 18px; width: 18px; height: 18px;">save</mat-icon>
+    {{ data.mode === 'add' ? 'Save' : 'Update' }}
+  </button>
+</mat-dialog-actions>

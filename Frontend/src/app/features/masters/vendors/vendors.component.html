@@ -1,0 +1,98 @@
+<div class="container">
+  <div class="table-card">
+    <div class="table-header" style="display: flex; justify-content: space-between; align-items: center;">
+      <div style="flex: 1; display: flex; justify-content: flex-start;">
+        <input type="text" placeholder="Search Vendors..." (keyup)="applyFilter($event)" style="min-width: 200px; padding: 8px 12px; border-radius: 6px; border: 1px solid #ddd; outline: none;">
+      </div>
+      
+      <div style="flex: 1; text-align: center;">
+        <h3 style="margin: 0;">Vendor Master</h3>
+      </div>
+
+      <div style="flex: 1; display: flex; justify-content: flex-end;">
+        <button [disabled]="!canAdd" class="btn-gradient" (click)="openAddDialog()" style="padding: 8px 16px;">
+          <mat-icon style="font-size: 18px; width: 18px; height: 18px; margin-right: 4px;">add</mat-icon> Add Vendor
+        </button>
+      </div>
+    </div>
+    
+    <div class="loading-container" *ngIf="isLoading" style="padding: 20px; text-align: center;">
+      <mat-spinner diameter="40" style="margin: 0 auto;"></mat-spinner>
+      <p>Loading vendors...</p>
+    </div>
+
+    <div class="table-responsive" *ngIf="!isLoading">
+      <table mat-table [dataSource]="dataSource" class="full-width-table">
+        <!-- Vendor Name Column -->
+        <ng-container matColumnDef="vendorName">
+          <th mat-header-cell *matHeaderCellDef>Vendor Name</th>
+          <td mat-cell *matCellDef="let vendor">
+            <div class="entity-name">{{ vendor.vendorName }}</div>
+            <div class="entity-desc">{{ vendor.address | slice:0:50 }}{{ vendor.address.length > 50 ? '...' : '' }}</div>
+          </td>
+        </ng-container>
+
+        <!-- Contact Column -->
+        <ng-container matColumnDef="contactNumber">
+          <th mat-header-cell *matHeaderCellDef>Contact</th>
+          <td mat-cell *matCellDef="let vendor">
+            {{ vendor.contactNumber || 'N/A' }}
+          </td>
+        </ng-container>
+
+        <!-- GST Column -->
+        <ng-container matColumnDef="gstNumber">
+          <th mat-header-cell *matHeaderCellDef>GST / PAN</th>
+          <td mat-cell *matCellDef="let vendor">
+            <div class="tax-info" *ngIf="vendor.gstNumber">GST: {{ vendor.gstNumber }}</div>
+            <div class="tax-info" *ngIf="vendor.panNumber">PAN: {{ vendor.panNumber }}</div>
+            <div class="tax-info" *ngIf="!vendor.gstNumber && !vendor.panNumber">N/A</div>
+          </td>
+        </ng-container>
+
+        <!-- Category Column -->
+        <ng-container matColumnDef="category">
+          <th mat-header-cell *matHeaderCellDef>Category</th>
+          <td mat-cell *matCellDef="let vendor">
+            {{ vendor.categoryName || 'N/A' }}
+          </td>
+        </ng-container>
+
+        <!-- IsActive Column -->
+        <ng-container matColumnDef="isActive">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let vendor">
+            <span class="badge" [ngClass]="vendor.isActive ? 'bank' : 'cash'">
+              {{ vendor.isActive ? 'Active' : 'Inactive' }}
+            </span>
+          </td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions" stickyEnd>
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let vendor">
+            <div class="actions">
+              <button [disabled]="!canEdit" class="btn-edit" (click)="openEditDialog(vendor)" matTooltip="Edit">
+                <mat-icon style="font-size: 18px; width: 18px; height: 18px;">edit</mat-icon>
+              </button>
+              <button [disabled]="!canDelete" class="btn-delete" (click)="deleteVendor(vendor.vendorId)" matTooltip="Delete">
+                <mat-icon style="font-size: 18px; width: 18px; height: 18px;">delete</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="6" style="text-align: center; padding: 20px;">
+            No vendors found.
+          </td>
+        </tr>
+      </table>
+    </div>
+    <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" [showFirstLastButtons]="true" aria-label="Select page of vendors"></mat-paginator>
+  </div>
+</div>

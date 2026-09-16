@@ -1,0 +1,156 @@
+.container-full {
+  width: 100%;
+}
+
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.header-section h2 {
+  margin: 0;
+  font-weight: 500;
+  color: #1a237e;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.search-field {
+  width: 300px;
+}
+
+/* Override mat-form-field height for header */
+::ng-deep .header-section .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+
+/* Multiline Sort Headers */
+::ng-deep .table-card thead, 
+::ng-deep .mat-mdc-header-row, 
+::ng-deep .mat-header-row {
+  height: auto !important;
+  min-height: 56px !important;
+}
+
+::ng-deep .table-card th.multiline-header, 
+::ng-deep .mat-mdc-header-cell.multiline-header, 
+::ng-deep th.multiline-header {
+  white-space: normal !important;
+  vertical-align: middle !important;
+  line-height: 1.2 !important;
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+}
+
+::ng-deep .multiline-header .mat-sort-header-container {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+::ng-deep .multiline-header .mat-sort-header-content {
+  white-space: normal !important;
+  text-align: center !important;
+  line-height: 1.2 !important;
+}
+
+::ng-deep .multiline-header .header-text {
+  display: inline-block !important;
+  white-space: normal !important;
+  text-align: center !important;
+  line-height: 1.2 !important;
+}
+
+.table-card {
+  width: 100%;
+}
+
+table {
+  width: 100%;
+}
+
+.event-link {
+  color: #3f51b5;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.event-link:hover {
+  text-decoration: underline;
+}
+
+.amount-cell {
+  font-weight: 600;
+  color: #1a237e;
+  text-align: right !important;
+  padding-right: 24px !important;
+}
+
+.paid-cell {
+  color: #2e7d32 !important;
+}
+
+.pending-cell {
+  color: #666;
+}
+
+.has-pending {
+  color: #c53030 !important;
+}
+
+th.mat-header-cell {
+  font-weight: 600;
+  color: #1a237e;
+}
+
+td.mat-cell {
+  padding: 16px;
+}
+
+.numeric-cell {
+  text-align: right !important;
+  padding-right: 24px !important;
+  font-weight: 500;
+}
+
+.text-danger {
+  color: #c53030 !important;
+  font-weight: 700;
+}
+
+.text-success {
+  color: #2e7d32 !important;
+  font-weight: 700;
+}
+
+/* Align headers for numeric columns */
+::ng-deep .mat-sort-header-container {
+  display: flex;
+}
+
+.numeric-cell + ::ng-deep .mat-sort-header-container {
+  justify-content: flex-end;
+}
+
+.grand-total-row {
+  border-top: 2px solid #1a237e;
+}
+
+.footer-label {
+  font-weight: 700;
+  color: #1a237e;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.footer-amount, .footer-numeric {
+  font-weight: 800;
+  font-size: 1rem;
+}

@@ -1,0 +1,115 @@
+<div class="container">
+    <!-- KPI CARDS -->
+  <div class="cards">
+    <div class="card blue">
+      <h4>Total Government Grants</h4>
+      <h2>{{ dataSource.data.length || 0 }}</h2>
+    </div>
+    <div class="card green">
+      <h4>Total Amount</h4>
+      <h2>{{ 0 | currency:'INR':'symbol':'1.0-0' }}</h2>
+    </div>
+    <div class="card orange">
+      <h4>This Month</h4>
+      <h2>{{ 0 | currency:'INR':'symbol':'1.0-0' }}</h2>
+    </div>
+    <div class="card purple">
+      <h4>Pending</h4>
+      <h2>0</h2>
+    </div>
+  </div>
+
+  <div class="table-card">
+    <div class="table-header" style="display: flex; justify-content: space-between; align-items: center;">
+      <div style="flex: 1; display: flex; justify-content: flex-start;">
+        <input type="text" placeholder="Search..." (keyup)="applyFilter($event)" style="min-width: 200px; padding: 8px 12px; border-radius: 6px; border: 1px solid #ddd; outline: none;">
+      </div>
+      
+      <div style="flex: 1; text-align: center;">
+        <h3 style="margin: 0;">Register</h3>
+      </div>
+
+      <div style="flex: 1; display: flex; justify-content: flex-end;">
+        <button [disabled]="!canAdd" class="btn-gradient" (click)="openAddDialog()" style="padding: 8px 16px;">
+          <mat-icon style="font-size: 18px; width: 18px; height: 18px; margin-right: 4px;">add</mat-icon> New Grant
+        </button>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table mat-table [dataSource]="dataSource" matSort >
+        
+        <!-- Grant Number Column -->
+        <ng-container matColumnDef="grantNumber">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Grant No. </th>
+          <td mat-cell *matCellDef="let grant"> 
+            <span class="grant-no" (click)="openViewDialog(grant)">{{ grant.grantNumber }}</span>
+          </td>
+        </ng-container>
+
+        <!-- Event Group Column -->
+        <ng-container matColumnDef="eventGroupName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Event Group </th>
+          <td mat-cell *matCellDef="let grant"> {{ grant.eventGroupName || '-' }} </td>
+        </ng-container>
+
+        <!-- Date Column -->
+        <ng-container matColumnDef="grantDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+          <td mat-cell *matCellDef="let grant"> {{ grant.grantDate | date:'dd-MMM-yyyy' }} </td>
+        </ng-container>
+
+        <!-- Amount Column -->
+        <ng-container matColumnDef="amount">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
+          <td mat-cell *matCellDef="let grant" class="amount-cell"> 
+            {{ grant.amount | currency:'INR' }}
+          </td>
+        </ng-container>
+
+        <!-- Consider For Audit Column -->
+        <ng-container matColumnDef="considerForAudit">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Audit? </th>
+          <td mat-cell *matCellDef="let grant">
+            <span class="audit-chip" [ngClass]="grant.considerForAudit ? 'yes' : 'no'">
+              {{ grant.considerForAudit ? 'Yes' : 'No' }}
+            </span>
+          </td>
+        </ng-container>
+
+        <!-- Remarks Column -->
+        <ng-container matColumnDef="remarks">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Remarks </th>
+          <td mat-cell *matCellDef="let grant" class="remarks-cell"> 
+            {{ grant.remarks || '-' }} 
+          </td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions" stickyEnd>
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let grant">
+            <div class="actions">
+
+              <button [disabled]="!canEdit" class="btn-edit" (click)="openEditDialog(grant)" title="Edit">
+                <mat-icon style="font-size: 18px; width: 18px; height: 18px;">edit</mat-icon>
+              </button>
+              <button [disabled]="!canDelete" class="btn-delete" (click)="deleteGovtGrant(grant)" title="Delete">
+                <mat-icon style="font-size: 18px; width: 18px; height: 18px;">delete</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="7">No government grants found.</td>
+        </tr>
+      </table>
+    </div>
+    <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" [showFirstLastButtons]="true" aria-label="Select page of government grants"></mat-paginator>
+  </div>
+</div>

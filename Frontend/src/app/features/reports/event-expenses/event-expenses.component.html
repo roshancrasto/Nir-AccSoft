@@ -1,0 +1,137 @@
+<div class="report-container">
+  <!-- Report Header (hidden in print) -->
+  <div class="report-header no-print">
+    <h2>Event Expenses Report</h2>
+    <p class="subtitle">View side-by-side Receipts and Payments statement for Event Groups</p>
+  </div>
+
+  <!-- Filter Card (hidden in print) -->
+  <mat-card class="filter-card no-print">
+    <div class="filter-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Select Event Group</mat-label>
+        <mat-select [(ngModel)]="selectedEventGroupKey" (selectionChange)="loadReport()">
+          <mat-option *ngFor="let group of eventGroups" [value]="group.eventGroupId">
+            {{ group.eventGroupName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" class="action-btn" (click)="loadReport()" [disabled]="isLoading">
+        <mat-icon>search</mat-icon> View Report
+      </button>
+
+      <div class="spacer"></div>
+
+      <button mat-raised-button color="accent" class="action-btn" (click)="exportToExcel()" [disabled]="isLoading || !reportData">
+        <mat-icon>file_download</mat-icon> Export Excel
+      </button>
+
+      <button mat-raised-button class="action-btn print-btn" (click)="exportToPDF()" [disabled]="isLoading || !reportData">
+        <mat-icon>print</mat-icon> Export PDF
+      </button>
+    </div>
+  </mat-card>
+
+  <!-- Spinner -->
+  <div class="spinner-container" *ngIf="isLoading">
+    <mat-spinner diameter="40"></mat-spinner>
+    <p>Generating report...</p>
+  </div>
+
+  <!-- Traditional Side-by-Side Statement Sheet -->
+  <div class="statement-card printable-statement" *ngIf="reportData && !isLoading">
+    
+    <!-- Centered Event Group Name Header -->
+    <div class="statement-header">
+      <h1 class="event-title">{{ reportData.eventGroupName | uppercase }}</h1>
+    </div>
+
+    <!-- Statement Table -->
+    <div class="statement-table-wrapper">
+      <table class="statement-table">
+        <thead>
+          <tr>
+            <th class="col-receipts">Receipts</th>
+            <th class="col-amount text-right">Receipt Amount (₹)</th>
+            <th class="col-amount text-right">Amount (₹)</th>
+            <th class="col-payments">Payments</th>
+            <th class="col-amount text-right">Voucher Amount (₹)</th>
+            <th class="col-amount text-right">Amount (₹)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Rows padded to match exact height dynamically -->
+          <tr *ngFor="let row of statementRows">
+            <td class="receipt-desc">{{ row.receipt }}</td>
+            <td class="amount-val text-right">
+              {{ row.receiptAmountVal !== null ? (row.receiptAmountVal | number:'1.2-2') : '' }}
+            </td>
+            <td class="amount-val text-right">
+              {{ row.receiptAmount !== null ? (row.receiptAmount | number:'1.2-2') : '' }}
+            </td>
+            <td class="payment-desc">{{ row.payment }}</td>
+            <td class="amount-val text-right">
+              {{ row.voucherAmountVal !== null ? (row.voucherAmountVal | number:'1.2-2') : '' }}
+            </td>
+            <td class="amount-val text-right">
+              {{ row.paymentAmount !== null ? (row.paymentAmount | number:'1.2-2') : '' }}
+            </td>
+          </tr>
+
+          <!-- Total Expenses Row (Right aligned payments subtotal) -->
+          <tr class="subtotal-row">
+            <td class="empty-side"></td>
+            <td class="empty-side"></td>
+            <td class="empty-side"></td>
+            <td class="label-cellbold">Total Expenses</td>
+            <td class="amount-cellbold text-right">
+              {{ reportData.totalVoucherAmount | number:'1.2-2' }}
+            </td>
+            <td class="amount-cellbold text-right">
+              {{ reportData.totalPayments | number:'1.2-2' }}
+            </td>
+          </tr>
+
+          <!-- Income Over Expenditure Row (Right aligned payments) -->
+          <tr class="subtotal-row">
+            <td class="empty-side"></td>
+            <td class="empty-side"></td>
+            <td class="empty-side"></td>
+            <td class="label-cellbold">Income Over Expenditure</td>
+            <td class="amount-cellbold text-right">
+              {{ reportData.incomeOverExpenditureVal | number:'1.2-2' }}
+            </td>
+            <td class="amount-cellbold text-right">
+              {{ reportData.incomeOverExpenditure | number:'1.2-2' }}
+            </td>
+          </tr>
+
+          <!-- Balanced Double Bordered Grand TOTAL Row -->
+          <tr class="grand-total-row">
+            <td class="total-label">TOTAL</td>
+            <td class="total-val text-right">
+              {{ reportData.totalReceiptAmount | number:'1.2-2' }}
+            </td>
+            <td class="total-val text-right">
+              {{ reportData.totalReceipts | number:'1.2-2' }}
+            </td>
+            <td class="total-label">TOTAL</td>
+            <td class="total-val text-right">
+              {{ reportData.totalReceiptAmount | number:'1.2-2' }}
+            </td>
+            <td class="total-val text-right">
+              {{ reportData.totalReceipts | number:'1.2-2' }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Empty state -->
+  <mat-card class="no-data-card" *ngIf="!reportData && !isLoading">
+    <mat-icon>analytics</mat-icon>
+    <p>Please select an Event Group and click "View Report" to load the statement.</p>
+  </mat-card>
+</div>

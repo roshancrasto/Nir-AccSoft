@@ -1,0 +1,106 @@
+<div class="container">
+    <!-- KPI CARDS -->
+  <div class="cards">
+    <div class="card blue">
+      <h4>Total Bank Transferss</h4>
+      <h2>{{ dataSource.data.length || 0 }}</h2>
+    </div>
+    <div class="card green">
+      <h4>Total Amount</h4>
+      <h2>{{ 0 | currency:'INR':'symbol':'1.0-0' }}</h2>
+    </div>
+    <div class="card orange">
+      <h4>This Month</h4>
+      <h2>{{ 0 | currency:'INR':'symbol':'1.0-0' }}</h2>
+    </div>
+    <div class="card purple">
+      <h4>Pending</h4>
+      <h2>0</h2>
+    </div>
+  </div>
+
+  <div class="table-card">
+    <div class="table-header" style="display: flex; justify-content: space-between; align-items: center;">
+      <div style="flex: 1; display: flex; justify-content: flex-start;">
+        <input type="text" placeholder="Search..." (keyup)="applyFilter($event)" style="min-width: 200px; padding: 8px 12px; border-radius: 6px; border: 1px solid #ddd; outline: none;">
+      </div>
+      
+      <div style="flex: 1; text-align: center;">
+        <h3 style="margin: 0;">Register</h3>
+      </div>
+
+      <div style="flex: 1; display: flex; justify-content: flex-end;">
+        <button [disabled]="!canAdd" class="btn-gradient" (click)="openAddDialog()" style="padding: 8px 16px;">
+          <mat-icon style="font-size: 18px; width: 18px; height: 18px; margin-right: 4px;">add</mat-icon> New Transfer
+        </button>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table mat-table [dataSource]="dataSource" >
+        <ng-container matColumnDef="transferNo">
+          <th mat-header-cell *matHeaderCellDef> Transfer No. </th>
+          <td mat-cell *matCellDef="let transfer"> 
+            <span class="transfer-no">{{ transfer.transferNo }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="transferDate">
+          <th mat-header-cell *matHeaderCellDef> Date </th>
+          <td mat-cell *matCellDef="let transfer"> {{ transfer.transferDate | date:'dd-MMM-yyyy' }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="transferType">
+          <th mat-header-cell *matHeaderCellDef> Type </th>
+          <td mat-cell *matCellDef="let transfer"> 
+            <span class="type-badge">{{ transfer.transferType }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fromAccount">
+          <th mat-header-cell *matHeaderCellDef> From </th>
+          <td mat-cell *matCellDef="let transfer"> {{ transfer.fromAccountType }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="toAccount">
+          <th mat-header-cell *matHeaderCellDef> To </th>
+          <td mat-cell *matCellDef="let transfer"> {{ transfer.toAccountType }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="amount">
+          <th mat-header-cell *matHeaderCellDef> Amount </th>
+          <td mat-cell *matCellDef="let transfer" class="amount-cell"> 
+            {{ transfer.amount | currency:'INR' }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="referenceNumber">
+          <th mat-header-cell *matHeaderCellDef> Reference </th>
+          <td mat-cell *matCellDef="let transfer"> {{ transfer.referenceNumber || '-' }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions" stickyEnd>
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let transfer">
+            <div class="actions">
+              <button [disabled]="!canEdit" class="btn-edit" (click)="openEditDialog(transfer)" title="Edit">
+              <mat-icon style="font-size: 18px; width: 18px; height: 18px;">edit</mat-icon>
+            </button>
+              <button [disabled]="!canDelete" class="btn-delete" (click)="deleteTransfer(transfer)" title="Delete">
+              <mat-icon style="font-size: 18px; width: 18px; height: 18px;">delete</mat-icon>
+            </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="8" style="text-align: center; padding: 20px;">No transfers found.</td>
+        </tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" [showFirstLastButtons]="true" aria-label="Select page of transfers"></mat-paginator>
+    </div>
+  </div>
+</div>

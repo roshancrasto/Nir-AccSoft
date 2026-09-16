@@ -1,0 +1,48 @@
+.form-container {
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-row {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+}
+
+.half-width {
+  flex: 1;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.status-row {
+  padding: 10px 0;
+}
+
+mat-icon[matPrefix] {
+  margin-right: 8px;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+textarea {
+  resize: vertical;
+}
+
+.select-search-container {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 8px 8px 0 8px;
+}
+
+.select-search-field {
+  width: 100%;
+}
+
+::ng-deep .select-search-field .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}

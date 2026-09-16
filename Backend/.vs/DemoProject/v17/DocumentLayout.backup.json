@@ -1,0 +1,41 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\Work\\AccSoft\\Backend\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5CD21C47-8FB4-45D3-8AC0-782AC991CE89}|DemoProject.API\\DemoProject.API.csproj|e:\\work\\accsoft\\backend\\demoproject.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{5CD21C47-8FB4-45D3-8AC0-782AC991CE89}|DemoProject.API\\DemoProject.API.csproj|solutionrelative:demoproject.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "E:\\Work\\AccSoft\\Backend\\DemoProject.API\\appsettings.json",
+              "RelativeDocumentMoniker": "DemoProject.API\\appsettings.json",
+              "ToolTip": "E:\\Work\\AccSoft\\Backend\\DemoProject.API\\appsettings.json",
+              "RelativeToolTip": "DemoProject.API\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-06-01T06:33:11.094Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

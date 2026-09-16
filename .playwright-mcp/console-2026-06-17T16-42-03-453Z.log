@@ -1,0 +1,3 @@
+[     250ms] [LOG] Angular is running in development mode. @ http://localhost:4200/@fs/E:/Work/AccSoft/Frontend/.angular/cache/17.3.17/vite/deps/chunk-BP2GZ5XF.js?v=f1102fe2:20481
+[   29581ms] [ERROR] Failed to load resource: the server responded with a status of 405 (Method Not Allowed) @ http://localhost:5284/api/PaymentExpenseLink/pending:0
+[   29590ms] [ERROR] ERROR HttpErrorResponse @ http://localhost:4200/@fs/E:/Work/AccSoft/Frontend/.angular/cache/17.3.17/vite/deps/chunk-BP2GZ5XF.js?v=f1102fe2:7435

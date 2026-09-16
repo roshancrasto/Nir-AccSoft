@@ -1,0 +1,81 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - generic [ref=e4]: DemoProject - NGO Accounting System
+    - button "Admin" [ref=e5]:
+      - img [ref=e6]: account_circle
+      - generic [ref=e7]: Admin
+    - button [ref=e10] [cursor=pointer]:
+      - img [ref=e11]: logout
+  - generic [ref=e15]:
+    - link "Dashboard" [ref=e16] [cursor=pointer]:
+      - /url: /dashboard
+      - img [ref=e17]: dashboard
+      - generic [ref=e18]: Dashboard
+    - button "Masters" [ref=e21]:
+      - img [ref=e22]: category
+      - img [ref=e23]: arrow_drop_down
+      - generic [ref=e24]: Masters
+    - button "Transactions" [ref=e27]:
+      - img [ref=e28]: receipt_long
+      - img [ref=e29]: arrow_drop_down
+      - generic [ref=e30]: Transactions
+    - button "Internal" [ref=e33]:
+      - img [ref=e34]: business_center
+      - img [ref=e35]: arrow_drop_down
+      - generic [ref=e36]: Internal
+    - button "Reports" [ref=e39]:
+      - img [ref=e40]: summarize
+      - img [ref=e41]: arrow_drop_down
+      - generic [ref=e42]: Reports
+  - main [ref=e45]:
+    - generic [ref=e48]:
+      - generic [ref=e50]:
+        - generic [ref=e51]:
+          - img [ref=e52]: payments
+          - generic [ref=e53]:
+            - heading "Payment Voucher" [level=1] [ref=e54]
+            - paragraph [ref=e55]: Record and manage expense payments
+        - button "New Voucher" [ref=e56]:
+          - img [ref=e57]: add
+          - generic [ref=e58]: New Voucher
+      - generic [ref=e61]:
+        - generic [ref=e65]:
+          - generic [ref=e66]: Search Vouchers
+          - textbox "Search Vouchers" [ref=e68]:
+            - /placeholder: Search by number, vendor, category or event
+          - img [ref=e70]: search
+        - generic [ref=e72]:
+          - table [ref=e73]:
+            - rowgroup [ref=e74]:
+              - row "Voucher No. Voucher Date Payment Date Vendor Category Event Group Event Amount Mode Actions" [ref=e75]:
+                - columnheader "Voucher No." [ref=e76]
+                - columnheader "Voucher Date" [ref=e77]
+                - columnheader "Payment Date" [ref=e78]
+                - columnheader "Vendor" [ref=e79]
+                - columnheader "Category" [ref=e80]
+                - columnheader "Event Group" [ref=e81]
+                - columnheader "Event" [ref=e82]
+                - columnheader "Amount" [ref=e83]
+                - columnheader "Mode" [ref=e84]
+                - columnheader "Actions" [ref=e85]
+            - rowgroup [ref=e86]:
+              - row "No vouchers found." [ref=e87]:
+                - cell "No vouchers found." [ref=e88]
+          - group "Select page of vouchers" [ref=e89]:
+            - generic [ref=e91]:
+              - generic [ref=e92]:
+                - generic [ref=e93]: "Items per page:"
+                - combobox "10 Items per page:" [ref=e98] [cursor=pointer]:
+                  - generic [ref=e99]:
+                    - generic [ref=e101]: "10"
+                    - img [ref=e104]
+              - generic [ref=e106]:
+                - generic [ref=e107]: 0 of 0
+                - button "First page" [disabled]:
+                  - img
+                - button "Previous page" [disabled]:
+                  - img
+                - button "Next page" [disabled]:
+                  - img
+                - button "Last page" [disabled]:
+                  - img

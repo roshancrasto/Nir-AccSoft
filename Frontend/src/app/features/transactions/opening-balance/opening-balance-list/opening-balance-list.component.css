@@ -1,0 +1,69 @@
+.page-container {
+  min-height: calc(100vh - 64px - 56px);
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.page-title {
+  margin: 0;
+  color: #333;
+  font-weight: 500;
+  font-size: 24px;
+}
+
+.search-field {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 20px;
+}
+
+.table-container {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+table {
+  width: 100%;
+}
+
+.amount-cell {
+  text-align: right;
+  padding-right: 24px !important;
+}
+
+.actions-cell {
+  width: 150px;
+  text-align: center;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.empty-cell {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}
+
+.badge {
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.badge-cash {
+  color: #2e7d32;
+}
+
+.badge-bank {
+  color: #1565c0;
+}

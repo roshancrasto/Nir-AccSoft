@@ -1,0 +1,302 @@
+Create a complete Receipts & Payments Account Report module in the existing Angular + ASP.NET Core + SQL Server accounting application.
+====================================================
+REPORT NAME
+====================================================
+Reports
+→ Receipts & Payments Account
+====================================================
+BUSINESS REQUIREMENT
+====================================================
+Generate a complete Receipts & Payments statement for a selected Financial Year.
+The report should display:
+LEFT SIDE:
+Receipts
+RIGHT SIDE:
+Payments
+The report should follow traditional accounting format.
+====================================================
+RECEIPTS DATA SOURCES
+====================================================
+====================================================
+1. OPENING BALANCE
+====================================================
+Source Table:
+NU_OpeningBalances
+Logic:
+Include all active opening balances for selected Financial Year.
+Total Opening Balance =
+SUM(OpeningAmount)
+Exclude:
+DeletedFlag = 1
+====================================================
+2. DONATIONS / RECEIPTS
+====================================================
+Source Table:
+NU_Receipt
+Logic:
+Include ONLY receipts where:
+ReceiptBook_Rno > 0
+Calculation:
+SUM(
+    ISNULL(CashAmount,0)
+    +
+    ISNULL(BankAmount,0)
+)
+Grouped as:
+Donations
+Exclude:
+DeletedFlag = 1
+====================================================
+3. BOX COLLECTION
+====================================================
+Source Table:
+NU_BoxCollections
+Include ONLY:
+ConsiderForAudit = 1
+Calculation:
+SUM(Amount)
+Grouped as:
+Box Collection
+Exclude:
+DeletedFlag = 1
+====================================================
+4. GOVT GRANTS
+====================================================
+Source Table:
+NU_GovtGrants
+Include ONLY:
+ConsiderForAudit = 1
+Calculation:
+SUM(Amount)
+Grouped as:
+Govt Grants
+Exclude:
+DeletedFlag = 1
+====================================================
+PAYMENTS DATA SOURCE
+====================================================
+====================================================
+PAYMENTS
+====================================================
+Source Table:
+NU_Payments
+Calculation:
+SUM(DebitAmount)
+Grouped by:
+Expense Category
+Exclude:
+DeletedFlag = 1
+====================================================
+IMPORTANT ACCOUNTING LOGIC
+====================================================
+====================================================
+TOTAL RECEIPTS
+====================================================
+Opening Balance
++ Donations
++ Box Collection
++ Govt Grants
+====================================================
+TOTAL PAYMENTS
+====================================================
+SUM(All Payments)
+====================================================
+CLOSING BALANCE
+====================================================
+Closing Balance =
+Total Receipts - Total Payments
+====================================================
+FINAL ACCOUNTING RULE
+====================================================
+Total Receipts Side MUST equal Total Payments Side.
+Meaning:
+Receipts Side:
+Opening Balance + Income
+Payments Side:
+Expenses + Closing Balance
+====================================================
+REPORT LAYOUT REQUIREMENT
+====================================================
+Traditional accounting statement layout.
+====================================================
+TABLE STRUCTURE
+====================================================
+| Receipts | Amount | Payments | Amount |
+====================================================
+LEFT SIDE
+====================================================
+Rows:
+- Opening Balance
+- Donations
+- Box Collection
+- Govt Grants
+====================================================
+RIGHT SIDE
+====================================================
+Rows:
+- Expense Categories / Expense Details
+- Closing Balance
+====================================================
+FINAL TOTAL ROW
+====================================================
+Both totals must match.
+====================================================
+ANGULAR FRONTEND REQUIREMENTS
+====================================================
+====================================================
+MENU STRUCTURE
+====================================================
+Reports
+→ Receipts & Payments Account
+====================================================
+FILTER SECTION
+====================================================
+Provide:
+1. Financial Year Dropdown
+Example:
+- 2025-26
+- 2026-27
+====================================================
+BUTTONS
+====================================================
+1. View Report
+2. Export Excel
+3. Export PDF
+====================================================
+PAGE DESIGN
+====================================================
+Use:
+- Angular Material
+- Traditional accounting statement format
+- Proper table borders
+- Bold totals
+- Right aligned amount columns
+====================================================
+UI REQUIREMENTS
+====================================================
+1. Center aligned heading
+Example:
+NIRANTHAR UDYAVAR
+Receipts & Payments Account
+For the Year Ending 31-Mar-2026
+2. Responsive layout
+3. Printable format
+====================================================
+EXPORT REQUIREMENTS
+====================================================
+====================================================
+1. EXPORT TO EXCEL
+====================================================
+Requirements:
+- Same layout as screen
+- Bold totals
+- Currency formatting
+- Proper alignment
+- Auto column width
+====================================================
+2. EXPORT TO PDF
+====================================================
+Requirements:
+- A4 landscape
+- Proper accounting format
+- Proper borders
+- Printable design
+====================================================
+BACKEND REQUIREMENTS
+====================================================
+Create API:
+GET /api/reports/receiptspayments/{financialYear}
+====================================================
+API RESPONSE FORMAT
+====================================================
+{
+  "financialYear": "2025-26",
+  "receipts": [
+    {
+      "description": "Opening Balance",
+      "amount": 102000
+    },
+    {
+      "description": "Donations",
+      "amount": 450000
+    },
+    {
+      "description": "Box Collection",
+      "amount": 18000
+    },
+    {
+      "description": "Govt Grants",
+      "amount": 25000
+    }
+  ],
+  "payments": [
+    {
+      "description": "Food Expenses",
+      "amount": 85000
+    },
+    {
+      "description": "Printing",
+      "amount": 25000
+    }
+  ],
+  "closingBalance": 75000,
+  "totalReceipts": 595000,
+  "totalPayments": 520000,
+  "finalTotal": 595000
+}
+====================================================
+BACKEND IMPLEMENTATION REQUIREMENTS
+====================================================
+1. Fetch Opening Balances
+2. Fetch Donation totals
+3. Fetch Box Collection totals
+4. Fetch Govt Grant totals
+5. Fetch Payment totals
+6. Calculate Closing Balance
+7. Ensure final totals match
+====================================================
+IMPORTANT REQUIREMENT
+====================================================
+If no records exist:
+Return 0 instead of NULL.
+====================================================
+ANGULAR IMPLEMENTATION REQUIREMENTS
+====================================================
+Generate:
+1. Angular Component
+2. Angular Service
+3. Angular Routing
+4. HTML
+5. TypeScript
+6. CSS
+====================================================
+TABLE RENDERING REQUIREMENT
+====================================================
+Display Receipts and Payments side-by-side.
+If one side contains fewer rows,
+add blank rows dynamically.
+====================================================
+ADDITIONAL REQUIREMENTS
+====================================================
+1. Existing modules should remain unchanged
+2. Use responsive design
+3. Use proper decimal formatting
+4. Use currency formatting
+5. Ensure printable layout
+====================================================
+EXPECTED OUTPUT
+====================================================
+Generate complete:
+1. ASP.NET Core API
+2. Service Layer
+3. Repository Layer
+4. Angular Component
+5. Angular Service
+6. Angular Routing
+7. HTML
+8. CSS
+9. TypeScript
+10. Excel Export Logic
+11. PDF Export Logic
+12. Dynamic accounting table rendering
+The implementation should be fully functional and production-ready.

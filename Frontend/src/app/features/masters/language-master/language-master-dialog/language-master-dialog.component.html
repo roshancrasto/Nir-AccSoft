@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>
+  <mat-icon class="dialog-icon">{{ data.mode === 'add' ? 'add_circle' : 'edit' }}</mat-icon>
+  {{ data.mode === 'add' ? 'Add New Language' : 'Edit Language' }}
+</h2>
+<mat-dialog-content>
+  <form #langForm="ngForm" class="lang-form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Language Name</mat-label>
+      <input matInput [(ngModel)]="langName" name="langName" required placeholder="Enter language name" #nameField="ngModel">
+      <mat-error *ngIf="nameField.hasError('required')">Language name is required</mat-error>
+    </mat-form-field>
+
+    <div class="toggle-row" *ngIf="data.mode === 'edit'">
+      <mat-slide-toggle [(ngModel)]="isActive" name="isActive" color="primary">
+        {{ isActive ? 'Active' : 'Inactive' }}
+      </mat-slide-toggle>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close style="color: #64748b;">Cancel</button>
+  <button class="btn-gradient" [disabled]="!langName.trim()" (click)="onSave()">
+    <mat-icon style="font-size: 18px; width: 18px; height: 18px;">save</mat-icon>
+    {{ data.mode === 'add' ? 'Save' : 'Update' }}
+  </button>
+</mat-dialog-actions>

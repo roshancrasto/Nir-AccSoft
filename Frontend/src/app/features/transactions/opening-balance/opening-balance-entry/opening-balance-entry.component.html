@@ -1,0 +1,64 @@
+<h2 mat-dialog-title class="dialog-title">
+  <mat-icon class="title-icon">{{ action === 'Add' ? 'add_circle' : action === 'Update' ? 'edit' : 'visibility' }}</mat-icon>
+  {{action}} Opening Balance
+</h2>
+
+<mat-dialog-content class="dialog-content">
+  <form [formGroup]="entryForm" class="form-container">
+    
+    <div class="row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Financial Year</mat-label>
+        <mat-select formControlName="financialYear">
+          <mat-option *ngFor="let year of financialYears" [value]="year">{{year}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="f['financialYear'].errors?.['required']">Financial Year is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Balance Type</mat-label>
+        <mat-select formControlName="balanceType">
+          <mat-option *ngFor="let type of balanceTypes" [value]="type">{{type}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="f['balanceType'].errors?.['required']">Balance Type is required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="row" *ngIf="f['balanceType'].value === 'Bank'">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Bank Account</mat-label>
+        <mat-select formControlName="bankAccountId">
+          <mat-option *ngFor="let acc of bankAccounts" [value]="acc.bankAccountKey">
+            {{acc.bankName}} - {{acc.branch}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="f['bankAccountId'].errors?.['required']">Bank Account is required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Opening Amount</mat-label>
+        <input matInput type="number" formControlName="openingAmount" placeholder="0.00" min="0">
+        <span matTextPrefix>₹&nbsp;</span>
+        <mat-error *ngIf="f['openingAmount'].errors?.['required']">Amount is required</mat-error>
+        <mat-error *ngIf="f['openingAmount'].errors?.['min']">Amount must be greater than 0</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Remarks</mat-label>
+        <textarea matInput formControlName="remarks" rows="3" placeholder="Enter remarks..."></textarea>
+      </mat-form-field>
+    </div>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="dialog-actions">
+  <button mat-button (click)="onCancel()" style="color: #64748b;">{{ action === 'View' ? 'Close' : 'Cancel' }}</button>
+  <button class="btn-gradient" (click)="onSubmit()" *ngIf="action !== 'View'" [disabled]="entryForm.invalid">
+    <mat-icon style="font-size: 18px; width: 18px; height: 18px;">save</mat-icon> Save
+  </button>
+</mat-dialog-actions>

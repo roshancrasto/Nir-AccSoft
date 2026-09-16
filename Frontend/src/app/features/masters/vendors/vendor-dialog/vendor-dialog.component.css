@@ -1,0 +1,32 @@
+.vendor-form {
+  padding-top: 10px;
+  min-width: 450px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.form-row {
+  display: flex;
+  gap: 16px;
+}
+
+.half-width {
+  flex: 1;
+}
+
+.dialog-icon {
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.toggle-row {
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+mat-icon[matPrefix] {
+  margin-right: 8px;
+  color: #666;
+}

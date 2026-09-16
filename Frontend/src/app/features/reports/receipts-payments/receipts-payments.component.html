@@ -1,0 +1,84 @@
+<div class="page-container no-print">
+  <div class="page-header">
+    <h2 class="page-title">Receipts & Payments Account</h2>
+  </div>
+
+  <div class="filter-section mat-elevation-z2">
+    <mat-form-field appearance="outline">
+      <mat-label>Financial Year</mat-label>
+      <mat-select [(ngModel)]="selectedYear">
+        <mat-option *ngFor="let year of financialYears" [value]="year">{{year}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="action-buttons">
+      <button mat-raised-button color="primary" (click)="loadReport()">
+        <mat-icon>search</mat-icon> View Report
+      </button>
+      <button mat-stroked-button color="primary" (click)="exportExcel()" [disabled]="!reportData">
+        <mat-icon>download</mat-icon> Export Excel
+      </button>
+      <button mat-stroked-button color="warn" (click)="exportPdf()" [disabled]="!reportData">
+        <mat-icon>picture_as_pdf</mat-icon> Export PDF
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="report-container print-area" *ngIf="reportData">
+  <div class="report-header">
+    <h2 class="org-title">NIRANTHAR UDYAVAR</h2>
+    <h3 class="report-title">Receipts & Payments Account</h3>
+    <p class="report-period">For the Year Ending 31-Mar-{{ selectedYear.split('-')[1] }}</p>
+  </div>
+
+  <table class="accounting-table">
+    <thead>
+      <tr>
+        <th class="desc-col">Receipts</th>
+        <th class="amt-col">Amount (₹)</th>
+        <th class="desc-col">Payments</th>
+        <th class="amt-col">Amount (₹)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Data Rows -->
+      <tr *ngFor="let i of maxRows">
+        <td class="desc-cell" [class.sub-item]="reportData.receipts[i] && reportData.receipts[i].isSubItem" [class.bold]="reportData.receipts[i] && reportData.receipts[i].amount == null">{{ reportData.receipts[i] ? reportData.receipts[i].description : '' }}</td>
+        <td class="amt-cell">{{ reportData.receipts[i] && reportData.receipts[i].amount != null ? (reportData.receipts[i].amount | number:'1.2-2') : '' }}</td>
+        <td class="desc-cell" [class.sub-item]="reportData.payments[i] && reportData.payments[i].isSubItem" [class.bold]="reportData.payments[i] && reportData.payments[i].amount == null">{{ reportData.payments[i] ? reportData.payments[i].description : '' }}</td>
+        <td class="amt-cell">{{ reportData.payments[i] && reportData.payments[i].amount != null ? (reportData.payments[i].amount | number:'1.2-2') : '' }}</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <!-- Totals Without Closing Balance (Optional intermediate total row if needed, but we can skip directly to final totals as requested) -->
+      <tr class="intermediate-total" *ngIf="reportData.closingBalance > 0">
+        <td class="desc-cell bold">Total Receipts</td>
+        <td class="amt-cell bold">{{ reportData.totalReceipts | number:'1.2-2' }}</td>
+        <td class="desc-cell bold">Total Payments</td>
+        <td class="amt-cell bold">{{ reportData.totalPayments | number:'1.2-2' }}</td>
+      </tr>
+      
+      <!-- Closing Balance Row -->
+      <tr *ngIf="reportData.closingBalance > 0">
+        <td class="desc-cell">&nbsp;</td>
+        <td class="amt-cell">&nbsp;</td>
+        <td class="desc-cell bold closing-balance-text">Closing Balance</td>
+        <td class="amt-cell bold closing-balance-amt">{{ reportData.closingBalance | number:'1.2-2' }}</td>
+      </tr>
+
+      <!-- Final Tally Row -->
+      <tr class="final-total">
+        <td class="desc-cell bold">Total</td>
+        <td class="amt-cell bold double-underline">{{ reportData.finalTotal | number:'1.2-2' }}</td>
+        <td class="desc-cell bold">Total</td>
+        <td class="amt-cell bold double-underline">{{ reportData.finalTotal | number:'1.2-2' }}</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div class="empty-state no-print" *ngIf="!reportData">
+  <mat-icon>analytics</mat-icon>
+  <p>Select a Financial Year and click "View Report" to generate the statement.</p>
+</div>

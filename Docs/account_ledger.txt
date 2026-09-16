@@ -1,0 +1,339 @@
+Create a complete Account Ledger Report in the existing Angular + ASP.NET Core + SQL Server accounting application.
+====================================================
+REPORT NAME
+====================================================
+Reports
+→ Account Ledger
+IMPORTANT:
+This report replaces the need for separate:
+- Bank Ledger
+- Cash Book
+- Fixed Deposit Register
+The same report should work for:
+- Cash Accounts
+- Bank Accounts
+- Fixed Deposit Accounts
+====================================================
+BUSINESS OBJECTIVE
+====================================================
+The Account Ledger should display all transactions related to a selected account with a running balance.
+The report will be used for:
+- Audit
+- CA Submission
+- Bank Reconciliation
+- Cash Verification
+- Fixed Deposit Tracking
+- Financial Statement Preparation
+====================================================
+ACCOUNT TYPES SUPPORTED
+====================================================
+Source:
+NU_BankAccountDetails
+Account Types:
+- Cash
+- Bank
+- Fixed Deposit
+Examples:
+Main Cash
+Petty Cash
+Union Bank Current Account
+Canara Bank Current Account
+FD-001
+FD-002
+====================================================
+FILTER SECTION
+====================================================
+Provide:
+1. Account Dropdown (Mandatory)
+Load from:
+NU_BankAccountDetails
+Display:
+Account Name
+====================================================
+2. From Date
+====================================================
+3. To Date
+====================================================
+4. Export Type
+- Excel
+- PDF
+====================================================
+BUTTONS
+====================================================
+1. View Report
+2. Export Excel
+3. Export PDF
+4. Print
+5. Clear Filters
+====================================================
+REPORT HEADER
+====================================================
+NIRANTHAR UDYAVAR
+ACCOUNT LEDGER
+Account:
+[Selected Account]
+Period:
+[From Date] to [To Date]
+====================================================
+REPORT FORMAT
+====================================================
+| Date | Particulars | Reference No | Receipt | Payment | Balance |
+====================================================
+OPENING BALANCE
+====================================================
+First row must always be:
+Opening Balance
+Source:
+NU_OpeningBalances
+Filter:
+Selected Account
+Selected Financial Year
+Opening Balance should be treated as:
+Receipt
+====================================================
+TRANSACTION SOURCES
+====================================================
+The report must combine transactions from multiple modules.
+====================================================
+1. RECEIPTS
+====================================================
+Source:
+NU_Receipt
+Include only:
+BankAmount &gt; 0
+OR
+CashAmount &gt; 0
+Depending on selected account.
+====================================================
+Particulars Format
+Receipt No - Donor Name
+Example:
+RC-001 - John D'Souza
+====================================================
+REFERENCE NUMBER
+Receipt Number
+====================================================
+RECEIPT COLUMN
+Amount received
+====================================================
+2. BOX COLLECTIONS
+====================================================
+Source:
+NU_BoxCollections
+Include:
+ConsiderForAudit = 1
+Particulars:
+Box Collection
+Reference:
+Collection Number
+====================================================
+3. GOVT GRANTS
+====================================================
+Source:
+NU_GovtGrants
+Include:
+ConsiderForAudit = 1
+Particulars:
+Government Grant
+Reference:
+Grant Number
+====================================================
+4. PAYMENTS
+====================================================
+Source:
+NU_Payments
+Include:
+Payment Mode linked to selected account
+Particulars:
+Voucher Number - Expense Details
+Example:
+PV-001 - Printing Charges
+====================================================
+REFERENCE
+Voucher Number
+====================================================
+PAYMENT COLUMN
+Payment Amount
+====================================================
+5. BANK TRANSFERS
+====================================================
+Source:
+NU_BankTransfers
+====================================================
+IF ACCOUNT IS SOURCE ACCOUNT
+Show:
+Payment
+Examples:
+Transfer To FD
+Transfer To Union Bank
+Transfer To Main Cash
+====================================================
+IF ACCOUNT IS DESTINATION ACCOUNT
+Show:
+Receipt
+Examples:
+Transfer From Cash
+Transfer From FD
+Transfer From Canara Bank
+====================================================
+REFERENCE
+Transfer Number
+====================================================
+FIXED DEPOSIT SUPPORT
+====================================================
+FD Accounts must work exactly like bank accounts.
+Example:
+FD-001
+Transfer To Fixed Deposit
+Should appear as:
+Receipt in FD ledger
+====================================================
+FD Maturity
+Should appear as:
+Payment in FD ledger
+====================================================
+PARTICULARS FORMATTING
+====================================================
+Examples:
+Opening Balance
+Receipt No RC-001 - John D'Souza
+Govt Grant - Drama Fest
+Box Collection - Mysterium
+PV-001 - Printing Charges
+BT-001 - Transfer To FD
+BT-002 - FD Maturity
+====================================================
+RUNNING BALANCE LOGIC
+====================================================
+Balance Calculation:
+Opening Balance
++ Receipt Amount
+- Payment Amount
+====================================================
+Balance should update after every transaction.
+====================================================
+TOTALS SECTION
+====================================================
+Display at bottom:
+Opening Balance
+Total Receipts
+Total Payments
+Closing Balance
+====================================================
+CLOSING BALANCE FORMULA
+====================================================
+Opening Balance
++ Total Receipts
+- Total Payments
+====================================================
+GRID REQUIREMENTS
+====================================================
+Use Angular Material Table
+Columns:
+Date
+Particulars
+Reference No
+Receipt
+Payment
+Balance
+====================================================
+FORMATTING REQUIREMENTS
+====================================================
+Receipt:
+Green
+Payment:
+Red
+Balance:
+Bold
+Amounts:
+Right Aligned
+Currency Format:
+Indian Format
+====================================================
+EXPORT TO EXCEL
+====================================================
+Requirements:
+Proper Header
+All Columns
+Running Balance
+Totals Section
+Auto Column Width
+Currency Formatting
+====================================================
+EXPORT TO PDF
+====================================================
+Requirements:
+A4 Landscape
+Page Header
+Page Numbers
+Proper Borders
+Totals Section
+Printable Format
+====================================================
+PRINT REQUIREMENTS
+====================================================
+Provide print-friendly layout.
+====================================================
+BACKEND REQUIREMENTS
+====================================================
+Create API:
+GET /api/reports/accountledger
+Parameters:
+AccountId
+FromDate
+ToDate
+====================================================
+API RESPONSE FORMAT
+====================================================
+{
+  "accountName": "Union Bank Current Account",
+  "openingBalance": 25000,
+  "transactions": [
+    {
+      "date": "2026-04-05",
+      "particulars": "RC-001 - John D'Souza",
+      "referenceNo": "RC-001",
+      "receipt": 5000,
+      "payment": 0,
+      "balance": 30000
+    },
+    {
+      "date": "2026-04-10",
+      "particulars": "PV-001 - Printing Charges",
+      "referenceNo": "PV-001",
+      "receipt": 0,
+      "payment": 2500,
+      "balance": 27500
+    }
+  ],
+  "totalReceipts": 5000,
+  "totalPayments": 2500,
+  "closingBalance": 27500
+}
+====================================================
+IMPORTANT REQUIREMENTS
+====================================================
+1. Merge all transaction sources into a single chronological ledger.
+2. Sort by transaction date ascending.
+3. Handle NULL values safely.
+4. If no transactions exist, still show Opening Balance.
+5. Existing modules should remain unchanged.
+6. Follow existing project architecture.
+====================================================
+EXPECTED OUTPUT
+====================================================
+Generate complete:
+1. ASP.NET Core API
+2. Repository Layer
+3. Service Layer
+4. DTOs
+5. Angular Component
+6. Angular Service
+7. Angular Routing
+8. Angular HTML
+9. Angular TypeScript
+10. CSS
+11. Excel Export Logic
+12. PDF Export Logic
+13. Running Balance Calculation Logic
+The implementation should be fully functional, audit-ready, and production-ready.
