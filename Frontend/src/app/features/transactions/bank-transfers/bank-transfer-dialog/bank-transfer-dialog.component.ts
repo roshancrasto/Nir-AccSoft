@@ -46,17 +46,10 @@ export class BankTransferDialogComponent implements OnInit {
   referenceNumber: string = '';
   remarks: string = '';
 
-  transferTypes: string[] = [
-    'Cash Deposit',
-    'Cash Withdrawal',
-    'Bank To Bank',
-    'Transfer To Petty Cash',
-    'Transfer To Fixed Deposit',
-    'Fixed Deposit Maturity',
-    'General Transfer'
-  ];
-
-  accountTypes: string[] = ['Cash', 'Bank', 'Fixed Deposit'];
+  transferTypes: string[] = [];
+  accountTypes: string[] = ['Cash', 'Bank', 'Fixed Deposit', 'QR Code Collection'];
+  fromAccountTypes: string[] = ['Cash', 'Bank', 'Fixed Deposit', 'QR Code Collection'];
+  toAccountTypes: string[] = ['Bank', 'Cash', 'Fixed Deposit'];
 
   allAccounts: BankAccountDropdown[] = [];
   balances: AccountBalance[] = [];
@@ -87,9 +80,25 @@ export class BankTransferDialogComponent implements OnInit {
   loadData(): void {
     this.openingBalanceService.getBankAccounts().subscribe(accounts => {
       this.allAccounts = accounts;
+      if (this.fromAccountType === 'QR Code Collection' && !this.fromAccountID) {
+        const qrAcc = this.allAccounts.find(a => (a.accountType || '').toLowerCase() === 'qr code collection' || (a.bankName || '').toLowerCase() === 'qr code collection');
+        if (qrAcc) {
+          this.fromAccountID = qrAcc.bankAccountKey;
+        }
+      }
     });
     this.bankTransferService.getAccountBalances().subscribe(balances => {
       this.balances = balances;
+    });
+    this.bankTransferService.getBankTransferTypes().subscribe({
+      next: (types) => {
+        if (Array.isArray(types)) {
+          this.transferTypes = types.map(t => t.transferTypeName || t.TransferTypeName || t);
+        }
+      },
+      error: (err) => {
+        console.error('Failed to load bank transfer types', err);
+      }
     });
   }
 
@@ -98,7 +107,8 @@ export class BankTransferDialogComponent implements OnInit {
   }
 
   getAccountDisplay(account: BankAccountDropdown): string {
-    return `[${account.accountType || 'Bank'}] ${account.bankName} - ${account.branch}`;
+    const branchInfo = account.branch ? ` - ${account.branch}` : '';
+    return `[${account.accountType || 'Bank'}] ${account.bankName}${branchInfo}`;
   }
 
   getBalance(accountId: number | null): number {
@@ -126,15 +136,31 @@ export class BankTransferDialogComponent implements OnInit {
     } else if (this.transferType === 'Fixed Deposit Maturity') {
       this.fromAccountType = 'Fixed Deposit';
       this.toAccountType = 'Bank';
+    } else if (this.transferType === 'QR Code Collection') {
+      this.fromAccountType = 'QR Code Collection';
+      this.toAccountType = 'Bank';
     }
     
     // Reset account selections when type changes
     this.fromAccountID = null;
     this.toAccountID = null;
+
+    if (this.fromAccountType === 'QR Code Collection') {
+      const qrAcc = this.allAccounts.find(a => (a.accountType || '').toLowerCase() === 'qr code collection' || (a.bankName || '').toLowerCase() === 'qr code collection');
+      if (qrAcc) {
+        this.fromAccountID = qrAcc.bankAccountKey;
+      }
+    }
   }
 
   onFromAccountTypeChange(): void {
     this.fromAccountID = null;
+    if (this.fromAccountType === 'QR Code Collection') {
+      const qrAcc = this.allAccounts.find(a => (a.accountType || '').toLowerCase() === 'qr code collection' || (a.bankName || '').toLowerCase() === 'qr code collection');
+      if (qrAcc) {
+        this.fromAccountID = qrAcc.bankAccountKey;
+      }
+    }
   }
 
   onToAccountTypeChange(): void {

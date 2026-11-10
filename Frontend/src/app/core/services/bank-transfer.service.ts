@@ -42,6 +42,10 @@ export class BankTransferService {
     return this.http.get<AccountBalance[]>(`${this.apiUrl}/Balances`);
   }
 
+  getBankTransferTypes(): Observable<any[]> {
+    return this.http.get<any[]>(`${environment.apiUrl}/BankTransferType`);
+  }
+
   createBankTransfer(transfer: Partial<BankTransfer>): Observable<any> {
     return this.http.post(this.apiUrl, transfer);
   }

@@ -24,14 +24,14 @@
       <mat-form-field appearance="outline" class="half-width">
         <mat-label>From Account Type</mat-label>
         <mat-select [(ngModel)]="fromAccountType" name="fromAccountType" (selectionChange)="onFromAccountTypeChange()" required>
-          <mat-option *ngFor="let type of accountTypes" [value]="type">{{ type }}</mat-option>
+          <mat-option *ngFor="let type of fromAccountTypes" [value]="type">{{ type }}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="half-width">
         <mat-label>To Account Type</mat-label>
         <mat-select [(ngModel)]="toAccountType" name="toAccountType" (selectionChange)="onToAccountTypeChange()" required>
-          <mat-option *ngFor="let type of accountTypes" [value]="type">{{ type }}</mat-option>
+          <mat-option *ngFor="let type of toAccountTypes" [value]="type">{{ type }}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>

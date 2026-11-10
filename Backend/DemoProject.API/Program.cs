@@ -59,6 +59,9 @@ builder.Services.AddScoped<DemoProject.Business.Interfaces.IPaymentExpenseLinkSe
 builder.Services.AddScoped<DemoProject.Repository.Interfaces.IReimbursementRepository, DemoProject.Repository.Implementations.ReimbursementRepository>();
 builder.Services.AddScoped<DemoProject.Business.Interfaces.IReimbursementService, DemoProject.Business.Services.ReimbursementService>();
 
+builder.Services.AddScoped<DemoProject.Repository.Interfaces.IBankTransferTypeRepository, DemoProject.Repository.Implementations.BankTransferTypeRepository>();
+builder.Services.AddScoped<DemoProject.Business.Interfaces.IBankTransferTypeService, DemoProject.Business.Services.BankTransferTypeService>();
+
 builder.Services.AddScoped<DemoProject.Repository.Interfaces.IAssetRepository, DemoProject.Repository.Implementations.AssetRepository>();
 builder.Services.AddScoped<DemoProject.Business.Interfaces.IAssetService, DemoProject.Business.Services.AssetService>();
 
