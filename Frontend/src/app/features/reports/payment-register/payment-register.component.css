@@ -81,7 +81,7 @@
   
   .totals-row h3 {
     margin: 0;
-    color: #1976d2;
+    color: var(--primary);
   }
   
   .totals-row span {

@@ -1,6 +1,7 @@
 import { PermissionService } from '../../../core/services/permission.service';
 import { AuthService } from '../../../core/services/auth.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { ConfirmDialogService } from '../../../core/services/confirm-dialog.service';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
@@ -39,6 +40,8 @@ import { ExpenseDialogComponent } from '../expense-dialog/expense-dialog.compone
   styleUrls: ['./event-expense-details.component.css']
 })
 export class EventExpenseDetailsComponent implements OnInit {
+  private confirmDialog = inject(ConfirmDialogService);
+
   canAdd = false;
   canEdit = false;
   canDelete = false;
@@ -141,7 +144,8 @@ export class EventExpenseDetailsComponent implements OnInit {
   }
 
   deleteExpense(expense: EventExpense): void {
-    if (confirm(`Are you sure you want to delete expense ${expense.expenseCode}?`)) {
+    this.confirmDialog.confirm({ title: 'Delete expense', message: `Are you sure you want to delete expense ${expense.expenseCode}?`, confirmText: 'Delete' }).subscribe(confirmed => {
+      if (!confirmed) { return; }
       this.internalAccountService.deleteExpense(expense.eventExpenseKey).subscribe({
         next: () => {
           this.loadExpenses();
@@ -152,6 +156,6 @@ export class EventExpenseDetailsComponent implements OnInit {
           this.snackBar.open('Error deleting expense', 'Close', { duration: 3000 });
         }
       });
-    }
+    });
   }
 }

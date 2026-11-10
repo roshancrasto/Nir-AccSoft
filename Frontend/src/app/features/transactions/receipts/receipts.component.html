@@ -1,25 +1,5 @@
 <div class="container">
 
-  <!-- KPI CARDS -->
-  <div class="cards">
-    <div class="card blue">
-      <h4>Total Receipts</h4>
-      <h2>{{ totalReceipts }}</h2>
-    </div>
-    <div class="card green">
-      <h4>Total Collection</h4>
-      <h2>{{ totalCollection | currency:'INR':'symbol':'1.0-0' }}</h2>
-    </div>
-    <div class="card orange">
-      <h4>This Month</h4>
-      <h2>{{ thisMonthCollection | currency:'INR':'symbol':'1.0-0' }}</h2>
-    </div>
-    <div class="card purple">
-      <h4>Pending Receipts</h4>
-      <h2>{{ pendingReceipts }}</h2>
-    </div>
-  </div>
-
   <!-- TABLE -->
   <div class="table-card">
     <div class="table-header" style="display: flex; justify-content: space-between; align-items: center;">

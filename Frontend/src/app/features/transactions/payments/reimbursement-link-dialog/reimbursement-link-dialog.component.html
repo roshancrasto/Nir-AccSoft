@@ -1,7 +1,11 @@
-<h2 mat-dialog-title>
-  <mat-icon style="vertical-align: middle; margin-right: 8px;">checklist</mat-icon>
-  Select Expenses to Link
-</h2>
+<div mat-dialog-title class="dlg-header">
+  <span class="dlg-icon"><mat-icon>checklist</mat-icon></span>
+  <div class="dlg-heading">
+    <span class="dlg-eyebrow">Payment Allocation</span>
+    <h2 class="dlg-title">Select Expenses to Link</h2>
+  </div>
+  <button type="button" class="dlg-close" mat-dialog-close aria-label="Close" title="Close"><mat-icon>close</mat-icon></button>
+</div>
 
 <mat-dialog-content>
   <div class="table-container mat-elevation-z1" *ngIf="pendingLinks.length > 0">

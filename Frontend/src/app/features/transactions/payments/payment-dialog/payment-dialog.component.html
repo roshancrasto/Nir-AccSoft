@@ -1,9 +1,15 @@
-<h2 mat-dialog-title>
-  <mat-icon class="dialog-icon">{{ data.mode === 'add' ? 'add_circle' : 'edit' }}</mat-icon>
-  {{ data.mode === 'add' ? 'New Payment Voucher ' : 'Edit Payment Voucher ' }}
-</h2>
+<div mat-dialog-title class="dlg-header">
+  <span class="dlg-icon"><mat-icon>request_quote</mat-icon></span>
+  <div class="dlg-heading">
+    <span class="dlg-eyebrow">Transactions</span>
+    <h2 class="dlg-title">{{ data.mode === 'add' ? 'New Payment Voucher ' : 'Edit Payment Voucher ' }}</h2>
+  </div>
+  <button type="button" class="dlg-close" mat-dialog-close aria-label="Close" title="Close"><mat-icon>close</mat-icon></button>
+</div>
 <mat-dialog-content>
   <form #paymentForm="ngForm" class="payment-form">
+    <div class="sec">
+      <div class="sec-title">Voucher</div>
     <div class="form-row">
       <mat-form-field appearance="outline" class="half-width">
         <mat-label>Voucher Number</mat-label>
@@ -47,6 +53,9 @@
       </mat-form-field>
     </div>
 
+    </div>
+    <div class="sec">
+      <div class="sec-title">Event &amp; party</div>
     <!-- Event Group and Event -->
     <div class="form-row">
       <mat-form-field appearance="outline" class="half-width">
@@ -106,6 +115,9 @@
       </mat-form-field>
     </div>
 
+    </div>
+    <div class="sec">
+      <div class="sec-title">Payment</div>
     <div class="form-row">
       <mat-form-field appearance="outline" class="half-width">
         <mat-label>Payment Mode</mat-label>
@@ -143,13 +155,26 @@
     </div>
 
     <div class="form-row" *ngIf="paymentMode === 'Bank'">
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Bank Account</mat-label>
+        <mat-select [(ngModel)]="bankAccountId" name="bankAccountId" required>
+          <mat-option *ngFor="let acc of bankAccounts" [value]="acc.bankAccountKey">
+            {{ getAccountDisplay(acc) }}
+          </mat-option>
+        </mat-select>
+        <mat-icon matPrefix>account_balance</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
         <mat-label>Reference Number (Cheque/UTR)</mat-label>
         <input matInput [(ngModel)]="referenceNumber" name="referenceNumber" placeholder="Enter reference number">
         <mat-icon matPrefix>tag</mat-icon>
       </mat-form-field>
     </div>
 
+    </div>
+    <div class="sec">
+      <div class="sec-title">Bill</div>
     <div class="form-row status-row">
       <mat-slide-toggle [(ngModel)]="billAvailable" name="billAvailable" color="primary">
         Bill Available
@@ -173,11 +198,15 @@
       </mat-form-field>
     </div>
 
+    </div>
+    <div class="sec">
+      <div class="sec-title">Notes</div>
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Description</mat-label>
       <textarea matInput [(ngModel)]="description" name="description" rows="2"></textarea>
     </mat-form-field>
 
+    </div>
     <!-- Reimbursement Links Selection -->
     <div class="allocation-section" *ngIf="(paymentType === 'Re-Imbursement' && memberId) || paymentType === 'Multiple Payments'">
       <div class="section-header">

@@ -1,6 +1,7 @@
 import { PermissionService } from '../../../core/services/permission.service';
 import { AuthService } from '../../../core/services/auth.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { ConfirmDialogService } from '../../../core/services/confirm-dialog.service';
 import { CommonModule } from '@angular/common';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
@@ -38,6 +39,8 @@ import { GovtGrantDialogComponent, GovtGrantDialogData } from './govt-grant-dial
   styleUrl: './govt-grants.component.css'
 })
 export class GovtGrantsComponent implements OnInit {
+  private confirmDialog = inject(ConfirmDialogService);
+
   canAdd = false;
   canEdit = false;
   canDelete = false;
@@ -149,7 +152,8 @@ export class GovtGrantsComponent implements OnInit {
   }
 
   deleteGovtGrant(grant: GovtGrant): void {
-    if (confirm(`Are you sure you want to delete government grant ${grant.grantNumber}?`)) {
+    this.confirmDialog.confirm({ title: 'Delete government grant', message: `Are you sure you want to delete government grant ${grant.grantNumber}?`, confirmText: 'Delete' }).subscribe(confirmed => {
+      if (!confirmed) { return; }
       this.govtGrantService.deleteGovtGrant(grant.govtGrantId).subscribe({
         next: () => {
           this.snackBar.open('Government grant deleted successfully', 'Close', { duration: 3000 });
@@ -161,6 +165,6 @@ export class GovtGrantsComponent implements OnInit {
           this.snackBar.open(message, 'Close', { duration: 3000 });
         }
       });
-    }
+    });
   }
 }

@@ -1,6 +1,7 @@
 import { PermissionService } from '../../../../core/services/permission.service';
 import { AuthService } from '../../../../core/services/auth.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { ConfirmDialogService } from '../../../../core/services/confirm-dialog.service';
 import { CommonModule } from '@angular/common';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -33,6 +34,8 @@ import { OpeningBalanceEntryComponent } from '../opening-balance-entry/opening-b
   styleUrls: ['./opening-balance-list.component.css']
 })
 export class OpeningBalanceListComponent implements OnInit {
+  private confirmDialog = inject(ConfirmDialogService);
+
   canAdd = false;
   canEdit = false;
   canDelete = false;
@@ -104,7 +107,8 @@ export class OpeningBalanceListComponent implements OnInit {
   }
 
   deleteRow(row: OpeningBalance) {
-    if (confirm('Are you sure you want to delete this opening balance?')) {
+    this.confirmDialog.confirm({ title: 'Delete opening balance', message: 'Are you sure you want to delete this opening balance?', confirmText: 'Delete' }).subscribe(confirmed => {
+      if (!confirmed) { return; }
       this.service.delete(row.openingBalanceId).subscribe({
         next: () => {
           this.snackBar.open('Deleted successfully', 'Close', { duration: 3000 });
@@ -115,6 +119,6 @@ export class OpeningBalanceListComponent implements OnInit {
           this.snackBar.open('Error deleting data', 'Close', { duration: 3000 });
         }
       });
-    }
+    });
   }
 }

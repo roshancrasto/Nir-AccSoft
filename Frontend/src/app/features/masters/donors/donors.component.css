@@ -85,7 +85,7 @@ tr.mat-mdc-row:hover {
 }
 
 .parish-badge {
-  color: #1565c0;
+  color: var(--primary);
   padding: 4px 12px;
   font-size: 13px;
   font-weight: 500;

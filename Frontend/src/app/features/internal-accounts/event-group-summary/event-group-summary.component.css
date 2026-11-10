@@ -12,7 +12,7 @@
 .header-section h2 {
   margin: 0;
   font-weight: 500;
-  color: #1a237e;
+  color: var(--text);
 }
 
 .actions {
@@ -76,7 +76,7 @@ table {
 }
 
 .event-link {
-  color: #3f51b5;
+  color: var(--primary);
   text-decoration: none;
   font-weight: 500;
   cursor: pointer;
@@ -88,7 +88,7 @@ table {
 
 .amount-cell {
   font-weight: 600;
-  color: #1a237e;
+  color: var(--text);
   text-align: right !important;
   padding-right: 24px !important;
 }
@@ -107,7 +107,7 @@ table {
 
 th.mat-header-cell {
   font-weight: 600;
-  color: #1a237e;
+  color: var(--text);
 }
 
 td.mat-cell {
@@ -140,12 +140,12 @@ td.mat-cell {
 }
 
 .grand-total-row {
-  border-top: 2px solid #1a237e;
+  border-top: 2px solid var(--text);
 }
 
 .footer-label {
   font-weight: 700;
-  color: #1a237e;
+  color: var(--text);
   text-transform: uppercase;
   font-size: 0.9rem;
 }

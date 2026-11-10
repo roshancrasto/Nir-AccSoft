@@ -44,10 +44,14 @@ export interface DonorDialogData {
     MatCheckboxModule
   ],
   template: `
-    <h2 mat-dialog-title>
-      <mat-icon class="dialog-icon">{{ data.mode === 'add' ? 'person_add' : 'person' }}</mat-icon>
-      {{ data.mode === 'add' ? 'Add New Donor' : 'Edit Donor' }}
-    </h2>
+    <div mat-dialog-title class="dlg-header">
+      <span class="dlg-icon"><mat-icon>volunteer_activism</mat-icon></span>
+      <div class="dlg-heading">
+        <span class="dlg-eyebrow">Masters</span>
+        <h2 class="dlg-title">{{ data.mode === 'add' ? 'Add New Donor' : 'Edit Donor' }}</h2>
+      </div>
+      <button type="button" class="dlg-close" mat-dialog-close aria-label="Close" title="Close"><mat-icon>close</mat-icon></button>
+    </div>
     <mat-dialog-content>
       <form [formGroup]="donorForm" class="donor-form">
         <div class="form-row">

@@ -1,8 +1,17 @@
-<h2 mat-dialog-title>{{ data.mode === 'add' ? 'Record Member Expense' : 'Edit Member Expense' }}</h2>
+<div mat-dialog-title class="dlg-header">
+  <span class="dlg-icon"><mat-icon>receipt</mat-icon></span>
+  <div class="dlg-heading">
+    <span class="dlg-eyebrow">Transactions</span>
+    <h2 class="dlg-title">{{ data.mode === 'add' ? 'Record Member Expense' : 'Edit Member Expense' }}</h2>
+  </div>
+  <button type="button" class="dlg-close" mat-dialog-close aria-label="Close" title="Close"><mat-icon>close</mat-icon></button>
+</div>
 
 <mat-dialog-content>
   <form class="dialog-form">
     
+    <div class="sec">
+      <div class="sec-title">Expense</div>
     <div class="row">
       <mat-form-field appearance="outline" class="half-width">
         <mat-label>Event Group</mat-label>
@@ -39,6 +48,9 @@
       </mat-form-field>
     </div>
 
+    </div>
+    <div class="sec">
+      <div class="sec-title">Payment</div>
     <div class="row">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Payment Mode</mat-label>
@@ -76,6 +88,9 @@
       <mat-icon matPrefix>link</mat-icon>
     </mat-form-field>
 
+    </div>
+    <div class="sec">
+      <div class="sec-title">Bill &amp; remarks</div>
     <div class="row">
       <mat-form-field appearance="outline" class="half-width">
         <mat-label>Bill No (Optional)</mat-label>
@@ -99,6 +114,7 @@
       <textarea matInput [(ngModel)]="remarks" name="remarks" rows="2"></textarea>
     </mat-form-field>
 
+    </div>
   </form>
 </mat-dialog-content>
 

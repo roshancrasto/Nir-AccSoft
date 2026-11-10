@@ -9,7 +9,7 @@
 .report-header h2 {
   margin: 0 0 4px 0;
   font-size: 1.6rem;
-  color: #1a237e;
+  color: var(--text);
   font-weight: 600;
 }
 

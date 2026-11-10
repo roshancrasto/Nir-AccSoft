@@ -8,6 +8,7 @@ import localeIn from '@angular/common/locales/en-IN';
 
 import { provideNativeDateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatPaginatorDefaultOptions, MAT_PAGINATOR_DEFAULT_OPTIONS } from '@angular/material/paginator';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldDefaultOptions } from '@angular/material/form-field';
 import { routes } from './app.routes';
 
 registerLocaleData(localeIn);
@@ -22,6 +23,8 @@ export const appConfig: ApplicationConfig = {
     provideNativeDateAdapter(),
     { provide: MAT_DATE_LOCALE, useValue: 'en-IN' },
     { provide: LOCALE_ID, useValue: 'en-IN' },
-    { provide: MAT_PAGINATOR_DEFAULT_OPTIONS, useValue: { showFirstLastButtons: true } as MatPaginatorDefaultOptions }
+    { provide: MAT_PAGINATOR_DEFAULT_OPTIONS, useValue: { showFirstLastButtons: true } as MatPaginatorDefaultOptions },
+    // Design only: compact fields with the label always shown above the box
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline', floatLabel: 'always', subscriptSizing: 'dynamic' } as MatFormFieldDefaultOptions }
   ]
 };

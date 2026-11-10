@@ -1,7 +1,11 @@
-<h2 mat-dialog-title>
-  <mat-icon class="dialog-icon">{{ isEdit ? 'edit' : 'add_circle' }}</mat-icon>
-  {{ isEdit ? 'Edit' : 'Add New' }} Event Expense
-</h2>
+<div mat-dialog-title class="dlg-header">
+  <span class="dlg-icon"><mat-icon>payments</mat-icon></span>
+  <div class="dlg-heading">
+    <span class="dlg-eyebrow">Internal Accounts</span>
+    <h2 class="dlg-title">{{ isEdit ? 'Edit' : 'Add New' }} Event Expense</h2>
+  </div>
+  <button type="button" class="dlg-close" (click)="onCancel()" aria-label="Close" title="Close"><mat-icon>close</mat-icon></button>
+</div>
 <mat-dialog-content>
   <form [formGroup]="expenseForm" class="expense-form">
     <div class="form-row">

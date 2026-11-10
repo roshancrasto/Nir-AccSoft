@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { ConfirmDialogService } from '../../../core/services/confirm-dialog.service';
 import { CommonModule } from '@angular/common';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
@@ -33,6 +34,8 @@ import { LanguageMasterDialogComponent, LanguageMasterDialogData } from './langu
   styleUrl: './language-master.component.css'
 })
 export class LanguageMasterComponent implements OnInit {
+  private confirmDialog = inject(ConfirmDialogService);
+
   displayedColumns: string[] = ['langKey', 'langName', 'isActive', 'actions'];
   dataSource: MatTableDataSource<LanguageMaster> = new MatTableDataSource<LanguageMaster>();
   isLoading = false;
@@ -141,7 +144,8 @@ export class LanguageMasterComponent implements OnInit {
   }
 
   deleteLanguage(id: number): void {
-    if (confirm('Are you sure you want to delete this language?')) {
+    this.confirmDialog.confirm({ title: 'Delete language', message: 'Are you sure you want to delete this language?', confirmText: 'Delete' }).subscribe(confirmed => {
+      if (!confirmed) { return; }
       this.langService.deleteLanguage(id).subscribe({
         next: () => {
           this.snackBar.open('Language deleted successfully!', 'Close', { duration: 3000 });
@@ -152,6 +156,6 @@ export class LanguageMasterComponent implements OnInit {
           this.snackBar.open('Failed to delete language', 'Close', { duration: 3000 });
         }
       });
-    }
+    });
   }
 }

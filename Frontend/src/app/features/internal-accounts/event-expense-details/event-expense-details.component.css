@@ -18,7 +18,7 @@
 .header-section h2 {
   margin: 0;
   font-weight: 500;
-  color: #1a237e;
+  color: var(--text);
 }
 
 .actions {
@@ -42,7 +42,7 @@
 }
 
 .total-badge .value {
-  color: #1a237e;
+  color: var(--text);
   font-weight: 700;
   font-size: 1.1rem;
 }
@@ -65,7 +65,7 @@ table {
 
 th.mat-header-cell {
   font-weight: 600;
-  color: #1a237e;
+  color: var(--text);
 }
 
 td.mat-cell {
@@ -97,7 +97,7 @@ td.mat-cell {
 }
 
 .bank-mode {
-  color: #1565c0;
+  color: var(--primary);
 }
 
 .cash-mode {

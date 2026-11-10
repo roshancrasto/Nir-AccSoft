@@ -1,8 +1,15 @@
-<h2 mat-dialog-title>
-  {{ data.mode === 'add' ? 'New Box Collection' : data.mode === 'edit' ? 'Edit Box Collection' : 'Box Collection Details' }}
-</h2>
+<div mat-dialog-title class="dlg-header">
+  <span class="dlg-icon"><mat-icon>savings</mat-icon></span>
+  <div class="dlg-heading">
+    <span class="dlg-eyebrow">Transactions</span>
+    <h2 class="dlg-title">{{ data.mode === 'add' ? 'New Box Collection' : data.mode === 'edit' ? 'Edit Box Collection' : 'Box Collection Details' }}</h2>
+  </div>
+  <button type="button" class="dlg-close" mat-dialog-close aria-label="Close" title="Close"><mat-icon>close</mat-icon></button>
+</div>
 <mat-dialog-content [formGroup]="form">
   <div class="form-container">
+    <div class="sec">
+      <div class="sec-title">Collection details</div>
     <div class="form-row" *ngIf="data.mode !== 'add' && data.collection?.collectionNumber">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Collection Number</mat-label>
@@ -37,6 +44,9 @@
       </mat-form-field>
     </div>
 
+    </div>
+    <div class="sec">
+      <div class="sec-title">Amount</div>
     <div class="form-row">
       <mat-form-field appearance="outline" class="half-width">
         <mat-label>Amount</mat-label>
@@ -57,12 +67,16 @@
       </div>
     </div>
 
+    </div>
+    <div class="sec">
+      <div class="sec-title">Notes</div>
     <div class="form-row">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Remarks</mat-label>
         <textarea matInput formControlName="remarks" rows="3" placeholder="Enter collection remarks..."></textarea>
         <mat-icon matPrefix>notes</mat-icon>
       </mat-form-field>
+    </div>
     </div>
   </div>
 </mat-dialog-content>

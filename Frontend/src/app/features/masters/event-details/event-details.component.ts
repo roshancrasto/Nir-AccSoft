@@ -1,6 +1,7 @@
 import { PermissionService } from '../../../core/services/permission.service';
 import { AuthService } from '../../../core/services/auth.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { ConfirmDialogService } from '../../../core/services/confirm-dialog.service';
 import { CommonModule } from '@angular/common';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
@@ -33,6 +34,8 @@ import { EventDetailDialogComponent, EventDetailDialogData } from './event-detai
   styleUrl: './event-details.component.css'
 })
 export class EventDetailsComponent implements OnInit {
+  private confirmDialog = inject(ConfirmDialogService);
+
   canAdd = false;
   canEdit = false;
   canDelete = false;
@@ -142,7 +145,8 @@ export class EventDetailsComponent implements OnInit {
   }
 
   deleteEventDetail(id: number): void {
-    if (confirm('Are you sure you want to delete this event detail?')) {
+    this.confirmDialog.confirm({ title: 'Delete event detail', message: 'Are you sure you want to delete this event detail?', confirmText: 'Delete' }).subscribe(confirmed => {
+      if (!confirmed) { return; }
       this.eventDetailService.deleteEventDetail(id).subscribe({
         next: () => {
           this.snackBar.open('Event detail deleted successfully!', 'Close', { duration: 3000 });
@@ -154,6 +158,6 @@ export class EventDetailsComponent implements OnInit {
           this.snackBar.open(message, 'Close', { duration: 3000 });
         }
       });
-    }
+    });
   }
 }

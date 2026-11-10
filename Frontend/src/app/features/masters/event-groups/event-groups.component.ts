@@ -1,6 +1,7 @@
 import { PermissionService } from '../../../core/services/permission.service';
 import { AuthService } from '../../../core/services/auth.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { ConfirmDialogService } from '../../../core/services/confirm-dialog.service';
 import { CommonModule } from '@angular/common';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
@@ -33,6 +34,8 @@ import { EventGroupDialogComponent, EventGroupDialogData } from './event-group-d
   styleUrl: './event-groups.component.css'
 })
 export class EventGroupsComponent implements OnInit {
+  private confirmDialog = inject(ConfirmDialogService);
+
   canAdd = false;
   canEdit = false;
   canDelete = false;
@@ -142,7 +145,8 @@ export class EventGroupsComponent implements OnInit {
   }
 
   deleteEventGroup(id: number): void {
-    if (confirm('Are you sure you want to delete this event group?')) {
+    this.confirmDialog.confirm({ title: 'Delete event group', message: 'Are you sure you want to delete this event group?', confirmText: 'Delete' }).subscribe(confirmed => {
+      if (!confirmed) { return; }
       this.eventService.deleteEventGroup(id).subscribe({
         next: () => {
           this.snackBar.open('Event group deleted successfully!', 'Close', { duration: 3000 });
@@ -154,7 +158,7 @@ export class EventGroupsComponent implements OnInit {
           this.snackBar.open(message, 'Close', { duration: 3000 });
         }
       });
-    }
+    });
   }
 
   getStatusColor(status: string): string {

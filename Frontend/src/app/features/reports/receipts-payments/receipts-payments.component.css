@@ -121,11 +121,11 @@
 }
 
 .closing-balance-text {
-  color: #1976d2;
+  color: var(--primary);
 }
 
 .closing-balance-amt {
-  color: #1976d2;
+  color: var(--primary);
 }
 
 .final-total td {

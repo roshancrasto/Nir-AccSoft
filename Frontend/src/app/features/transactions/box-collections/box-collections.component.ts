@@ -1,6 +1,7 @@
 import { PermissionService } from '../../../core/services/permission.service';
 import { AuthService } from '../../../core/services/auth.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { ConfirmDialogService } from '../../../core/services/confirm-dialog.service';
 import { CommonModule } from '@angular/common';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
@@ -38,6 +39,8 @@ import { BoxCollectionDialogComponent, BoxCollectionDialogData } from './box-col
   styleUrl: './box-collections.component.css'
 })
 export class BoxCollectionsComponent implements OnInit {
+  private confirmDialog = inject(ConfirmDialogService);
+
   canAdd = false;
   canEdit = false;
   canDelete = false;
@@ -149,7 +152,8 @@ export class BoxCollectionsComponent implements OnInit {
   }
 
   deleteBoxCollection(collection: BoxCollection): void {
-    if (confirm(`Are you sure you want to delete box collection ${collection.collectionNumber}?`)) {
+    this.confirmDialog.confirm({ title: 'Delete box collection', message: `Are you sure you want to delete box collection ${collection.collectionNumber}?`, confirmText: 'Delete' }).subscribe(confirmed => {
+      if (!confirmed) { return; }
       this.boxCollectionService.deleteBoxCollection(collection.boxCollectionId).subscribe({
         next: () => {
           this.snackBar.open('Box collection deleted successfully', 'Close', { duration: 3000 });
@@ -161,6 +165,6 @@ export class BoxCollectionsComponent implements OnInit {
           this.snackBar.open(message, 'Close', { duration: 3000 });
         }
       });
-    }
+    });
   }
 }

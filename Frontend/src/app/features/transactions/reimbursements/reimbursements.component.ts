@@ -1,6 +1,7 @@
 import { PermissionService } from '../../../core/services/permission.service';
 import { AuthService } from '../../../core/services/auth.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { ConfirmDialogService } from '../../../core/services/confirm-dialog.service';
 import { CommonModule } from '@angular/common';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,6 +20,8 @@ import { ReimbursementDialogComponent } from '../reimbursement-dialog/reimbursem
   styleUrls: ['./reimbursements.component.css']
 })
 export class ReimbursementsComponent implements OnInit {
+  private confirmDialog = inject(ConfirmDialogService);
+
   canAdd = false;
   canEdit = false;
   canDelete = false;
@@ -85,8 +88,9 @@ export class ReimbursementsComponent implements OnInit {
   }
 
   deleteLink(id: number): void {
-    if (confirm('Are you sure you want to delete this expense?')) {
+    this.confirmDialog.confirm({ title: 'Delete expense', message: 'Are you sure you want to delete this expense?', confirmText: 'Delete' }).subscribe(confirmed => {
+      if (!confirmed) { return; }
       this.service.delete(id).subscribe(() => this.loadData());
-    }
+    });
   }
 }

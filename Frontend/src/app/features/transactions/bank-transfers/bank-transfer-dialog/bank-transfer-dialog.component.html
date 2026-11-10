@@ -1,9 +1,15 @@
-<h2 mat-dialog-title>
-  <mat-icon class="dialog-icon">{{ data.mode === 'add' ? 'add_circle' : 'edit' }}</mat-icon>
-  {{ data.mode === 'add' ? 'Record Bank Transfer' : 'Edit Bank Transfer' }}
-</h2>
+<div mat-dialog-title class="dlg-header">
+  <span class="dlg-icon"><mat-icon>sync_alt</mat-icon></span>
+  <div class="dlg-heading">
+    <span class="dlg-eyebrow">Transactions</span>
+    <h2 class="dlg-title">{{ data.mode === 'add' ? 'Record Bank Transfer' : 'Edit Bank Transfer' }}</h2>
+  </div>
+  <button type="button" class="dlg-close" mat-dialog-close aria-label="Close" title="Close"><mat-icon>close</mat-icon></button>
+</div>
 <mat-dialog-content>
   <form #transferForm="ngForm" class="transfer-form">
+    <div class="sec">
+      <div class="sec-title">Transfer</div>
     <div class="form-row">
       <mat-form-field appearance="outline" class="half-width">
         <mat-label>Transfer Date</mat-label>
@@ -20,6 +26,9 @@
       </mat-form-field>
     </div>
 
+    </div>
+    <div class="sec">
+      <div class="sec-title">Accounts</div>
     <div class="form-row">
       <mat-form-field appearance="outline" class="half-width">
         <mat-label>From Account Type</mat-label>
@@ -66,6 +75,9 @@
       </div>
     </div>
 
+    </div>
+    <div class="sec">
+      <div class="sec-title">Amount &amp; reference</div>
     <div class="form-row">
       <mat-form-field appearance="outline" class="half-width mt-3">
         <mat-label>Amount</mat-label>
@@ -88,6 +100,7 @@
     <div class="alert alert-info" *ngIf="fromAccountType === toAccountType && transferType !== 'Bank To Bank' && transferType !== 'Transfer To Petty Cash' && transferType !== 'General Transfer'">
       <mat-icon>info</mat-icon>
       <span>Transferring between the same account type ({{fromAccountType}} to {{toAccountType}}) is usually used for internal sub-accounts.</span>
+    </div>
     </div>
   </form>
 </mat-dialog-content>

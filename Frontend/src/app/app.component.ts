@@ -54,6 +54,23 @@ export class AppComponent implements OnInit {
     });
   }
 
+  /** Display-only: initials for the avatar chip in the top bar. */
+  get userInitials(): string {
+    const name = (this.currentUser?.fullName || '').trim();
+    if (!name) { return 'U'; }
+    const parts = name.split(/\s+/);
+    return (parts[0][0] + (parts.length > 1 ? parts[parts.length - 1][0] : '')).toUpperCase();
+  }
+
+  /** Display-only: highlight a top-level menu when one of its child routes is open. */
+  isParentActive(parent: Menu): boolean {
+    const url = this.router.url.split('?')[0];
+    return (parent.children || []).some(c => {
+      const route = (c.menuRoute || '').replace(/^\/?/, '/');
+      return route.length > 1 && (url === route || url.startsWith(route + '/'));
+    });
+  }
+
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);

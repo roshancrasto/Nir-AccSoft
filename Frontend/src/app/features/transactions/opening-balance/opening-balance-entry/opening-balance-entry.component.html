@@ -1,7 +1,11 @@
-<h2 mat-dialog-title class="dialog-title">
-  <mat-icon class="title-icon">{{ action === 'Add' ? 'add_circle' : action === 'Update' ? 'edit' : 'visibility' }}</mat-icon>
-  {{action}} Opening Balance
-</h2>
+<div mat-dialog-title class="dlg-header">
+  <span class="dlg-icon"><mat-icon>account_balance_wallet</mat-icon></span>
+  <div class="dlg-heading">
+    <span class="dlg-eyebrow">Transactions</span>
+    <h2 class="dlg-title">{{action}} Opening Balance</h2>
+  </div>
+  <button type="button" class="dlg-close" (click)="onCancel()" aria-label="Close" title="Close"><mat-icon>close</mat-icon></button>
+</div>
 
 <mat-dialog-content class="dialog-content">
   <form [formGroup]="entryForm" class="form-container">

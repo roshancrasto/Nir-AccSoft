@@ -31,10 +31,14 @@ export interface CategoryDialogData {
     MatIconModule
   ],
   template: `
-    <h2 mat-dialog-title>
-      <mat-icon class="dialog-icon">{{ data.mode === 'add' ? 'add_circle' : 'edit' }}</mat-icon>
-      {{ data.mode === 'add' ? 'Add New Category' : 'Edit Category' }}
-    </h2>
+    <div mat-dialog-title class="dlg-header">
+      <span class="dlg-icon"><mat-icon>label</mat-icon></span>
+      <div class="dlg-heading">
+        <span class="dlg-eyebrow">Masters</span>
+        <h2 class="dlg-title">{{ data.mode === 'add' ? 'Add New Category' : 'Edit Category' }}</h2>
+      </div>
+      <button type="button" class="dlg-close" mat-dialog-close aria-label="Close" title="Close"><mat-icon>close</mat-icon></button>
+    </div>
     <mat-dialog-content>
       <form #categoryForm="ngForm">
         <mat-form-field appearance="outline" class="full-width">
@@ -72,10 +76,6 @@ export interface CategoryDialogData {
     }
     .toggle-row {
       margin: 8px 0 16px;
-    }
-    .dialog-icon {
-      vertical-align: middle;
-      margin-right: 8px;
     }
     mat-dialog-content {
       min-width: 350px;

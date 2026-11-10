@@ -65,5 +65,5 @@ table {
 }
 
 .badge-bank {
-  color: #1565c0;
+  color: var(--primary);
 }

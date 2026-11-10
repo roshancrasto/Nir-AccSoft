@@ -1,6 +1,7 @@
 import { PermissionService } from '../../../core/services/permission.service';
 import { AuthService } from '../../../core/services/auth.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { ConfirmDialogService } from '../../../core/services/confirm-dialog.service';
 import { CommonModule } from '@angular/common';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
@@ -35,6 +36,8 @@ import { PaymentDialogComponent, PaymentDialogData } from './payment-dialog/paym
   styleUrl: './payments.component.css'
 })
 export class PaymentsComponent implements OnInit {
+  private confirmDialog = inject(ConfirmDialogService);
+
   canAdd = false;
   canEdit = false;
   canDelete = false;
@@ -142,7 +145,8 @@ export class PaymentsComponent implements OnInit {
   }
 
   deletePayment(payment: Payment): void {
-    if (confirm(`Are you sure you want to delete voucher ${payment.voucherNumber}?`)) {
+    this.confirmDialog.confirm({ title: 'Delete payment voucher', message: `Are you sure you want to delete voucher ${payment.voucherNumber}?`, confirmText: 'Delete' }).subscribe(confirmed => {
+      if (!confirmed) { return; }
       this.paymentService.deletePayment(payment.paymentId).subscribe({
         next: () => {
           this.snackBar.open('Payment voucher deleted successfully', 'Close', { duration: 3000 });
@@ -154,6 +158,6 @@ export class PaymentsComponent implements OnInit {
           this.snackBar.open(message, 'Close', { duration: 3000 });
         }
       });
-    }
+    });
   }
 }

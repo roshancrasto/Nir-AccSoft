@@ -21,6 +21,8 @@ namespace DemoProject.Data.Entities
         public string? Description { get; set; }
         public string? DonorName { get; set; }
         public int? ReceiptBook_Rno { get; set; }
+        public int? BankAccountId { get; set; }
+        public string? BankName { get; set; }
     }
 
     public class Payment
@@ -52,6 +54,8 @@ namespace DemoProject.Data.Entities
         public int? MemberId { get; set; }
         public bool? IsVoucherOnly { get; set; }
         public bool IsReimbursement { get; set; }
+        public int? BankAccountId { get; set; }
+        public string? BankName { get; set; }
         // Join fields for related payment
         public string? RelatedVoucherNumber { get; set; }
         public string? RelatedVendorName { get; set; }

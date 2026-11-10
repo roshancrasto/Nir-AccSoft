@@ -1,6 +1,7 @@
 import { PermissionService } from '../../../core/services/permission.service';
 import { AuthService } from '../../../core/services/auth.service';
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, inject } from '@angular/core';
+import { ConfirmDialogService } from '../../../core/services/confirm-dialog.service';
 import { CommonModule } from '@angular/common';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
@@ -36,6 +37,8 @@ import { BankTransferDialogComponent, BankTransferDialogData } from './bank-tran
   styleUrl: './bank-transfers.component.css'
 })
 export class BankTransfersComponent implements OnInit, AfterViewInit {
+  private confirmDialog = inject(ConfirmDialogService);
+
   canAdd = false;
   canEdit = false;
   canDelete = false;
@@ -147,7 +150,8 @@ export class BankTransfersComponent implements OnInit, AfterViewInit {
   }
 
   deleteTransfer(transfer: BankTransfer): void {
-    if (confirm(`Are you sure you want to delete transfer ${transfer.transferNo}?`)) {
+    this.confirmDialog.confirm({ title: 'Delete bank transfer', message: `Are you sure you want to delete transfer ${transfer.transferNo}?`, confirmText: 'Delete' }).subscribe(confirmed => {
+      if (!confirmed) { return; }
       this.bankTransferService.deleteBankTransfer(transfer.transferId).subscribe({
         next: () => {
           this.snackBar.open('Bank transfer deleted successfully', 'Close', { duration: 3000 });
@@ -159,6 +163,6 @@ export class BankTransfersComponent implements OnInit, AfterViewInit {
           this.snackBar.open(message, 'Close', { duration: 3000 });
         }
       });
-    }
+    });
   }
 }

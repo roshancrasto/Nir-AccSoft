@@ -1,43 +1,69 @@
 <div *ngIf="currentUser">
-  <!-- NAVBAR from design.html -->
-  <div class="navbar">
-    <div class="logo">
-      <i class="fa-solid fa-building-columns"></i>
-      AccSoft
-    </div>
+  <!-- TOP NAVIGATION BAR -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" routerLink="/dashboard">
+        <span class="brand-mark">
+          <i class="fa-solid fa-building-columns"></i>
+        </span>
+        <span class="brand-name">Acc<strong>Soft</strong></span>
+      </a>
 
-    <ul class="menu">
-      <li>
-        <a routerLink="/dashboard" routerLinkActive="active-nav">
-          <i class="fa-solid fa-chart-line"></i> Dashboard
-        </a>
-      </li>
-
-      <!-- Dynamic Menus -->
-      <ng-container *ngFor="let parent of menus">
-        <li>
-          <a [matMenuTriggerFor]="subMenu" routerLinkActive="active-nav">
-            <mat-icon>{{ parent.menuIcon || 'folder' }}</mat-icon> {{ parent.menuName }} 
-            <i class="fa-solid fa-caret-down dropdown-icon" *ngIf="parent.children && parent.children.length > 0"></i>
-          </a>
-          <mat-menu #subMenu="matMenu" class="nav-menu">
-            <a *ngFor="let child of parent.children" mat-menu-item [routerLink]="child.menuRoute">
-              <mat-icon>{{ child.menuIcon || 'insert_drive_file' }}</mat-icon> {{ child.menuName }}
+      <nav class="nav">
+        <ul class="menu">
+          <li>
+            <a class="nav-item" routerLink="/dashboard" routerLinkActive="active-nav">
+              <mat-icon>space_dashboard</mat-icon>
+              <span>Dashboard</span>
             </a>
-          </mat-menu>
-        </li>
-      </ng-container>
-    </ul>
+          </li>
 
-    <div class="user-profile" [matMenuTriggerFor]="userProfileMenu" style="cursor: pointer;" title="Profile">
-      <i class="fa-solid fa-user"></i>
-    </div>
-    <mat-menu #userProfileMenu="matMenu">
-      <button mat-menu-item (click)="logout()">
-        <mat-icon>logout</mat-icon> Logout
+          <!-- Dynamic Menus -->
+          <ng-container *ngFor="let parent of menus">
+            <li>
+              <a class="nav-item"
+                 [class.active-nav]="isParentActive(parent)"
+                 [matMenuTriggerFor]="subMenu"
+                 #trigger="matMenuTrigger"
+                 [class.menu-open]="trigger.menuOpen">
+                <mat-icon>{{ parent.menuIcon || 'folder' }}</mat-icon>
+                <span>{{ parent.menuName }}</span>
+                <mat-icon class="caret" *ngIf="parent.children && parent.children.length > 0">expand_more</mat-icon>
+              </a>
+              <mat-menu #subMenu="matMenu" class="nav-menu" xPosition="after" yPosition="below">
+                <div class="nav-menu-title">{{ parent.menuName }}</div>
+                <a *ngFor="let child of parent.children" mat-menu-item [routerLink]="child.menuRoute" routerLinkActive="nav-menu-active">
+                  <mat-icon>{{ child.menuIcon || 'insert_drive_file' }}</mat-icon>
+                  <span>{{ child.menuName }}</span>
+                </a>
+              </mat-menu>
+            </li>
+          </ng-container>
+        </ul>
+      </nav>
+
+      <button class="user-chip" type="button" [matMenuTriggerFor]="userProfileMenu" title="Profile">
+        <span class="avatar">{{ userInitials }}</span>
+        <span class="user-meta">
+          <span class="user-name">{{ currentUser.fullName }}</span>
+          <span class="user-email">{{ currentUser.email }}</span>
+        </span>
+        <mat-icon class="caret">expand_more</mat-icon>
       </button>
-    </mat-menu>
-  </div>
+      <mat-menu #userProfileMenu="matMenu" class="profile-menu" xPosition="before">
+        <div class="profile-head">
+          <span class="avatar avatar-lg">{{ userInitials }}</span>
+          <div>
+            <div class="user-name">{{ currentUser.fullName }}</div>
+            <div class="user-email">{{ currentUser.email }}</div>
+          </div>
+        </div>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon> Logout
+        </button>
+      </mat-menu>
+    </div>
+  </header>
 </div>
 
 <main class="main-content" [class.no-nav]="!currentUser">

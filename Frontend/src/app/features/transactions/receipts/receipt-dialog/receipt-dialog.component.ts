@@ -13,6 +13,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { DonorService, Donor } from '../../../../core/services/donor.service';
 import { EventDetailService, EventDetail } from '../../../../core/services/event-detail.service';
 import { EventGroupService, EventGroup } from '../../../../core/services/event-group.service';
+import { OpeningBalanceService, BankAccountDropdown } from '../../../../core/services/opening-balance.service';
 
 export interface ReceiptDialogData {
   mode: 'add' | 'edit';
@@ -52,6 +53,8 @@ export class ReceiptDialogComponent implements OnInit {
   panAvailable: boolean = false;
   description: string = '';
   receiptBook_Rno: number | null = null;
+  bankAccountId: number | null = 1;
+  bankAccounts: BankAccountDropdown[] = [];
 
   donors: Donor[] = [];
   filteredDonors: Donor[] = [];
@@ -66,7 +69,8 @@ export class ReceiptDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: ReceiptDialogData,
     private donorService: DonorService,
     private eventDetailService: EventDetailService,
-    private eventGroupService: EventGroupService
+    private eventGroupService: EventGroupService,
+    private openingBalanceService: OpeningBalanceService
   ) {
     if (data.mode === 'edit' && data.receipt) {
       this.receiptNumber = data.receipt.receiptNumber;
@@ -82,6 +86,7 @@ export class ReceiptDialogComponent implements OnInit {
       this.panAvailable = data.receipt.panAvailable;
       this.description = data.receipt.description;
       this.receiptBook_Rno = data.receipt.receiptBook_Rno;
+      this.bankAccountId = data.receipt.bankAccountId ?? (data.receipt.paymentMode !== 'Cash' ? 1 : null);
     }
   }
 
@@ -101,6 +106,9 @@ export class ReceiptDialogComponent implements OnInit {
     this.eventGroupService.getEventGroups().subscribe((data: EventGroup[]) => {
       this.eventGroups = data.filter(e => e.isActive);
       this.filteredEventGroups = [...this.eventGroups];
+    });
+    this.openingBalanceService.getBankAccounts().subscribe((data: BankAccountDropdown[]) => {
+      this.bankAccounts = data.filter(a => (a.accountType || 'Bank') === 'Bank');
     });
   }
 
@@ -149,6 +157,11 @@ export class ReceiptDialogComponent implements OnInit {
     return `${year}-${month}-${day}`;
   }
 
+  getAccountDisplay(account: BankAccountDropdown): string {
+    const branchPart = account.branch ? ` - ${account.branch}` : '';
+    return `${account.bankName}${branchPart}`;
+  }
+
   onSave(): void {
     if (!this.receiptNumber || !this.receiptDate || !this.donorId) return;
 
@@ -162,6 +175,7 @@ export class ReceiptDialogComponent implements OnInit {
       paymentMode: this.paymentMode,
       cashAmount: this.cashAmount,
       bankAmount: this.bankAmount,
+      bankAccountId: (this.paymentMode === 'Bank' || this.paymentMode === 'Both') ? (this.bankAccountId || 1) : null,
       referenceNumber: this.referenceNumber,
       panAvailable: this.panAvailable,
       description: this.description,

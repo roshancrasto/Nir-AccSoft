@@ -1,6 +1,7 @@
 import { PermissionService } from '../../../core/services/permission.service';
 import { AuthService } from '../../../core/services/auth.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { ConfirmDialogService } from '../../../core/services/confirm-dialog.service';
 import { CommonModule } from '@angular/common';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
@@ -31,6 +32,8 @@ import { CategoryDialogComponent, CategoryDialogData } from './category-dialog/c
   styleUrl: './categories.component.css'
 })
 export class CategoriesComponent implements OnInit {
+  private confirmDialog = inject(ConfirmDialogService);
+
   canAdd = false;
   canEdit = false;
   canDelete = false;
@@ -140,7 +143,8 @@ export class CategoriesComponent implements OnInit {
   }
 
   deleteCategory(id: number): void {
-    if (confirm('Are you sure you want to delete this category?')) {
+    this.confirmDialog.confirm({ title: 'Delete category', message: 'Are you sure you want to delete this category?', confirmText: 'Delete' }).subscribe(confirmed => {
+      if (!confirmed) { return; }
       this.categoryService.deleteCategory(id).subscribe({
         next: () => {
           this.snackBar.open('Category deleted successfully!', 'Close', { duration: 3000 });
@@ -152,6 +156,6 @@ export class CategoriesComponent implements OnInit {
           this.snackBar.open(message, 'Close', { duration: 3000 });
         }
       });
-    }
+    });
   }
 }

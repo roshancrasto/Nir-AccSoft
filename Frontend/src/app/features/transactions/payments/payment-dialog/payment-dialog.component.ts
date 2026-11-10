@@ -22,6 +22,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { EventExpenseSelectionDialogComponent } from '../event-expense-selection-dialog/event-expense-selection-dialog.component';
 import { PaymentService, PaymentExpenseMapping, PendingEventExpense, RelatedPayment } from '../../../../core/services/payment.service';
 import { PaymentExpenseLinkService, PaymentExpenseLink } from '../../../../core/services/payment-expense-link.service';
+import { OpeningBalanceService, BankAccountDropdown } from '../../../../core/services/opening-balance.service';
 import { ReimbursementLinkDialogComponent } from '../reimbursement-link-dialog/reimbursement-link-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -93,6 +94,8 @@ export class PaymentDialogComponent implements OnInit {
   categories: Category[] = [];
   filteredCategories: Category[] = [];
   paymentModes: string[] = ['Cash', 'Bank'];
+  bankAccountId: number | null = 1;
+  bankAccounts: BankAccountDropdown[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<PaymentDialogComponent>,
@@ -105,6 +108,7 @@ export class PaymentDialogComponent implements OnInit {
     private paymentService: PaymentService,
     private memberService: MemberService,
     private paymentExpenseLinkService: PaymentExpenseLinkService,
+    private openingBalanceService: OpeningBalanceService,
     private snackBar: MatSnackBar
   ) {
     if (data.mode === 'edit' && data.payment) {
@@ -122,6 +126,7 @@ export class PaymentDialogComponent implements OnInit {
       this.memberId = data.payment.memberId || null;
       this.selectedExpenseIds = data.payment.selectedExpenseIds || [];
       this.paymentMode = data.payment.paymentMode;
+      this.bankAccountId = data.payment.bankAccountId ?? (data.payment.paymentMode !== 'Cash' ? 1 : null);
       this.debitAmount = data.payment.debitAmount;
       this.description = data.payment.description;
       this.billAvailable = data.payment.billAvailable;
@@ -149,6 +154,7 @@ export class PaymentDialogComponent implements OnInit {
       this.memberId = payment.memberId || null;
       this.selectedExpenseIds = payment.selectedExpenseIds || [];
       this.paymentMode = payment.paymentMode;
+      this.bankAccountId = payment.bankAccountId ?? (payment.paymentMode !== 'Cash' ? 1 : null);
       this.debitAmount = payment.debitAmount;
       this.description = payment.description;
       this.billAvailable = payment.billAvailable;
@@ -192,6 +198,9 @@ export class PaymentDialogComponent implements OnInit {
     this.categoryService.getCategories().subscribe((data: Category[]) => {
       this.categories = data.filter(c => c.isActive);
       this.filteredCategories = [...this.categories];
+    });
+    this.openingBalanceService.getBankAccounts().subscribe((data: BankAccountDropdown[]) => {
+      this.bankAccounts = data.filter(a => (a.accountType || 'Bank') === 'Bank');
     });
   }
 
@@ -282,6 +291,11 @@ export class PaymentDialogComponent implements OnInit {
     return `${year}-${month}-${day}`;
   }
 
+  getAccountDisplay(account: BankAccountDropdown): string {
+    const branchPart = account.branch ? ` - ${account.branch}` : '';
+    return `${account.bankName}${branchPart}`;
+  }
+
   onSave(): void {
     if (!this.voucherNumber || !this.voucherDate || !this.debitAmount) return;
 
@@ -294,6 +308,7 @@ export class PaymentDialogComponent implements OnInit {
       eventGroupKey: this.eventGroupKey,
       expenseCategoryId: this.expenseCategoryId,
       paymentMode: this.paymentMode,
+      bankAccountId: this.paymentMode === 'Bank' ? (this.bankAccountId || 1) : null,
       debitAmount: this.debitAmount,
       description: this.description,
       billAvailable: this.billAvailable,

@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { ConfirmDialogService } from '../../../core/services/confirm-dialog.service';
 import { CommonModule } from '@angular/common';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
@@ -35,6 +36,8 @@ import { DonorDialogComponent, DonorDialogData } from './donor-dialog/donor-dial
   styleUrl: './donors.component.css'
 })
 export class DonorsComponent implements OnInit {
+  private confirmDialog = inject(ConfirmDialogService);
+
   displayedColumns: string[] = ['donorName', 'mobileNumber', 'dPlace', 'dCity', 'dState', 'isUdyavarParish', 'isActive', 'actions'];
   dataSource: MatTableDataSource<Donor> = new MatTableDataSource<Donor>();
   canAdd = false;
@@ -150,7 +153,8 @@ export class DonorsComponent implements OnInit {
   }
 
   deleteDonor(id: number): void {
-    if (confirm('Are you sure you want to delete this donor?')) {
+    this.confirmDialog.confirm({ title: 'Delete donor', message: 'Are you sure you want to delete this donor?', confirmText: 'Delete' }).subscribe(confirmed => {
+      if (!confirmed) { return; }
       this.donorService.deleteDonor(id).subscribe({
         next: () => {
           this.snackBar.open('Donor deleted successfully!', 'Close', { duration: 3000 });
@@ -161,6 +165,6 @@ export class DonorsComponent implements OnInit {
           this.snackBar.open('Failed to delete donor', 'Close', { duration: 3000 });
         }
       });
-    }
+    });
   }
 }

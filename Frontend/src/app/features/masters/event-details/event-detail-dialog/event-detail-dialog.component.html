@@ -1,7 +1,11 @@
-<h2 mat-dialog-title>
-  <mat-icon class="dialog-icon">{{ data.mode === 'add' ? 'add_circle' : 'edit' }}</mat-icon>
-  {{ data.mode === 'add' ? 'Add Event Detail' : 'Edit Event Detail' }}
-</h2>
+<div mat-dialog-title class="dlg-header">
+  <span class="dlg-icon"><mat-icon>event_note</mat-icon></span>
+  <div class="dlg-heading">
+    <span class="dlg-eyebrow">Masters</span>
+    <h2 class="dlg-title">{{ data.mode === 'add' ? 'Add Event Detail' : 'Edit Event Detail' }}</h2>
+  </div>
+  <button type="button" class="dlg-close" mat-dialog-close aria-label="Close" title="Close"><mat-icon>close</mat-icon></button>
+</div>
 <mat-dialog-content>
   <form #eventForm="ngForm" class="event-form">
     <mat-form-field appearance="outline" class="full-width">

@@ -21,6 +21,8 @@ export interface Receipt {
   panAvailable: boolean;
   description: string;
   receiptBook_Rno?: number;
+  bankAccountId?: number | null;
+  bankName?: string;
 }
 
 @Injectable({

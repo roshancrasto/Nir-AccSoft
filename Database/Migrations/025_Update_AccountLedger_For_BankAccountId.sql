@@ -25,6 +25,7 @@ BEGIN
 
     -- Find the Base Opening Balance on or before @ReportFY
     DECLARE @BaseOB DECIMAL(18,2) = 0;
+    DECLARE @CalculatedOpeningBalance DECIMAL(18,2) = 0;
     DECLARE @LatestOBYear VARCHAR(10) = NULL;
 
     IF @AccountType = 'Cash'

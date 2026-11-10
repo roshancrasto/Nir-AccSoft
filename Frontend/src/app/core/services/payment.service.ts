@@ -61,6 +61,8 @@ export interface Payment {
   memberId?: number | null;
   selectedExpenseIds?: number[];
   isVoucherOnly?: boolean;
+  bankAccountId?: number | null;
+  bankName?: string;
 }
 
 @Injectable({

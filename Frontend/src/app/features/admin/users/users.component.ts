@@ -1,6 +1,7 @@
 import { PermissionService } from '../../../core/services/permission.service';
 import { AuthService } from '../../../core/services/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { ConfirmDialogService } from '../../../core/services/confirm-dialog.service';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { UserService, UserDTO } from '../../../core/services/user.service';
 import { MatTableModule } from '@angular/material/table';
@@ -17,6 +18,8 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
+  private confirmDialog = inject(ConfirmDialogService);
+
   canAdd = false;
   canEdit = false;
   canDelete = false;
@@ -50,12 +53,13 @@ export class UsersComponent implements OnInit {
   }
 
   deactivateUser(user: UserDTO) {
-    if (confirm(`Are you sure you want to ${user.isActive ? 'deactivate' : 'activate'} ${user.fullName}?`)) {
+    this.confirmDialog.confirm({ title: user.isActive ? 'Deactivate user' : 'Activate user', message: `Are you sure you want to ${user.isActive ? 'deactivate' : 'activate'} ${user.fullName}?`, confirmText: user.isActive ? 'Deactivate' : 'Activate', tone: user.isActive ? 'danger' : 'primary', icon: user.isActive ? 'person_off' : 'person_check' }).subscribe(confirmed => {
+      if (!confirmed) { return; }
       user.isActive = !user.isActive;
       this.userService.updateUser(user.userId, user).subscribe(() => {
         this.loadUsers();
       });
-    }
+    });
   }
 
   openAddUserDialog() {
@@ -89,29 +93,37 @@ import { MatDialogRef } from '@angular/material/dialog';
     MatSelectModule,
     MatCheckboxModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatIconModule
   ],
   template: `
-    <h2 mat-dialog-title>Create New User</h2>
+    <div mat-dialog-title class="dlg-header">
+      <span class="dlg-icon"><mat-icon>person_add</mat-icon></span>
+      <div class="dlg-heading">
+        <span class="dlg-eyebrow">Administration</span>
+        <h2 class="dlg-title">Create New User</h2>
+      </div>
+      <button type="button" class="dlg-close" mat-dialog-close aria-label="Close" title="Close"><mat-icon>close</mat-icon></button>
+    </div>
     <mat-dialog-content>
       <form [formGroup]="userForm" style="display: flex; flex-direction: column;">
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="outline">
           <mat-label>Full Name</mat-label>
           <input matInput formControlName="fullName" required>
         </mat-form-field>
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="outline">
           <mat-label>Email</mat-label>
           <input matInput type="email" formControlName="email" required>
         </mat-form-field>
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="outline">
           <mat-label>Login ID</mat-label>
           <input matInput formControlName="loginId" required>
         </mat-form-field>
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="outline">
           <mat-label>Password</mat-label>
           <input matInput type="password" formControlName="password" required>
         </mat-form-field>
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="outline">
           <mat-label>Link to Member (Optional)</mat-label>
           <mat-select formControlName="memberKey">
             <mat-option [value]="null">-- None --</mat-option>

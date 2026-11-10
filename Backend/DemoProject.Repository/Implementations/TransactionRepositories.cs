@@ -30,6 +30,7 @@ namespace DemoProject.Repository.Implementations
             parameters.Add("@PANAvailable", entity.PANAvailable);
             parameters.Add("@Description", entity.Description);
             parameters.Add("@ReceiptBook_Rno", entity.ReceiptBook_Rno);
+            parameters.Add("@BankAccountId", entity.BankAccountId);
             parameters.Add("@CreatedBy", createdBy);
             return await connection.ExecuteScalarAsync<int>("NU_sp_Receipt_Insert", parameters, commandType: CommandType.StoredProcedure);
         }
@@ -51,6 +52,7 @@ namespace DemoProject.Repository.Implementations
             parameters.Add("@PANAvailable", entity.PANAvailable);
             parameters.Add("@Description", entity.Description);
             parameters.Add("@ReceiptBook_Rno", entity.ReceiptBook_Rno);
+            parameters.Add("@BankAccountId", entity.BankAccountId);
             parameters.Add("@ModifiedBy", modifiedBy);
             await connection.ExecuteAsync("NU_sp_Receipt_Update", parameters, commandType: CommandType.StoredProcedure);
         }
@@ -100,6 +102,7 @@ namespace DemoProject.Repository.Implementations
             parameters.Add("@IsVoucherOnly", entity.IsVoucherOnly);
             parameters.Add("@IsReimbursement", entity.IsReimbursement);
             parameters.Add("@PaymentType", entity.PaymentType);
+            parameters.Add("@BankAccountId", entity.BankAccountId);
             try
             {
                 return await connection.ExecuteScalarAsync<int>("NU_sp_Payment_Insert", parameters, commandType: CommandType.StoredProcedure);
@@ -137,6 +140,7 @@ namespace DemoProject.Repository.Implementations
             parameters.Add("@IsVoucherOnly", entity.IsVoucherOnly);
             parameters.Add("@IsReimbursement", entity.IsReimbursement);
             parameters.Add("@PaymentType", entity.PaymentType);
+            parameters.Add("@BankAccountId", entity.BankAccountId);
             try
             {
                 await connection.ExecuteAsync("NU_sp_Payment_Update", parameters, commandType: CommandType.StoredProcedure);

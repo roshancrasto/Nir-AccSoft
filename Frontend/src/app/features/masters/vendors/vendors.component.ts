@@ -1,6 +1,7 @@
 import { PermissionService } from '../../../core/services/permission.service';
 import { AuthService } from '../../../core/services/auth.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { ConfirmDialogService } from '../../../core/services/confirm-dialog.service';
 import { CommonModule } from '@angular/common';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
@@ -31,6 +32,8 @@ import { VendorDialogComponent, VendorDialogData } from './vendor-dialog/vendor-
   styleUrl: './vendors.component.css'
 })
 export class VendorsComponent implements OnInit {
+  private confirmDialog = inject(ConfirmDialogService);
+
   canAdd = false;
   canEdit = false;
   canDelete = false;
@@ -140,7 +143,8 @@ export class VendorsComponent implements OnInit {
   }
 
   deleteVendor(id: number): void {
-    if (confirm('Are you sure you want to delete this vendor?')) {
+    this.confirmDialog.confirm({ title: 'Delete vendor', message: 'Are you sure you want to delete this vendor?', confirmText: 'Delete' }).subscribe(confirmed => {
+      if (!confirmed) { return; }
       this.vendorService.deleteVendor(id).subscribe({
         next: () => {
           this.snackBar.open('Vendor deleted successfully!', 'Close', { duration: 3000 });
@@ -152,6 +156,6 @@ export class VendorsComponent implements OnInit {
           this.snackBar.open(message, 'Close', { duration: 3000 });
         }
       });
-    }
+    });
   }
 }

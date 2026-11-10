@@ -22,6 +22,8 @@ namespace DemoProject.Business.DTOs
         public string? Description { get; set; }
         public string? DonorName { get; set; }
         public int? ReceiptBook_Rno { get; set; }
+        public int? BankAccountId { get; set; }
+        public string? BankName { get; set; }
     }
 
     public class CreateReceiptDto
@@ -39,6 +41,7 @@ namespace DemoProject.Business.DTOs
         public bool PANAvailable { get; set; }
         public string? Description { get; set; }
         public int? ReceiptBook_Rno { get; set; }
+        public int? BankAccountId { get; set; }
     }
 
     // Payment DTOs
@@ -74,6 +77,8 @@ namespace DemoProject.Business.DTOs
         public int? MemberId { get; set; }
         public bool? IsVoucherOnly { get; set; }
         public bool IsReimbursement { get; set; }
+        public int? BankAccountId { get; set; }
+        public string? BankName { get; set; }
         public List<PaymentExpenseMappingDto> EventExpenseMappings { get; set; } = new();
         public List<int> SelectedExpenseIds { get; set; } = new();
     }
@@ -102,6 +107,7 @@ namespace DemoProject.Business.DTOs
         public int? MemberId { get; set; }
         public bool? IsVoucherOnly { get; set; }
         public bool IsReimbursement { get; set; }
+        public int? BankAccountId { get; set; }
         public List<PaymentExpenseMappingDto> EventExpenseMappings { get; set; } = new();
         public List<int> SelectedExpenseIds { get; set; } = new();
     }
