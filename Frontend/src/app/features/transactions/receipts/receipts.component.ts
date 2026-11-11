@@ -12,17 +12,11 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { FormsModule } from '@angular/forms';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ListFilter } from '../../../shared/list-filter/list-filter';
+import { ListFilterComponent } from '../../../shared/list-filter/list-filter.component';
+import { FilterChipsComponent } from '../../../shared/list-filter/filter-chips.component';
 import { ReceiptEntryService, Receipt } from '../../../core/services/receipt-entry.service';
 import { ReceiptDialogComponent, ReceiptDialogData } from './receipt-dialog/receipt-dialog.component';
-
-interface FilterOption {
-  key: string;
-  label: string;
-  count: number;
-}
 
 @Component({
   selector: 'app-receipts',
@@ -38,9 +32,8 @@ interface FilterOption {
     MatFormFieldModule,
     MatInputModule,
     MatPaginatorModule,
-    FormsModule,
-    MatMenuModule,
-    MatCheckboxModule
+    ListFilterComponent,
+    FilterChipsComponent
   ],
   providers: [ReceiptEntryService],
   templateUrl: './receipts.component.html',
@@ -64,12 +57,12 @@ export class ReceiptsComponent implements OnInit {
 
   // List filter (multi-select Event Group / Donor) combined with the search box
   searchText = '';
-  groupOptions: FilterOption[] = [];
-  donorOptions: FilterOption[] = [];
-  selectedGroups = new Set<string>();
-  selectedDonors = new Set<string>();
-  groupSearch = '';
-  donorSearch = '';
+  filter = new ListFilter<Receipt>([
+    { id: 'eventGroup', label: 'Event Group', searchPlaceholder: 'Search event groups', emptyText: 'No event groups', weight: 2,
+      keyOf: r => r.eventGroupKey != null ? 'g' + r.eventGroupKey : 'n' + (r.eventGroupName || ''), labelOf: r => r.eventGroupName },
+    { id: 'donor', label: 'Donor', searchPlaceholder: 'Search donors', emptyText: 'No donors', weight: 3,
+      keyOf: r => r.donorId != null ? 'd' + r.donorId : 'n' + (r.donorName || ''), labelOf: r => r.donorName }
+  ]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -80,6 +73,7 @@ export class ReceiptsComponent implements OnInit {
     private authService: AuthService) {}
 
   ngOnInit(): void {
+    this.filter.changes.subscribe(() => this.applyFilters());
     this.loadReceipts();
 
     const user = this.authService.getCurrentUser();
@@ -102,7 +96,7 @@ export class ReceiptsComponent implements OnInit {
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.filterPredicate = (r, f) => this.matchesFilter(r, f);
-        this.buildFilterOptions(data || []);
+        this.filter.setData(data || []);
         this.applyFilters();
         this.calculateKPIs(data);
       },
@@ -118,70 +112,16 @@ export class ReceiptsComponent implements OnInit {
     this.applyFilters();
   }
 
-  // ---- Event Group / Donor filter ----
-  private groupKey(r: Receipt): string { return r.eventGroupKey != null ? 'g' + r.eventGroupKey : 'n' + (r.eventGroupName || ''); }
-  private donorKey(r: Receipt): string { return r.donorId != null ? 'd' + r.donorId : 'n' + (r.donorName || ''); }
-
-  private buildFilterOptions(data: Receipt[]): void {
-    const collect = (keyOf: (r: Receipt) => string, labelOf: (r: Receipt) => string | undefined, selected: Set<string>) => {
-      const map = new Map<string, FilterOption>();
-      for (const r of data) {
-        const label = (labelOf(r) || '').trim();
-        if (!label) continue;
-        const key = keyOf(r);
-        const o = map.get(key);
-        if (o) { o.count++; } else { map.set(key, { key, label, count: 1 }); }
-      }
-      // drop selections that no longer exist after a reload
-      for (const k of Array.from(selected)) { if (!map.has(k)) selected.delete(k); }
-      return Array.from(map.values()).sort((a, b) => a.label.localeCompare(b.label));
-    };
-    this.groupOptions = collect(r => this.groupKey(r), r => r.eventGroupName, this.selectedGroups);
-    this.donorOptions = collect(r => this.donorKey(r), r => r.donorName, this.selectedDonors);
-  }
-
-  get activeFilterCount(): number { return this.selectedGroups.size + this.selectedDonors.size; }
-
-  visibleOptions(options: FilterOption[], search: string): FilterOption[] {
-    const q = (search || '').trim().toLowerCase();
-    return q ? options.filter(o => o.label.toLowerCase().includes(q)) : options;
-  }
-
-  toggleOption(selected: Set<string>, key: string): void {
-    if (selected.has(key)) { selected.delete(key); } else { selected.add(key); }
-    this.applyFilters();
-  }
-
-  clearSelection(selected: Set<string>): void {
-    selected.clear();
-    this.applyFilters();
-  }
-
-  clearAllFilters(): void {
-    this.selectedGroups.clear();
-    this.selectedDonors.clear();
-    this.applyFilters();
-  }
-
-  optionLabel(options: FilterOption[], key: string): string {
-    return options.find(o => o.key === key)?.label || '';
-  }
-
   applyFilters(): void {
     // The filter string only has to change for MatTableDataSource to re-run the predicate.
-    this.dataSource.filter = JSON.stringify({
-      t: this.searchText,
-      g: Array.from(this.selectedGroups),
-      d: Array.from(this.selectedDonors)
-    });
+    this.dataSource.filter = this.searchText + '\u0000' + this.filter.signature;
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
   }
 
   private matchesFilter(r: Receipt, _filter: string): boolean {
-    if (this.selectedGroups.size && !this.selectedGroups.has(this.groupKey(r))) return false;
-    if (this.selectedDonors.size && !this.selectedDonors.has(this.donorKey(r))) return false;
+    if (!this.filter.matches(r)) return false;
     if (!this.searchText) return true;
     // same text match as the table's default search
     const text = Object.values(r).reduce((acc: string, v) => acc + (v ?? '') + ' ', '').toLowerCase();

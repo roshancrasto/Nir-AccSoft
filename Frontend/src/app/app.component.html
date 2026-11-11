@@ -29,12 +29,21 @@
                 <span>{{ parent.menuName }}</span>
                 <mat-icon class="caret" *ngIf="parent.children && parent.children.length > 0">expand_more</mat-icon>
               </a>
-              <mat-menu #subMenu="matMenu" class="nav-menu" xPosition="after" yPosition="below">
-                <div class="nav-menu-title">{{ parent.menuName }}</div>
-                <a *ngFor="let child of parent.children" mat-menu-item [routerLink]="child.menuRoute" routerLinkActive="nav-menu-active">
-                  <mat-icon>{{ child.menuIcon || 'insert_drive_file' }}</mat-icon>
-                  <span>{{ child.menuName }}</span>
-                </a>
+              <mat-menu #subMenu="matMenu" [class]="(parent.children?.length || 0) > 6 ? 'nav-menu nav-menu-wide' : 'nav-menu'" xPosition="after" yPosition="below">
+                <div class="nm-head">
+                  <span class="nm-head-icon"><mat-icon>{{ parent.menuIcon || 'folder' }}</mat-icon></span>
+                  <div class="nm-head-text">
+                    <span class="nm-head-title">{{ parent.menuName }}</span>
+                    <span class="nm-head-sub">{{ parent.children?.length || 0 }} {{ (parent.children?.length || 0) === 1 ? 'page' : 'pages' }}</span>
+                  </div>
+                </div>
+                <div class="nm-grid">
+                  <a *ngFor="let child of parent.children" mat-menu-item class="nm-item" [routerLink]="child.menuRoute" routerLinkActive="nav-menu-active">
+                    <span class="nm-icon"><mat-icon>{{ child.menuIcon || 'insert_drive_file' }}</mat-icon></span>
+                    <span class="nm-text">{{ child.menuName }}</span>
+                    <span class="nm-arrow material-icons" aria-hidden="true">chevron_right</span>
+                  </a>
+                </div>
               </mat-menu>
             </li>
           </ng-container>

@@ -1,1 +1,4 @@
 /* Component specific styles are now in styles.css globally */
+
+/* Filter button sits next to the search box */
+.table-header > div:first-child { gap: 8px; align-items: center; }

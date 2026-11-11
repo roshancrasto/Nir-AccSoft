@@ -1,115 +1,293 @@
-<div class="dashboard-container">
-  <div class="welcome-banner fade-in">
-    <div class="welcome-header">
-      <div>
-        <h1>Welcome back, Admin!</h1>
-        <p>Here's what's happening with DemoProject today.</p>
+<div class="dash">
+
+  <!-- Header -->
+  <header class="dash-head">
+    <div class="dash-hello">
+      <div class="dash-eyebrow">
+        <span>{{ today | date:'EEEE, d MMMM y' }}</span>
+        <span class="fy-pill">{{ fyLabel }}</span>
+        <span class="sample-pill" *ngIf="isSample" title="These figures are sample data until the dashboard is connected">
+          <mat-icon>science</mat-icon> Sample data
+        </span>
       </div>
-      <button mat-flat-button color="primary" (click)="loadSummary()" [disabled]="isLoading">
-        <mat-icon>refresh</mat-icon> Refresh Data
-      </button>
+      <h1>{{ greeting }}, {{ userName }}</h1>
+      <p>Here's how the association's accounts are doing this financial year.</p>
     </div>
-  </div>
+    <div class="dash-actions">
+      <a class="act act-primary" routerLink="/transactions/receipts"><mat-icon>add</mat-icon> New Receipt</a>
+      <a class="act" routerLink="/transactions/payments"><mat-icon>request_quote</mat-icon> New Voucher</a>
+      <a class="act" routerLink="/transactions/bank-transfers"><mat-icon>sync_alt</mat-icon> Bank Transfer</a>
+    </div>
+  </header>
 
-  <div *ngIf="isLoading" class="loading-state">
-    <mat-spinner diameter="40"></mat-spinner>
-    <p>Loading your dashboard...</p>
-  </div>
-
-  <div *ngIf="!isLoading && summary" class="dashboard-content fade-in-up">
-    <!-- Summary Cards -->
-    <div class="summary-cards">
-      <mat-card class="summary-card cash">
-        <mat-card-header>
-          <div class="card-icon cash-icon">
-            <mat-icon>account_balance_wallet</mat-icon>
-          </div>
-          <div class="card-titles">
-            <mat-card-title>Cash in Hand</mat-card-title>
-            <mat-card-subtitle>As of today</mat-card-subtitle>
-          </div>
-        </mat-card-header>
-        <mat-card-content>
-          <h2>{{ summary.cashInHand | currency:'INR':'symbol' }}</h2>
-        </mat-card-content>
-      </mat-card>
-
-      <mat-card class="summary-card bank">
-        <mat-card-header>
-          <div class="card-icon bank-icon">
-            <mat-icon>account_balance</mat-icon>
-          </div>
-          <div class="card-titles">
-            <mat-card-title>Bank Balance</mat-card-title>
-            <mat-card-subtitle>All Accounts</mat-card-subtitle>
-          </div>
-        </mat-card-header>
-        <mat-card-content>
-          <h2>{{ summary.bankBalance | currency:'INR':'symbol' }}</h2>
-        </mat-card-content>
-      </mat-card>
-
-      <mat-card class="summary-card events">
-        <mat-card-header>
-          <div class="card-icon event-icon">
-            <mat-icon>event_available</mat-icon>
-          </div>
-          <div class="card-titles">
-            <mat-card-title>Active Events</mat-card-title>
-            <mat-card-subtitle>Ongoing groups</mat-card-subtitle>
-          </div>
-        </mat-card-header>
-        <mat-card-content>
-          <h2>{{ summary.activeEvents }} <span class="text-sm">Events</span></h2>
-        </mat-card-content>
-      </mat-card>
+  <!-- KPI tiles -->
+  <section class="kpis">
+    <div class="kpi kpi-hero">
+      <div class="kpi-top">
+        <span class="kpi-label">Total funds</span>
+        <span class="kpi-icon"><mat-icon>account_balance</mat-icon></span>
+      </div>
+      <div class="kpi-value">{{ inr(totalBalance) }}</div>
+      <div class="kpi-foot">
+        <span><b>{{ compact(totalBalance - cashBalance) }}</b> in bank &amp; deposits</span>
+        <span class="dot-sep"></span>
+        <span><b>{{ compact(cashBalance) }}</b> cash</span>
+      </div>
     </div>
 
-    <!-- Dashboard Grid Layout -->
-    <div class="dashboard-grid">
-      <!-- Quick Actions -->
-      <div class="quick-links-section">
-        <h2 class="section-title">Quick Actions</h2>
-        <div class="links-grid">
-          <mat-card *ngFor="let link of quickLinks" class="link-card" [routerLink]="link.route">
-            <div class="icon-wrapper" [style.backgroundColor]="link.color + '20'">
-              <mat-icon [style.color]="link.color">{{link.icon}}</mat-icon>
-            </div>
-            <div class="link-text">
-              <h3>{{link.title}}</h3>
-              <p>{{link.desc}}</p>
-            </div>
-            <div class="arrow-icon">
-              <mat-icon>arrow_forward</mat-icon>
-            </div>
-          </mat-card>
+    <div class="kpi">
+      <div class="kpi-top">
+        <span class="kpi-label">Receipts · FY to date</span>
+        <svg class="spark" viewBox="0 0 96 28" aria-hidden="true"><path [attr.d]="receiptsSpark" class="spark-income"></path></svg>
+      </div>
+      <div class="kpi-value">{{ inr(totalReceipts) }}</div>
+      <div class="kpi-foot">
+        <span class="delta" [class.up]="receiptsChange >= 0" [class.down]="receiptsChange < 0">
+          <mat-icon>{{ receiptsChange >= 0 ? 'trending_up' : 'trending_down' }}</mat-icon>{{ receiptsChange >= 0 ? '+' : '' }}{{ receiptsChange | number:'1.1-1' }}%
+        </span>
+        <span>vs same period last year</span>
+      </div>
+    </div>
+
+    <div class="kpi">
+      <div class="kpi-top">
+        <span class="kpi-label">Payments · FY to date</span>
+        <svg class="spark" viewBox="0 0 96 28" aria-hidden="true"><path [attr.d]="paymentsSpark" class="spark-expense"></path></svg>
+      </div>
+      <div class="kpi-value">{{ inr(totalPayments) }}</div>
+      <div class="kpi-foot">
+        <span class="delta neutral">
+          <mat-icon>{{ paymentsChange >= 0 ? 'trending_up' : 'trending_down' }}</mat-icon>{{ paymentsChange >= 0 ? '+' : '' }}{{ paymentsChange | number:'1.1-1' }}%
+        </span>
+        <span>vs same period last year</span>
+      </div>
+    </div>
+
+    <div class="kpi">
+      <div class="kpi-top">
+        <span class="kpi-label">Net surplus · FY to date</span>
+        <span class="kpi-icon soft"><mat-icon>savings</mat-icon></span>
+      </div>
+      <div class="kpi-value" [class.neg]="surplus < 0">{{ inr(surplus) }}</div>
+      <div class="kpi-foot">
+        <span>Receipts minus payments · {{ (surplus / (totalReceipts || 1)) * 100 | number:'1.0-0' }}% of receipts kept</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Monthly chart + accounts -->
+  <section class="grid grid-main">
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <h2>Receipts vs payments</h2>
+          <p>Month by month, {{ fyLabel }}</p>
+        </div>
+        <div class="card-tools">
+          <div class="legend">
+            <span><i class="sw income"></i>Receipts</span>
+            <span><i class="sw expense"></i>Payments</span>
+          </div>
+          <button type="button" class="icon-toggle" (click)="showMonthTable = !showMonthTable"
+                  [title]="showMonthTable ? 'Show chart' : 'Show as table'" [attr.aria-label]="showMonthTable ? 'Show chart' : 'Show as table'">
+            <mat-icon>{{ showMonthTable ? 'bar_chart' : 'table_rows' }}</mat-icon>
+          </button>
         </div>
       </div>
 
-      <!-- Recent Activity -->
-      <div class="recent-activity-section">
-        <h2 class="section-title">Recent Activity</h2>
-        <mat-card class="activity-card">
-          <div class="activity-list" *ngIf="summary.recentActivities?.length; else noActivity">
-            <div class="activity-item" *ngFor="let activity of summary.recentActivities">
-              <div class="activity-icon" [style.backgroundColor]="activity.color + '20'">
-                <mat-icon [style.color]="activity.color">{{activity.icon}}</mat-icon>
-              </div>
-              <div class="activity-details">
-                <span class="action">{{activity.action}}</span>
-                <span class="detail">{{activity.details}}</span>
-              </div>
-              <span class="time">{{activity.time}}</span>
-            </div>
+      <div class="chart-host" #monthHost data-tip="month" *ngIf="!showMonthTable" (mouseleave)="hideTip()">
+        <div class="chart-scroll">
+        <svg class="month-chart" [attr.viewBox]="'0 0 ' + ch.w + ' ' + ch.h" role="img" aria-label="Monthly receipts and payments">
+          <g class="grid-lines">
+            <ng-container *ngFor="let t of yTicks">
+              <line [attr.x1]="ch.padL" [attr.x2]="ch.w - ch.padR" [attr.y1]="t.y" [attr.y2]="t.y"></line>
+              <text class="axis" [attr.x]="ch.padL - 8" [attr.y]="t.y + 4" text-anchor="end">{{ t.label }}</text>
+            </ng-container>
+          </g>
+          <ng-container *ngFor="let b of monthBars">
+            <rect class="band" [class.on]="hoverMonth === b.m.month" [attr.x]="b.x + 2" [attr.y]="ch.padT" [attr.width]="b.band - 4" [attr.height]="ch.h - ch.padT - ch.padB" rx="6"></rect>
+            <path class="bar income" [attr.d]="b.receiptsPath"></path>
+            <path class="bar expense" [attr.d]="b.paymentsPath"></path>
+            <text class="axis month" [attr.x]="b.labelX" [attr.y]="ch.h - 8" text-anchor="middle">{{ b.m.month }}</text>
+            <rect class="hit" [attr.x]="b.x" [attr.y]="0" [attr.width]="b.band" [attr.height]="ch.h"
+                  (mousemove)="monthTip($event, monthHost, b)"></rect>
+          </ng-container>
+          <line class="baseline" [attr.x1]="ch.padL" [attr.x2]="ch.w - ch.padR" [attr.y1]="ch.h - ch.padB" [attr.y2]="ch.h - ch.padB"></line>
+        </svg>
+        </div>
+        <ng-container *ngTemplateOutlet="tipTpl; context: { $implicit: 'month' }"></ng-container>
+      </div>
+
+      <table class="mini-table" *ngIf="showMonthTable">
+        <thead><tr><th>Month</th><th class="num">Receipts</th><th class="num">Payments</th><th class="num">Net</th></tr></thead>
+        <tbody>
+          <tr *ngFor="let b of monthBars">
+            <td>{{ b.m.month }}</td>
+            <td class="num">{{ inr(b.m.receipts) }}</td>
+            <td class="num">{{ inr(b.m.payments) }}</td>
+            <td class="num" [class.neg]="b.m.receipts < b.m.payments">{{ inr(b.m.receipts - b.m.payments) }}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr><td>Total</td><td class="num">{{ inr(totalReceipts) }}</td><td class="num">{{ inr(totalPayments) }}</td><td class="num">{{ inr(surplus) }}</td></tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <h2>Where the money is</h2>
+          <p>Balance by account</p>
+        </div>
+        <span class="head-figure">{{ compact(totalBalance) }}</span>
+      </div>
+      <div class="rank-list" #accHost data-tip="acc" (mouseleave)="hideTip()">
+        <div class="rank-row" *ngFor="let a of accountRows" (mousemove)="rowTip($event, accHost, a.name, a.balance, a.share, 'Share of funds')">
+          <div class="rank-line">
+            <span class="rank-name">
+              <span class="acc-type">{{ a.type === 'Fixed Deposit' ? 'FD' : a.type === 'QR Code Collection' ? 'QR' : a.type }}</span>{{ a.name }}
+            </span>
+            <span class="rank-value">{{ inr(a.balance) }}</span>
           </div>
-          <ng-template #noActivity>
-            <div class="no-activity">
-              <mat-icon>inbox</mat-icon>
-              <p>No recent activities found.</p>
-            </div>
-          </ng-template>
-        </mat-card>
+          <div class="track"><div class="fill neutral" [style.width.%]="a.pct"></div></div>
+        </div>
+        <ng-container *ngTemplateOutlet="tipTpl; context: { $implicit: 'acc' }"></ng-container>
       </div>
     </div>
-  </div>
+  </section>
+
+  <!-- Event groups, categories, donors -->
+  <section class="grid grid-three">
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <h2>Event group results</h2>
+          <p>Income minus expense</p>
+        </div>
+        <div class="legend">
+          <span><i class="sw income"></i>Surplus</span>
+          <span><i class="sw expense"></i>Deficit</span>
+        </div>
+      </div>
+      <div class="rank-list" #grpHost data-tip="grp" (mouseleave)="hideTip()">
+        <div class="rank-row" *ngFor="let g of groupRows" (mousemove)="groupTip($event, grpHost, g)">
+          <div class="rank-line">
+            <span class="rank-name">{{ g.name }}</span>
+            <span class="rank-value" [class.neg]="g.net < 0">{{ g.net >= 0 ? '+' : '' }}{{ compact(g.net) }}</span>
+          </div>
+          <div class="track diverge">
+            <span class="zero" [style.left.%]="groupZero"></span>
+            <div class="fill" [class.income]="g.net >= 0" [class.expense]="g.net < 0"
+                 [class.to-left]="g.net < 0" [style.left.%]="g.left" [style.width.%]="g.width"></div>
+          </div>
+        </div>
+        <ng-container *ngTemplateOutlet="tipTpl; context: { $implicit: 'grp' }"></ng-container>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <h2>Spending by category</h2>
+          <p>Payments, {{ fyLabel }}</p>
+        </div>
+        <a class="card-link" routerLink="/reports/category-expense">Report <mat-icon>arrow_forward</mat-icon></a>
+      </div>
+      <div class="rank-list" #catHost data-tip="cat" (mouseleave)="hideTip()">
+        <div class="rank-row" *ngFor="let c of categoryRows" (mousemove)="rowTip($event, catHost, c.name, c.amount, c.share, 'Share of spending')">
+          <div class="rank-line">
+            <span class="rank-name">{{ c.name }}</span>
+            <span class="rank-value">{{ compact(c.amount) }}</span>
+          </div>
+          <div class="track"><div class="fill expense" [style.width.%]="c.pct"></div></div>
+        </div>
+        <ng-container *ngTemplateOutlet="tipTpl; context: { $implicit: 'cat' }"></ng-container>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <h2>Top donors</h2>
+          <p>Largest contributions this year</p>
+        </div>
+        <a class="card-link" routerLink="/masters/donors">All <mat-icon>arrow_forward</mat-icon></a>
+      </div>
+      <ol class="donors">
+        <li *ngFor="let d of data.donors; let i = index">
+          <span class="donor-rank">{{ i + 1 }}</span>
+          <span class="donor-avatar">{{ initials(d.name) }}</span>
+          <span class="donor-meta">
+            <span class="donor-name">{{ d.name }}</span>
+            <span class="donor-sub">{{ d.receipts }} {{ d.receipts === 1 ? 'receipt' : 'receipts' }}</span>
+          </span>
+          <span class="donor-amt">{{ inr(d.amount) }}</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Recent + attention -->
+  <section class="grid grid-main">
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <h2>Recent transactions</h2>
+          <p>Latest entries across receipts, payments and transfers</p>
+        </div>
+      </div>
+      <div class="recent-scroll">
+      <table class="recent">
+        <thead>
+          <tr><th>Type</th><th>Number</th><th>Party</th><th class="ctr">Date</th><th>Mode</th><th class="num">Amount</th></tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let t of data.recent">
+            <td>
+              <span class="kind" [attr.data-kind]="t.kind">
+                <mat-icon>{{ t.kind === 'Receipt' ? 'south_west' : t.kind === 'Payment' ? 'north_east' : 'sync_alt' }}</mat-icon>{{ t.kind }}
+              </span>
+            </td>
+            <td class="mono">{{ t.number }}</td>
+            <td class="party">{{ t.party }}</td>
+            <td class="ctr">{{ t.date | date:'dd MMM' }}</td>
+            <td class="muted">{{ t.mode }}</td>
+            <td class="num strong">{{ t.kind === 'Payment' ? '−' : '' }}{{ inr(t.amount) }}</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <h2>Needs attention</h2>
+          <p>Items to follow up</p>
+        </div>
+        <span class="count-badge">{{ data.attention.length }}</span>
+      </div>
+      <div class="attention">
+        <a class="att" *ngFor="let a of data.attention" [routerLink]="a.route">
+          <span class="att-icon"><mat-icon>{{ a.icon }}</mat-icon></span>
+          <span class="att-text">
+            <span class="att-title">{{ a.title }}</span>
+            <span class="att-detail">{{ a.detail }}</span>
+          </span>
+          <mat-icon class="att-go">chevron_right</mat-icon>
+        </a>
+      </div>
+    </div>
+  </section>
 </div>
+
+<ng-template #tipTpl let-host>
+  <div class="tip" *ngIf="tip && tip.host === host" [class.flip]="tip.flip" [style.left.px]="tip.x" [style.top.px]="tip.y">
+    <div class="tip-title">{{ tip.title }}</div>
+    <div class="tip-row" *ngFor="let r of tip.rows">
+      <span class="tip-label"><i *ngIf="r.swatch" class="sw" [style.background]="r.swatch"></i>{{ r.label }}</span>
+      <span class="tip-value">{{ r.value }}</span>
+    </div>
+  </div>
+</ng-template>

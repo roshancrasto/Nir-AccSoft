@@ -14,6 +14,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { PaymentService, Payment } from '../../../core/services/payment.service';
+import { ListFilter } from '../../../shared/list-filter/list-filter';
+import { ListFilterComponent } from '../../../shared/list-filter/list-filter.component';
+import { FilterChipsComponent } from '../../../shared/list-filter/filter-chips.component';
 import { PaymentDialogComponent, PaymentDialogData } from './payment-dialog/payment-dialog.component';
 
 @Component({
@@ -30,7 +33,9 @@ import { PaymentDialogComponent, PaymentDialogData } from './payment-dialog/paym
     MatFormFieldModule,
     MatInputModule,
     MatTooltipModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    ListFilterComponent,
+    FilterChipsComponent
   ],
   templateUrl: './payments.component.html',
   styleUrl: './payments.component.css'
@@ -46,6 +51,17 @@ export class PaymentsComponent implements OnInit {
   dataSource: MatTableDataSource<Payment> = new MatTableDataSource<Payment>();
   isLoading = false;
 
+  // List filter (multi-select Vendor / Category / Event Group) combined with the search box
+  searchText = '';
+  filter = new ListFilter<Payment>([
+    { id: 'vendor', label: 'Vendor', searchPlaceholder: 'Search vendors', emptyText: 'No vendors', weight: 3,
+      keyOf: p => p.vendorId != null ? 'v' + p.vendorId : 'n' + (p.vendorName || ''), labelOf: p => p.vendorName },
+    { id: 'category', label: 'Category', searchPlaceholder: 'Search categories', emptyText: 'No categories', weight: 2,
+      keyOf: p => p.expenseCategoryId != null ? 'c' + p.expenseCategoryId : 'n' + (p.categoryName || ''), labelOf: p => p.categoryName },
+    { id: 'eventGroup', label: 'Event Group', searchPlaceholder: 'Search event groups', emptyText: 'No event groups', weight: 2,
+      keyOf: p => p.eventGroupKey != null ? 'g' + p.eventGroupKey : 'n' + (p.eventGroupName || ''), labelOf: p => p.eventGroupName }
+  ]);
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private paymentService: PaymentService,
@@ -55,6 +71,7 @@ export class PaymentsComponent implements OnInit {
     private authService: AuthService) {}
 
   ngOnInit(): void {
+    this.filter.changes.subscribe(() => this.applyFilters());
     this.loadPayments();
 
     const user = this.authService.getCurrentUser();
@@ -77,10 +94,13 @@ export class PaymentsComponent implements OnInit {
       next: (data) => {
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.paginator = this.paginator;
-        this.dataSource.filterPredicate = (data: any, filter: string) => {
+        this.dataSource.filterPredicate = (data: any) => {
+          if (!this.filter.matches(data)) return false;
           const searchStr = (data.voucherNumber + (data.vendorName || '') + (data.categoryName || '') + (data.eventGroupName || '') + (data.eventName || '') + (data.relatedVoucherNumber || '')).toLowerCase();
-          return searchStr.indexOf(filter) !== -1;
+          return searchStr.indexOf(this.searchText) !== -1;
         };
+        this.filter.setData(data || []);
+        this.applyFilters();
         this.isLoading = false;
       },
       error: (err) => {
@@ -92,9 +112,13 @@ export class PaymentsComponent implements OnInit {
   }
 
   applyFilter(event: Event): void {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.searchText = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    this.applyFilters();
+  }
 
+  applyFilters(): void {
+    // The filter string only has to change for MatTableDataSource to re-run the predicate.
+    this.dataSource.filter = this.searchText + '\u0000' + this.filter.signature;
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }

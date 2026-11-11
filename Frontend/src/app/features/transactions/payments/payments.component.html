@@ -3,6 +3,7 @@
     <div class="table-header" style="display: flex; justify-content: space-between; align-items: center;">
       <div style="flex: 1; display: flex; justify-content: flex-start;">
         <input type="text" placeholder="Search..." (keyup)="applyFilter($event)" style="min-width: 200px; padding: 8px 12px; border-radius: 6px; border: 1px solid #ddd; outline: none;">
+        <app-list-filter [filter]="filter" title="Filter payments" [panelWidth]="900"></app-list-filter>
       </div>
       
       <div style="flex: 1; text-align: center;">
@@ -15,6 +16,8 @@
         </button>
       </div>
     </div>
+
+    <app-filter-chips [filter]="filter" [shown]="dataSource.filteredData.length" [total]="dataSource.data.length" noun="payments"></app-filter-chips>
 
     <div class="table-responsive">
       <table mat-table [dataSource]="dataSource" >
