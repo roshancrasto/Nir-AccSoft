@@ -13,13 +13,13 @@
     <div class="form-row">
       <mat-form-field appearance="outline" class="half-width">
         <mat-label>Voucher Number</mat-label>
-        <input matInput [(ngModel)]="voucherNumber" name="voucherNumber" required placeholder="V-001">
+        <input matInput [(ngModel)]="voucherNumber" name="voucherNumber" required placeholder="2026/27-001">
         <mat-icon matPrefix>receipt</mat-icon>
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="half-width">
         <mat-label>Voucher Date</mat-label>
-        <input matInput [matDatepicker]="vPicker" [(ngModel)]="voucherDate" name="voucherDate" required>
+        <input matInput [matDatepicker]="vPicker" [(ngModel)]="voucherDate" name="voucherDate" (dateChange)="setNextVoucherNumber()" required>
         <mat-datepicker-toggle matSuffix [for]="vPicker"></mat-datepicker-toggle>
         <mat-datepicker #vPicker></mat-datepicker>
       </mat-form-field>

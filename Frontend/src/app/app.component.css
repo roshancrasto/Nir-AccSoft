@@ -35,32 +35,24 @@
   flex-shrink: 0;
   padding-right: 18px;
   border-right: 1px solid var(--bar-border);
-  height: 32px;
+  height: 38px;
   text-decoration: none;
   color: var(--bar-text-strong);
 }
 
-.brand-mark {
-  display: grid;
-  place-items: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 9px;
+.brand-logo {
+  display: flex;
+  align-items: center;
+  height: 38px;
+  padding: 3px 10px;
+  border-radius: 8px;
   background: #fff;
-  color: var(--ink);
-  font-size: 15px;
 }
 
-.brand-name {
-  font-size: 17px;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  white-space: nowrap;
-}
-
-.brand-name strong {
-  font-weight: 700;
-  color: var(--accent);
+.brand-logo img {
+  display: block;
+  height: 32px;
+  width: auto;
 }
 
 /* Nav */
@@ -229,7 +221,8 @@
 @media (max-width: 768px) {
   .topbar-inner { padding: 0 10px; gap: 10px; }
   .brand { padding-right: 10px; }
-  .brand-name { display: none; }
+  .brand-logo { height: 32px; padding: 3px 8px; }
+  .brand-logo img { height: 26px; }
   .content-wrapper { padding: 0 10px; }
   .nav-item span { display: none; }
 }

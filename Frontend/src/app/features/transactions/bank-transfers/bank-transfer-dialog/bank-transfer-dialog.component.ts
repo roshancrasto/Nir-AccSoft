@@ -47,8 +47,10 @@ export class BankTransferDialogComponent implements OnInit {
   remarks: string = '';
 
   transferTypes: string[] = [];
-  accountTypes: string[] = ['Cash', 'Bank', 'Fixed Deposit', 'QR Code Collection'];
-  fromAccountTypes: string[] = ['Cash', 'Bank', 'Fixed Deposit', 'QR Code Collection'];
+  accountTypes: string[] = ['Cash', 'Bank', 'Fixed Deposit', 'QR Code Collection', 'SB Interest'];
+  fromAccountTypes: string[] = ['Cash', 'Bank', 'Fixed Deposit', 'QR Code Collection', 'SB Interest'];
+  /** Account types backed by a single system account, which is selected automatically. */
+  private readonly singleAccountTypes = ['qr code collection', 'sb interest'];
   toAccountTypes: string[] = ['Bank', 'Cash', 'Fixed Deposit'];
 
   allAccounts: BankAccountDropdown[] = [];
@@ -80,11 +82,8 @@ export class BankTransferDialogComponent implements OnInit {
   loadData(): void {
     this.openingBalanceService.getBankAccounts().subscribe(accounts => {
       this.allAccounts = accounts;
-      if (this.fromAccountType === 'QR Code Collection' && !this.fromAccountID) {
-        const qrAcc = this.allAccounts.find(a => (a.accountType || '').toLowerCase() === 'qr code collection' || (a.bankName || '').toLowerCase() === 'qr code collection');
-        if (qrAcc) {
-          this.fromAccountID = qrAcc.bankAccountKey;
-        }
+      if (!this.fromAccountID) {
+        this.selectSingleFromAccount();
       }
     });
     this.bankTransferService.getAccountBalances().subscribe(balances => {
@@ -139,27 +138,30 @@ export class BankTransferDialogComponent implements OnInit {
     } else if (this.transferType === 'QR Code Collection') {
       this.fromAccountType = 'QR Code Collection';
       this.toAccountType = 'Bank';
+    } else if (this.transferType === 'SB Interest') {
+      this.fromAccountType = 'SB Interest';
+      this.toAccountType = 'Bank';
     }
     
     // Reset account selections when type changes
     this.fromAccountID = null;
     this.toAccountID = null;
 
-    if (this.fromAccountType === 'QR Code Collection') {
-      const qrAcc = this.allAccounts.find(a => (a.accountType || '').toLowerCase() === 'qr code collection' || (a.bankName || '').toLowerCase() === 'qr code collection');
-      if (qrAcc) {
-        this.fromAccountID = qrAcc.bankAccountKey;
-      }
-    }
+    this.selectSingleFromAccount();
   }
 
   onFromAccountTypeChange(): void {
     this.fromAccountID = null;
-    if (this.fromAccountType === 'QR Code Collection') {
-      const qrAcc = this.allAccounts.find(a => (a.accountType || '').toLowerCase() === 'qr code collection' || (a.bankName || '').toLowerCase() === 'qr code collection');
-      if (qrAcc) {
-        this.fromAccountID = qrAcc.bankAccountKey;
-      }
+    this.selectSingleFromAccount();
+  }
+
+  /** For QR Code Collection / SB Interest, picks their one system account as the From Account. */
+  private selectSingleFromAccount(): void {
+    const type = (this.fromAccountType || '').toLowerCase();
+    if (!this.singleAccountTypes.includes(type)) return;
+    const acc = this.allAccounts.find(a => (a.accountType || '').toLowerCase() === type || (a.bankName || '').toLowerCase() === type);
+    if (acc) {
+      this.fromAccountID = acc.bankAccountKey;
     }
   }
 

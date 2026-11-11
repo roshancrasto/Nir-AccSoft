@@ -13,7 +13,7 @@
     <div class="form-row">
       <mat-form-field appearance="outline" class="half-width">
         <mat-label>Receipt Number</mat-label>
-        <input matInput [(ngModel)]="receiptNumber" name="receiptNumber" placeholder="R-001" required>
+        <input matInput [(ngModel)]="receiptNumber" name="receiptNumber" placeholder="REC-2026-001" required>
         <mat-icon matPrefix>confirmation_number</mat-icon>
       </mat-form-field>
 
@@ -27,7 +27,7 @@
     <div class="form-row">
       <mat-form-field appearance="outline" class="half-width">
         <mat-label>Receipt Date</mat-label>
-        <input matInput [matDatepicker]="picker" [(ngModel)]="receiptDate" name="receiptDate" required>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="receiptDate" name="receiptDate" (dateChange)="setNextReceiptNumber()" required>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>

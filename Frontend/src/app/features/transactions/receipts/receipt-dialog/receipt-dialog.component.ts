@@ -14,6 +14,7 @@ import { DonorService, Donor } from '../../../../core/services/donor.service';
 import { EventDetailService, EventDetail } from '../../../../core/services/event-detail.service';
 import { EventGroupService, EventGroup } from '../../../../core/services/event-group.service';
 import { OpeningBalanceService, BankAccountDropdown } from '../../../../core/services/opening-balance.service';
+import { ReceiptEntryService } from '../../../../core/services/receipt-entry.service';
 
 export interface ReceiptDialogData {
   mode: 'add' | 'edit';
@@ -41,6 +42,8 @@ export interface ReceiptDialogData {
 })
 export class ReceiptDialogComponent implements OnInit {
   receiptNumber: string = '';
+  private existingReceiptNumbers: string[] = [];
+  private autoReceiptNumber = '';
   receiptDate: Date = new Date();
   receivedDate: Date | null = null;
   donorId: number | null = null;
@@ -70,7 +73,8 @@ export class ReceiptDialogComponent implements OnInit {
     private donorService: DonorService,
     private eventDetailService: EventDetailService,
     private eventGroupService: EventGroupService,
-    private openingBalanceService: OpeningBalanceService
+    private openingBalanceService: OpeningBalanceService,
+    private receiptService: ReceiptEntryService
   ) {
     if (data.mode === 'edit' && data.receipt) {
       this.receiptNumber = data.receipt.receiptNumber;
@@ -92,6 +96,32 @@ export class ReceiptDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadMasters();
+    if (this.data.mode === 'add') {
+      this.receiptService.getReceipts().subscribe(receipts => {
+        this.existingReceiptNumbers = (receipts || []).map(r => r.receiptNumber || '');
+        this.setNextReceiptNumber();
+      });
+    }
+  }
+
+  /** Suggests the next receipt number for the receipt date's financial year (April-March), e.g. REC-2026-008,
+   *  where 2026 is the year the financial year starts. Only fills the field while it is empty or still holds the
+   *  previous suggestion, so typed values are kept. */
+  setNextReceiptNumber(): void {
+    if (this.data.mode !== 'add') return;
+    if (this.receiptNumber && this.receiptNumber !== this.autoReceiptNumber) return;
+    const d = this.receiptDate ? new Date(this.receiptDate) : new Date();
+    const startYear = d.getMonth() >= 3 ? d.getFullYear() : d.getFullYear() - 1;
+    const prefix = `REC-${startYear}-`;
+    let max = 0;
+    for (const no of this.existingReceiptNumbers) {
+      const v = no.trim().toUpperCase();
+      if (!v.startsWith(prefix)) continue;
+      const seq = Number(v.substring(prefix.length));
+      if (Number.isInteger(seq) && seq > max) max = seq;
+    }
+    this.autoReceiptNumber = prefix + String(max + 1).padStart(3, '0');
+    this.receiptNumber = this.autoReceiptNumber;
   }
 
   loadMasters(): void {

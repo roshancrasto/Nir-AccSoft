@@ -5,6 +5,11 @@
     <div class="table-header" style="display: flex; justify-content: space-between; align-items: center;">
       <div style="flex: 1; display: flex; justify-content: flex-start;">
         <input type="text" placeholder="Search..." (keyup)="applyFilter($event)" style="min-width: 200px; padding: 8px 12px; border-radius: 6px; border: 1px solid #ddd; outline: none;">
+        <button type="button" class="filter-btn" [class.active]="activeFilterCount > 0" [matMenuTriggerFor]="filterMenu">
+          <mat-icon>filter_list</mat-icon>
+          <span>Filter</span>
+          <span class="filter-count" *ngIf="activeFilterCount > 0">{{ activeFilterCount }}</span>
+        </button>
       </div>
       
       <div style="flex: 1; text-align: center;">
@@ -17,6 +22,60 @@
         </button>
       </div>
     </div>
+
+    <!-- Active filters -->
+    <div class="filter-chips" *ngIf="activeFilterCount > 0">
+      <span class="chip" *ngFor="let k of selectedGroups">
+        <span class="chip-kind">Event Group</span>{{ optionLabel(groupOptions, k) }}
+        <button type="button" aria-label="Remove" (click)="toggleOption(selectedGroups, k)"><mat-icon>close</mat-icon></button>
+      </span>
+      <span class="chip" *ngFor="let k of selectedDonors">
+        <span class="chip-kind">Donor</span>{{ optionLabel(donorOptions, k) }}
+        <button type="button" aria-label="Remove" (click)="toggleOption(selectedDonors, k)"><mat-icon>close</mat-icon></button>
+      </span>
+      <button type="button" class="chips-clear" (click)="clearAllFilters()">Clear all</button>
+      <span class="chips-result">{{ dataSource.filteredData.length }} of {{ dataSource.data.length }} receipts</span>
+    </div>
+
+    <!-- Filter panel -->
+    <mat-menu #filterMenu="matMenu" class="filter-menu" xPosition="after">
+      <div class="filter-panel" (click)="$event.stopPropagation()" (keydown)="$event.key !== 'Escape' && $event.stopPropagation()">
+        <div class="fp-head">
+          <span class="fp-title">Filter receipts</span>
+          <button type="button" class="fp-link" *ngIf="activeFilterCount > 0" (click)="clearAllFilters()">Clear all</button>
+        </div>
+
+        <div class="fp-body">
+        <div class="fp-section">
+          <div class="fp-label">
+            <span>Event Group <em *ngIf="selectedGroups.size">{{ selectedGroups.size }} selected</em></span>
+            <button type="button" class="fp-link" *ngIf="selectedGroups.size" (click)="clearSelection(selectedGroups)">Clear</button>
+          </div>
+          <input class="fp-search" type="search" placeholder="Search event groups" [(ngModel)]="groupSearch">
+          <div class="fp-list">
+            <mat-checkbox *ngFor="let o of visibleOptions(groupOptions, groupSearch)" [checked]="selectedGroups.has(o.key)" (change)="toggleOption(selectedGroups, o.key)">
+              <span class="fp-opt">{{ o.label }}</span><span class="fp-count">{{ o.count }}</span>
+            </mat-checkbox>
+            <div class="fp-empty" *ngIf="visibleOptions(groupOptions, groupSearch).length === 0">No event groups</div>
+          </div>
+        </div>
+
+        <div class="fp-section">
+          <div class="fp-label">
+            <span>Donor <em *ngIf="selectedDonors.size">{{ selectedDonors.size }} selected</em></span>
+            <button type="button" class="fp-link" *ngIf="selectedDonors.size" (click)="clearSelection(selectedDonors)">Clear</button>
+          </div>
+          <input class="fp-search" type="search" placeholder="Search donors" [(ngModel)]="donorSearch">
+          <div class="fp-list">
+            <mat-checkbox *ngFor="let o of visibleOptions(donorOptions, donorSearch)" [checked]="selectedDonors.has(o.key)" (change)="toggleOption(selectedDonors, o.key)">
+              <span class="fp-opt">{{ o.label }}</span><span class="fp-count">{{ o.count }}</span>
+            </mat-checkbox>
+            <div class="fp-empty" *ngIf="visibleOptions(donorOptions, donorSearch).length === 0">No donors</div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </mat-menu>
 
     <div class="table-responsive">
       <table mat-table [dataSource]="dataSource" matSort>

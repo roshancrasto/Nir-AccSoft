@@ -52,6 +52,21 @@
   backdrop-filter: blur(8px);
 }
 
+.brand-logo {
+  margin: 0 auto 22px;
+  padding: 22px 28px;
+  max-width: 420px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 20px 40px -16px rgba(0, 0, 0, 0.5);
+}
+
+.brand-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .brand-title {
   font-size: 44px;
   font-weight: 800;
@@ -192,6 +207,12 @@
 
   .brand-title {
     font-size: 32px;
+  }
+
+  .brand-logo {
+    max-width: 300px;
+    padding: 14px 18px;
+    margin-bottom: 14px;
   }
 
   .login-form-panel {

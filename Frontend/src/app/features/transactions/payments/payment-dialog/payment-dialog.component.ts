@@ -55,6 +55,8 @@ export interface PaymentDialogData {
 })
 export class PaymentDialogComponent implements OnInit {
   voucherNumber: string = '';
+  private existingVoucherNumbers: string[] = [];
+  private autoVoucherNumber = '';
   voucherDate: Date = new Date();
   paymentDate: Date = new Date();
   vendorId: number | null = null;
@@ -177,6 +179,31 @@ export class PaymentDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadMasters();
+    if (this.data.mode === 'add') {
+      this.paymentService.getPayments().subscribe(payments => {
+        this.existingVoucherNumbers = (payments || []).map(p => p.voucherNumber || '');
+        this.setNextVoucherNumber();
+      });
+    }
+  }
+
+  /** Suggests the next voucher number for the voucher date's financial year (April-March), e.g. 2026/27-011.
+   *  Only fills the field while it is empty or still holds the previous suggestion, so typed values are kept. */
+  setNextVoucherNumber(): void {
+    if (this.data.mode !== 'add') return;
+    if (this.voucherNumber && this.voucherNumber !== this.autoVoucherNumber) return;
+    const d = this.voucherDate ? new Date(this.voucherDate) : new Date();
+    const startYear = d.getMonth() >= 3 ? d.getFullYear() : d.getFullYear() - 1;
+    const prefix = `${startYear}/${String((startYear + 1) % 100).padStart(2, '0')}-`;
+    let max = 0;
+    for (const no of this.existingVoucherNumbers) {
+      const v = no.trim();
+      if (!v.startsWith(prefix)) continue;
+      const seq = Number(v.substring(prefix.length));
+      if (Number.isInteger(seq) && seq > max) max = seq;
+    }
+    this.autoVoucherNumber = prefix + String(max + 1).padStart(3, '0');
+    this.voucherNumber = this.autoVoucherNumber;
   }
 
   loadMasters(): void {

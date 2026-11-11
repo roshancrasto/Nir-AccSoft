@@ -1513,3 +1513,7 @@ mat-paginator, .mat-mdc-paginator {
   .main-content { padding-top: 0 !important; }
   body { background: white; }
 }
+
+/* List filter panel (mat-menu) */
+.mat-mdc-menu-panel.filter-menu { max-width: none; border-radius: 12px; }
+.mat-mdc-menu-panel.filter-menu .mat-mdc-menu-content { padding: 6px 0; }
